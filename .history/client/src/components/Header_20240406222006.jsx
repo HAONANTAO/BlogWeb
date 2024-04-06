@@ -31,29 +31,11 @@ const Header = () => {
       <Button className="w-12 h-10 lg:hidden" color="gray" pill>
         <AiOutlineSearch />
       </Button>
-      {/* 中等md尺寸下的显示顺序 */}
-      <div className="flex gap-2 md:order-2">
-        <Button className="hidden w-12 h-10 sm:inline" color="gray" pill>
+      <div>
+        <Button className="hidden w-12 h-10 ">
           <FaMoon />
         </Button>
-        <Link to="/sign-in">
-          {/* 渐变 */}
-          <Button gradientDuoTone="purpleToBlue" pill>
-            Sign In
-          </Button>
-        </Link>
       </div>
-      <Navbar.Collapse>
-        <Navbar.Link>
-          <Link to="/">Home</Link>
-        </Navbar.Link>
-        <Navbar.Link>
-          <Link to="/about">About</Link>
-        </Navbar.Link>
-        <Navbar.Link>
-          <Link to="/projects">Projects</Link>
-        </Navbar.Link>
-      </Navbar.Collapse>
     </Navbar>
   );
 };
