@@ -1,6 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+// users 路由
+import useRoutes from "./routes/user.route.js";
+
 // 创建服务器express
 const app = express();
 
@@ -14,6 +17,5 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 
-app.get("/test", (req, res) => {
-  res.json({ message: "API Working!!!" });
-});
+// 这个路径过这个路由
+app.use("/api/user", useRoutes);
