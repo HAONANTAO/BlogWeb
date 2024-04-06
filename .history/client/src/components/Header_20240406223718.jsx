@@ -6,8 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 const Header = () => {
-  // 当前的路径
-  const path = useLocation().pathname;
+  const path=useLocation().pathname():
   return (
     <Navbar className="border-b-2">
       {/* 跳转回Home主页 大于sm size的字体变大 黑夜主题字体变白色*/}
@@ -49,14 +48,13 @@ const Header = () => {
         <Navbar.Toggle></Navbar.Toggle>
       </div>
       <Navbar.Collapse>
-        {/* 根据当前url的path来亮光 */}
-        <Navbar.Link active={path === "/"}>
+        <Navbar.Link>
           <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"}>
+        <Navbar.Link>
           <Link to="/about">About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/projects"}>
+        <Navbar.Link>
           <Link to="/projects">Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>

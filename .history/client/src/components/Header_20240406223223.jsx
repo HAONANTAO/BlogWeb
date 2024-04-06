@@ -2,12 +2,10 @@ import React from "react";
 //UI Library
 import { Button, Navbar, TextInput } from "flowbite-react";
 // router without refresh
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 const Header = () => {
-  // 当前的路径
-  const path = useLocation().pathname;
   return (
     <Navbar className="border-b-2">
       {/* 跳转回Home主页 大于sm size的字体变大 黑夜主题字体变白色*/}
@@ -20,7 +18,6 @@ const Header = () => {
         </span>
         Blog
       </Link>
-      {/* 搜索bar */}
       <form>
         <TextInput
           type="text"
@@ -34,7 +31,7 @@ const Header = () => {
       <Button className="w-12 h-10 lg:hidden" color="gray" pill>
         <AiOutlineSearch />
       </Button>
-      {/* 中等md尺寸下的显示顺序 后置*/}
+      {/* 中等md尺寸下的显示顺序 比*/}
       <div className="flex gap-2 md:order-2">
         <Button className="hidden w-12 h-10 sm:inline" color="gray" pill>
           <FaMoon />
@@ -45,18 +42,16 @@ const Header = () => {
             Sign In
           </Button>
         </Link>
-        {/* Navbar.Toggle是小屏幕才显示 配合collapse显示*/}
         <Navbar.Toggle></Navbar.Toggle>
       </div>
       <Navbar.Collapse>
-        {/* 根据当前url的path来亮光 */}
-        <Navbar.Link active={path === "/"}>
+        <Navbar.Link>
           <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"}>
+        <Navbar.Link>
           <Link to="/about">About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/projects"}>
+        <Navbar.Link>
           <Link to="/projects">Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>

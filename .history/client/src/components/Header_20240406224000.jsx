@@ -49,7 +49,7 @@ const Header = () => {
         <Navbar.Toggle></Navbar.Toggle>
       </div>
       <Navbar.Collapse>
-        {/* 根据当前url的path来亮光 */}
+        {/* 只在主页面使用 */}
         <Navbar.Link active={path === "/"}>
           <Link to="/">Home</Link>
         </Navbar.Link>
@@ -57,7 +57,9 @@ const Header = () => {
           <Link to="/about">About</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/projects"}>
-          <Link to="/projects">Projects</Link>
+          <Link to="/projects" active={path === "/about"}>
+            Projects
+          </Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

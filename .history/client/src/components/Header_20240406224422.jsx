@@ -50,14 +50,17 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         {/* 根据当前url的path来亮光 */}
-        <Navbar.Link active={path === "/"}>
+        <Navbar.Link active={path === "/about" ? "true" : undefined}>
           <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"}>
+        {/* active不接受布尔值 */}
+        <Navbar.Link active={path === "/about" ? "true" : undefined}>
           <Link to="/about">About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/projects"}>
-          <Link to="/projects">Projects</Link>
+        <Navbar.Link active={path === "/projects" ? "true" : undefined}>
+          <Link to="/projects" active={path === "/about"}>
+            Projects
+          </Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
