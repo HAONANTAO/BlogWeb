@@ -1,0 +1,11 @@
+{
+  "name": "blogweb",
+  "version": "1.0.0",
+  "description": "MERN Personal Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
