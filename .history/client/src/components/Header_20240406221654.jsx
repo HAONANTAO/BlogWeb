@@ -26,10 +26,7 @@ const Header = () => {
           className="hidden lg:inline "
         />
       </form>
-      {/* 给小屏幕使用的 pill=radius*/}
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
+      <Button
     </Navbar>
   );
 };

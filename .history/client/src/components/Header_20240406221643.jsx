@@ -1,6 +1,6 @@
 import React from "react";
 //UI Library
-import { Button, Navbar, TextInput } from "flowbite-react";
+import { Navbar, TextInput } from "flowbite-react";
 // router without refresh
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -26,10 +26,6 @@ const Header = () => {
           className="hidden lg:inline "
         />
       </form>
-      {/* 给小屏幕使用的 pill=radius*/}
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
     </Navbar>
   );
 };
