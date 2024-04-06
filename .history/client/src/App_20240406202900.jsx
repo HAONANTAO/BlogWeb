@@ -9,6 +9,8 @@ import SignOut from "./pages/SignOut";
 function App() {
   return (
     <>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1>Hello world!</h1>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -16,7 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/projects" element={<Projects />}></Route>
           <Route path="/sign-in" element={<SignIn />}></Route>
-          <Route path="/sign-out" element={<SignOut />}></Route>
+          <Route path="/" element={<SignOut />}></Route>
         </Routes>
       </BrowserRouter>
     </>
