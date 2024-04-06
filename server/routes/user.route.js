@@ -1,11 +1,7 @@
 import express from "express";
-
+import { test, normal } from "../controllers/user.controller.js";
 const useRoutes = express.Router();
 
-useRoutes.get("/", (req, res) => {
-  res.json({ message: "User API Working!!!" });
-});
-useRoutes.get("/test", (req, res) => {
-  res.json({ message: "User API test Working!!!" });
-});
+useRoutes.get("/", test);
+useRoutes.get("/test", normal);
 export default useRoutes;
