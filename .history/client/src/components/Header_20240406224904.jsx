@@ -50,7 +50,6 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         {/* 根据当前url的path来亮光 */}
-        {/* as={"div"}是因为两个link不可以嵌套 */}
         <Navbar.Link active={path === "/"} as={"div"}>
           <Link to="/">Home</Link>
         </Navbar.Link>
