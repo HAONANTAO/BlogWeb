@@ -9,6 +9,11 @@ const app = express();
 dotenv.config();
 const DATABASE_URL = process.env.DATABASE_URL;
 mongoose.connect(DATABASE_URL).then(console.log("Mongodb database connected!"));
+
 app.listen(3000, () => {
   console.log("listening on port 3000");
+});
+
+app.get("/test", (req, res) => {
+  res.json({ message: "API Working!!!" });
 });
