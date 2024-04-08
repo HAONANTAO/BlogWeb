@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
-import bcryptjs from "bcrypt";
+import bcrypt from "bcrypt";
+import { errorHandler } from "../utils/errorHandler.js";
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
   if (
@@ -10,12 +11,14 @@ export const signup = async (req, res, next) => {
     email === "" ||
     password === ""
   ) {
-    return res
-      .status(400)
-      .json({ message: "All fields are required, missing some information!" });
+    //reuseable component errorHandler
+    return next(errorHandler(400, "All fields are required!"));
   }
   //hash password
-  const hashedPassword = bcryptjs.hashSync(password, 10);
+  console.log("Password:", password);
+  console.log(typeof password);
+  const hashedPassword = bcrypt.hashSync(password, 8);
+
   //create based on the user models
   const newUser = new User({
     username,
@@ -27,6 +30,6 @@ export const signup = async (req, res, next) => {
     return res.status(200).json({ message: "Signup successfully!" });
   } catch (error) {
     //pass error to next
-    next(error);
+    return next(error);
   }
 };
