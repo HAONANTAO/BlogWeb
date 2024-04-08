@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 // users 路由
 import useRoutes from "./routes/user.route.js";
-
-// 创建服务器express
+import authRoutes from "./routes/auth.route.js";
+import bodyParser from "body-parser";
+// create server using express
 const app = express();
-
-// 安全问题 从env拿到数据库连接和密码
+//parse middle ware
+app.use(bodyParser.json());
+// security
 // Load environment variables from .env file
 dotenv.config();
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -17,5 +19,6 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 
-// 这个路径过这个路由
+//pass this path from this routes
 app.use("/api/user", useRoutes);
+app.use("/api/auth", authRoutes);
