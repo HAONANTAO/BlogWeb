@@ -5,6 +5,7 @@ import { Button, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
+
 const Header = () => {
   // 当前的路径
   const path = useLocation().pathname;
@@ -20,6 +21,7 @@ const Header = () => {
         </span>
         Blog
       </Link>
+
       {/* 搜索bar */}
       <form>
         <TextInput
