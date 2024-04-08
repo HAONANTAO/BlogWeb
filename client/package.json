@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.105.2",
+    "@react-three/fiber": "^8.16.1",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.8.0",
+    "maath": "^0.10.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "three": "^0.163.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

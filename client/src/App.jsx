@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import StarsCanvas from "./components/Canvas/StarsCanvas";
 
 //components
 import Header from "./components/Header";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/sign-in" element={<SignIn />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
         </Routes>
+        <StarsCanvas />
       </BrowserRouter>
     </>
   );

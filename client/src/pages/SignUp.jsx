@@ -63,9 +63,9 @@ const SignUp = () => {
           </Button>
         </form>
         <div className="gap-2 mt-5 text-xs">
-          <span>Have an account?</span>
+          <span>Have an account? </span>
           <Link to="/sign-in" className="text-purple-500">
-            SignIn
+            Sign in
           </Link>
         </div>
       </div>
