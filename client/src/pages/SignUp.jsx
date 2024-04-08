@@ -5,7 +5,7 @@ const SignUp = () => {
   return (
     // <div className="min-h-screen mt-20">
     //   {/* mx-auto for center */}
-    <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 md:flex-row ">
+    <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 text-white md:flex-row">
       {/* md:items-center */}
       {/* left side */}
       <div className="flex-1 mr-5 md:items-center">
@@ -27,8 +27,11 @@ const SignUp = () => {
       {/* right side */}
       <div className="flex-1">
         <form className="flex flex-col gap-4">
-          <div className="">
-            <Label value="Your Username" htmlFor="Username"></Label>
+          <div>
+            <Label
+              value="Your Username"
+              className="text-white"
+              htmlFor="Username"></Label>
             <TextInput
               type="text"
               placeholder="Username"
@@ -36,8 +39,11 @@ const SignUp = () => {
               className=""
             />
           </div>
-          <div className="">
-            <Label value="Your Email" htmlFor="Email"></Label>
+          <div>
+            <Label
+              value="Your Email"
+              className="text-white"
+              htmlFor="Email"></Label>
             <TextInput
               type="text"
               placeholder="name@company.com"
@@ -45,14 +51,12 @@ const SignUp = () => {
               className=""
             />
           </div>
-          <div className="">
-            <Label value="Your Password" htmlFor="Password"></Label>
-            <TextInput
-              type="password"
-              placeholder="xxxxxxxx"
-              id="Password"
-              className=""
-            />
+          <div>
+            <Label
+              value="Your Password"
+              htmlFor="Password"
+              className="text-white"></Label>
+            <TextInput type="password" placeholder="xxxxxxxx" id="Password" />
           </div>
           <Button
             gradientDuoTone="tealToLime"
