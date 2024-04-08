@@ -22,3 +22,14 @@ app.listen(3000, () => {
 //pass this path from this routes
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
+
+//middleware handle error！
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error!";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
