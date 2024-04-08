@@ -5,7 +5,7 @@ import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import SignIn from "./pages/SignIn";
-import SignOut from "./pages/SignOut";
+import SignUp from "./pages/SignUp";
 
 //components
 import Header from "./components/Header";
@@ -20,7 +20,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/projects" element={<Projects />}></Route>
           <Route path="/sign-in" element={<SignIn />}></Route>
-          <Route path="/sign-out" element={<SignOut />}></Route>
+          <Route path="/sign-up" element={<SignUp />}></Route>
         </Routes>
       </BrowserRouter>
     </>
