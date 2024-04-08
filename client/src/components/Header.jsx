@@ -10,7 +10,9 @@ const Header = () => {
   // 当前的路径
   const path = useLocation().pathname;
   return (
-    <Navbar className="border-b-2">
+    //  border-b-2
+    // 取消边框 不好看 bg-代表和下面一个颜色
+    <Navbar className="text-white bg-">
       {/* 跳转回Home主页 大于sm size的字体变大 黑夜主题字体变白色*/}
       <Link
         to="/"
@@ -53,13 +55,19 @@ const Header = () => {
       <Navbar.Collapse>
         {/* 根据当前url的path来亮光 */}
         {/* as={"div"}是因为两个link不可以嵌套 */}
-        <Navbar.Link active={path === "/"} as={"div"}>
+        <Navbar.Link active={path === "/"} as={"div"} className="text-white">
           <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"} as={"div"}>
+        <Navbar.Link
+          active={path === "/about"}
+          as={"div"}
+          className="text-white">
           <Link to="/about">About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/projects"} as={"div"}>
+        <Navbar.Link
+          active={path === "/projects"}
+          as={"div"}
+          className="text-white">
           <Link to="/projects">Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>
