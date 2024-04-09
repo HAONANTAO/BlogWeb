@@ -1,5 +1,5 @@
 import { Alert, Button, Label, TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
@@ -8,6 +8,11 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    //clear error message
+    setErrorMessage();
+  }, []);
   const handleChange = (e) => {
     //keep the original one
     // removing the white space using trim()
@@ -16,7 +21,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("need fill all!");
+      return setErrorMessage("need fill all information!");
     }
     //no refresh
 
@@ -26,19 +31,18 @@ const SignUp = () => {
     //   header: { "Content-Type": "application/json" },
     //   body: JSON.JSON.stringify(formData),
     // });
-
-    axios
-      .post("/api/auth/signup", formData, {
+    try {
+      setLoading(true);
+      const data = await axios.post("/api/auth/signup", formData, {
         headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-        setErrorMessage(error.errorMessage);
       });
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      //specfic infor
+      setErrorMessage(error.response.data.message);
+    }
   };
   return (
     <>
@@ -105,6 +109,7 @@ const SignUp = () => {
               />
             </div>
             <Button
+              disabled={loading}
               gradientDuoTone="tealToLime"
               pill
               className="mt-5"
@@ -123,14 +128,10 @@ const SignUp = () => {
               {errorMessage}
             </Alert>
           )}
-        </div>{" "}
-      </div>{" "}
+        </div>
+      </div>
       {/* <StarsCanvas /> */}
     </>
-    // <div className="min-h-screen mt-20">
-    //   {/* mx-auto for center */}
-
-    /* </div> */
   );
 };
 
