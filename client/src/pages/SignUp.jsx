@@ -1,8 +1,36 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 const SignUp = () => {
+  const [formData, setFormData] = useState({});
+  const handleChange = (e) => {
+    //keep the original one
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    //no refresh
+    e.preventDefault();
+    try {
+      //replace the original fetch method
+      // const res = await fetch("/api/auth/signup", {
+      //   method: "POST",
+      //   header: { "Content-Type": "application/json" },
+      //   body: JSON.JSON.stringify(formData),
+      // });
+
+      const res = axios
+        .post("/api/auth/signup", formData, {
+          header: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    } catch (error) {}
+  };
   return (
     <>
       <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 text-white md:flex-row">
@@ -30,37 +58,42 @@ const SignUp = () => {
         {/* EarthCanvas组件放在左侧div下方 */}
         {/* right side */}
         <div className="flex-1">
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
               <Label
-                value="Your Username"
+                value="Your username"
                 className="text-white"
-                htmlFor="Username"></Label>
+                htmlFor="username"></Label>
               <TextInput
                 type="text"
-                placeholder="Username"
-                id="Username"
-                className=""
+                placeholder="username"
+                id="username"
+                onChange={handleChange}
               />
             </div>
             <div>
               <Label
-                value="Your Email"
+                value="Your email"
                 className="text-white"
-                htmlFor="Email"></Label>
+                htmlFor="email"></Label>
               <TextInput
-                type="text"
+                type="email"
                 placeholder="name@company.com"
-                id="Email"
-                className=""
+                id="email"
+                onChange={handleChange}
               />
             </div>
             <div>
               <Label
-                value="Your Password"
-                htmlFor="Password"
+                value="Your password"
+                htmlFor="password"
                 className="text-white"></Label>
-              <TextInput type="password" placeholder="xxxxxxxx" id="Password" />
+              <TextInput
+                type="password"
+                placeholder="xxxxxxxx"
+                id="password"
+                onChange={handleChange}
+              />
             </div>
             <Button
               gradientDuoTone="tealToLime"
