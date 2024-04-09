@@ -1,6 +1,6 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
 import StarsCanvas from "../components/Canvas/StarsCanvas";
@@ -8,7 +8,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [formData, setFormData] = useState({});
-
+  //跳转
+  const navigate = useNavigate();
   useEffect(() => {
     //clear error message
     setErrorMessage();
@@ -38,6 +39,10 @@ const SignUp = () => {
       });
       console.log(data);
       setLoading(false);
+      if (data.statusText === "OK") {
+        //changeURL to /signin
+        navigate("/signin");
+      }
     } catch (error) {
       setLoading(false);
       //specfic infor
