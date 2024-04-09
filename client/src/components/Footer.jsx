@@ -1,13 +1,17 @@
 import React from "react";
 import { Footer } from "flowbite-react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
+
+import { ImEvil2, ImGithub } from "react-icons/im";
+import { IoLogoWechat } from "react-icons/io5";
 //incase the same name with Footer from flowbite
 const FooterComponent = () => {
   return (
     <Footer
       container
-      className="text-white bg-transparent border border-blue-900">
-      <div className="w-full mx-auto max-w-7xl">
+      className="text-white bg-transparent border border-blue-900 ">
+      <div className="w-full mx-auto ">
         <div className="grid justify-between w-full sm:flex smd:grid-cols-1">
           <div
             to="/"
@@ -18,13 +22,12 @@ const FooterComponent = () => {
             </span>
             Blog
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
+          <div className="grid grid-cols-2 gap-4 sm:mt-4 sm:grid-cols-3 sm:gap-8">
             <div>
               <Footer.Title title="About" />
 
               <Footer.LinkGroup>
                 <Footer.Link
-                  col
                   href="https://www.aarontao.com"
                   target="_blank" //open in a new window
                   rel="noopener noreferrer" //security reason
@@ -32,7 +35,6 @@ const FooterComponent = () => {
                   Aaron's Portfolio
                 </Footer.Link>
                 <Footer.Link
-                  col
                   href="#"
                   target="_blank" //open in a new window
                   rel="noopener noreferrer" //security reason
@@ -46,7 +48,6 @@ const FooterComponent = () => {
 
               <Footer.LinkGroup>
                 <Footer.Link
-                  col
                   href="https://github.com/HAONANTAO"
                   target="_blank" //open in a new window
                   rel="noopener noreferrer" //security reason
@@ -54,7 +55,6 @@ const FooterComponent = () => {
                   Aaron's GitHub
                 </Footer.Link>
                 <Footer.Link
-                  col
                   href="www.linkedin.com/in/haonan-tao-aaron"
                   target="_blank" //open in a new window
                   rel="noopener noreferrer" //security reason
@@ -76,6 +76,26 @@ const FooterComponent = () => {
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
+          </div>
+        </div>
+        {/* <Footer.Divider /> */}
+        <div className="flex gap-8 pt-4 mt-4 border-t border-gray-400 sm:justify-between border-opacity-40">
+          <div>
+            <Footer.Copyright
+              href="#"
+              by="Aaron's Blog"
+              year={new Date().getFullYear()}
+            />
+          </div>
+          {/* icons */}
+          <div className="flex gap-8 sm:mt-0 sm:justify-center">
+            <Footer.Icon href="#" icon={ImEvil2} />
+
+            <Footer.Icon href="#" icon={BsFacebook} />
+            <Footer.Icon href="#" icon={BsInstagram} />
+            <Footer.Icon href="#" icon={BsTwitter} />
+            <Footer.Icon href="#" icon={IoLogoWechat} />
+            <Footer.Icon href="https://github.com/HAONANTAO" icon={ImGithub} />
           </div>
         </div>
       </div>
