@@ -2,6 +2,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
+import StarsCanvas from "../components/Canvas/StarsCanvas";
 const SignUp = () => {
   const [formData, setFormData] = useState({});
   const handleChange = (e) => {
@@ -11,25 +12,24 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     //no refresh
     e.preventDefault();
-    try {
-      //replace the original fetch method
-      // const res = await fetch("/api/auth/signup", {
-      //   method: "POST",
-      //   header: { "Content-Type": "application/json" },
-      //   body: JSON.JSON.stringify(formData),
-      // });
 
-      const res = axios
-        .post("/api/auth/signup", formData, {
-          header: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
-    } catch (error) {}
+    //replace the original fetch method
+    // const res = await fetch("/api/auth/signup", {
+    //   method: "POST",
+    //   header: { "Content-Type": "application/json" },
+    //   body: JSON.JSON.stringify(formData),
+    // });
+
+    axios
+      .post("/api/auth/signup", formData, {
+        header: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        console.log(response.Data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
   return (
     <>
@@ -111,6 +111,7 @@ const SignUp = () => {
           </div>
         </div>{" "}
       </div>{" "}
+      {/* <StarsCanvas /> */}
     </>
     // <div className="min-h-screen mt-20">
     //   {/* mx-auto for center */}
