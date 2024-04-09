@@ -2,6 +2,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
+import axios from "axios";
 import StarsCanvas from "../components/Canvas/StarsCanvas";
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -10,6 +11,7 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
   const handleSubmit = async (e) => {
+    console.log("object");
     //no refresh
     e.preventDefault();
 
@@ -22,10 +24,11 @@ const SignUp = () => {
 
     axios
       .post("/api/auth/signup", formData, {
-        header: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
-        console.log(response.Data);
+        const data = response.data;
+        console.log(data);
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -99,7 +102,7 @@ const SignUp = () => {
               gradientDuoTone="tealToLime"
               pill
               className="mt-5"
-              type="button">
+              type="submit">
               SignUp
             </Button>
           </form>

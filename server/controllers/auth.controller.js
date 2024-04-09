@@ -15,8 +15,7 @@ export const signup = async (req, res, next) => {
     return next(errorHandler(400, "All fields are required!"));
   }
   //hash password
-  console.log("Password:", password);
-  console.log(typeof password);
+
   const hashedPassword = bcrypt.hashSync(password, 8);
 
   //create based on the user models
