@@ -1,19 +1,24 @@
-import { Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
 import StarsCanvas from "../components/Canvas/StarsCanvas";
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
   const [formData, setFormData] = useState({});
   const handleChange = (e) => {
     //keep the original one
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    // removing the white space using trim()
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
-    console.log("object");
-    //no refresh
     e.preventDefault();
+    if (!formData.username || !formData.email || !formData.password) {
+      return setErrorMessage("need fill all!");
+    }
+    //no refresh
 
     //replace the original fetch method
     // const res = await fetch("/api/auth/signup", {
@@ -32,6 +37,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.error("There was an error!", error);
+        setErrorMessage(error.errorMessage);
       });
   };
   return (
@@ -112,6 +118,11 @@ const SignUp = () => {
               Sign in
             </Link>
           </div>
+          {errorMessage && (
+            <Alert className="mt-5" color="failure">
+              {errorMessage}
+            </Alert>
+          )}
         </div>{" "}
       </div>{" "}
       {/* <StarsCanvas /> */}
