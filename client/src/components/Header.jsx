@@ -12,7 +12,7 @@ const Header = () => {
   return (
     //  border-b-2
     // 取消边框 不好看 bg-代表和下面一个颜色
-    <Navbar className="text-white bg-">
+    <Navbar className="text-white border-blue-800 bg-">
       {/* 跳转回Home主页 大于sm size的字体变大 黑夜主题字体变白色*/}
       <Link
         to="/"

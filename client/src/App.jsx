@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import StarsCanvas from "./components/Canvas/StarsCanvas";
 //components
 import Header from "./components/Header";
+import FooterComponent from "./components/Footer";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/sign-in" element={<SignIn />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
         </Routes>
+        <FooterComponent />
         <StarsCanvas />
       </BrowserRouter>
     </>
