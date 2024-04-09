@@ -2,7 +2,7 @@ import React from "react";
 import { Footer } from "flowbite-react";
 // import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
-
+import { FaLinkedin } from "react-icons/fa";
 import { ImEvil2, ImGithub } from "react-icons/im";
 import { IoLogoWechat } from "react-icons/io5";
 //incase the same name with Footer from flowbite
@@ -91,10 +91,19 @@ const FooterComponent = () => {
           <div className="flex gap-8 sm:mt-0 sm:justify-center">
             <Footer.Icon href="#" icon={ImEvil2} />
 
-            <Footer.Icon href="#" icon={BsFacebook} />
-            <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-            <Footer.Icon href="#" icon={IoLogoWechat} />
+            <Footer.Icon
+              href="https://www.facebook.com/profile.php?id=100010269617228"
+              icon={BsFacebook}
+            />
+            <Footer.Icon
+              href="www.linkedin.com/in/haonan-tao-aaron"
+              icon={FaLinkedin}
+            />
+
+            <Footer.Icon
+              href="/client/src/assets/wechat.jpg"
+              icon={IoLogoWechat}
+            />
             <Footer.Icon href="https://github.com/HAONANTAO" icon={ImGithub} />
           </div>
         </div>
