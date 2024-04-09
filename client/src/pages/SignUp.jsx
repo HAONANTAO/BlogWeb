@@ -1,4 +1,4 @@
-import { Alert, Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
@@ -114,7 +114,13 @@ const SignUp = () => {
               pill
               className="mt-5"
               type="submit">
-              SignUp
+              {loading ? (
+                <Spinner size="sm">
+                  {/* <span className="pl-3">loading...</span> */}
+                </Spinner>
+              ) : (
+                "SignUp"
+              )}
             </Button>
           </form>
           <div className="gap-2 mt-5 text-xs">
