@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
 import StarsCanvas from "../components/Canvas/StarsCanvas";
+import { FaUserAstronaut } from "react-icons/fa";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -78,10 +81,14 @@ const SignUp = () => {
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
-              <Label
-                value="Your username"
-                className="text-white"
-                htmlFor="username"></Label>
+              <div className="flex gap-2">
+                <FaUserAstronaut />
+                <Label
+                  value="Your username"
+                  className="text-white"
+                  htmlFor="username"></Label>
+              </div>
+
               <TextInput
                 type="text"
                 placeholder="username"
@@ -89,11 +96,16 @@ const SignUp = () => {
                 onChange={handleChange}
               />
             </div>
+
             <div>
-              <Label
-                value="Your email"
-                className="text-white"
-                htmlFor="email"></Label>
+              <div className="flex gap-2">
+                <MdMarkEmailUnread />
+                <Label
+                  value="Your email"
+                  className="text-white"
+                  htmlFor="email"></Label>
+              </div>
+
               <TextInput
                 type="email"
                 placeholder="name@company.com"
@@ -102,10 +114,14 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <Label
-                value="Your password"
-                htmlFor="password"
-                className="text-white"></Label>
+              <div className="flex gap-2">
+                <RiLockPasswordFill />
+                <Label
+                  value="Your password"
+                  htmlFor="password"
+                  className="text-white"></Label>
+              </div>
+
               <TextInput
                 type="password"
                 placeholder="xxxxxxxx"
@@ -133,6 +149,17 @@ const SignUp = () => {
             <Link to="/sign-in" className="text-purple-500">
               Sign in
             </Link>
+            <p
+              id="helper-text-explanation"
+              class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              We’ll never share your details. Read our{" "}
+              <a
+                href="#"
+                class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                Privacy Policy
+              </a>
+              .
+            </p>
           </div>
           {errorMessage && (
             <Alert className="mt-5" color="failure">

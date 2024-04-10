@@ -116,11 +116,22 @@ const SignIn = () => {
             </Button>
           </form>
           <div className="gap-2 mt-5 text-xs">
-            <span>Have an account? </span>
-            <Link to="/sign-in" className="text-purple-500">
-              Sign in
+            <span>Don't have a account? </span>
+            <Link to="/sign-up" className="text-purple-500">
+              Sign Up
             </Link>
           </div>
+          <p
+            id="helper-text-explanation"
+            class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            We’ll never share your details. Read our{" "}
+            <a
+              href="#"
+              class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+              Privacy Policy
+            </a>
+            .
+          </p>
           {errorMessage && (
             <Alert className="mt-5" color="failure">
               {errorMessage}
