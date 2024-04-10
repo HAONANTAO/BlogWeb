@@ -2,8 +2,11 @@ import { Button } from "flowbite-react";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { app } from "../firebase.js";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 import {
   signInStart,
   signInSuccess,
@@ -11,6 +14,7 @@ import {
 } from "../redux/user/userSlice.js";
 
 const OAuth = () => {
+  const navigate = useNavigate();
   //redux
   const dispatch = useDispatch();
   //oauth firebase
@@ -28,16 +32,17 @@ const OAuth = () => {
         name: resultsFromGoogle.user.displayName,
         photoURL: resultsFromGoogle.user.photoURL,
       };
-
+      // console.log(resultsFromGoogle);
       const res = await axios.post("/api/auth/google", googleData, {
         headers: { "Content-Type": "application/json" },
       });
+      // console.log(res);
       if (res.statusText === "OK") {
         dispatch(signInSuccess(res));
-        navigate("/home");
+        navigate("/");
       }
-      console.log(resultsFromGoogle);
     } catch (error) {
+      console.log(error);
       dispatch(signInFailure(error.response.data.message));
     }
   };

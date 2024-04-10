@@ -8,11 +8,11 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   //in env file
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "mern-blog-41d55.firebaseapp.com",
-  projectId: "mern-blog-41d55",
-  storageBucket: "mern-blog-41d55.appspot.com",
-  messagingSenderId: "837394525739",
-  appId: "1:837394525739:web:d2c51859ce4ed6f1bf046e",
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_BUCKER,
+  messagingSenderId: import.meta.env.VITE_SEND_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
