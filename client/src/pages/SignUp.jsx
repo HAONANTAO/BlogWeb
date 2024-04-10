@@ -9,16 +9,21 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoEyeSharp } from "react-icons/io5";
 import OAuth from "../components/OAuth";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
+
 const SignUp = () => {
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
+  const dispatch = useDispatch();
+  const { loading, errorMessage } = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({});
   //跳转
   const navigate = useNavigate();
-  useEffect(() => {
-    //clear error message
-    setErrorMessage();
-  }, []);
+
   const handleChange = (e) => {
     //keep the original one
     // removing the white space using trim()
@@ -27,7 +32,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("need fill all information!");
+      return dispatch(signInFailure("need fill all information!"));
     }
     //no refresh
 
@@ -38,20 +43,18 @@ const SignUp = () => {
     //   body: JSON.JSON.stringify(formData),
     // });
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const data = await axios.post("/api/auth/signup", formData, {
         headers: { "Content-Type": "application/json" },
       });
-      console.log(data);
-      setLoading(false);
+
       if (data.statusText === "OK") {
         //changeURL to /signin
+        dispatch(signInSuccess(data));
         navigate("/signin");
       }
     } catch (error) {
-      setLoading(false);
-      //specfic infor
-      setErrorMessage(error.response.data.message);
+      dispatch(signInFailure(error.response.data.message));
     }
   };
   const [passwordVisible, SetPasswordVisible] = useState("password");

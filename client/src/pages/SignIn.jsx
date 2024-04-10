@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
 import StarsCanvas from "../components/Canvas/StarsCanvas";
+import OAuth from "../components/OAuth";
 import { FaUserAstronaut } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -142,6 +143,7 @@ const SignIn = () => {
                 "SignIn"
               )}
             </Button>
+            <OAuth />
           </form>
           <div className="gap-2 mt-5 text-xs">
             <span>Have an account? </span>

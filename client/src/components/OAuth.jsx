@@ -3,7 +3,17 @@ import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
+
 const OAuth = () => {
+  //redux
+  const dispatch = useDispatch();
+  //oauth firebase
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const handleGoogleClick = async () => {
@@ -12,9 +22,23 @@ const OAuth = () => {
     });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
+      //take personal google information
+      let googleData = {
+        email: resultsFromGoogle.user.email,
+        name: resultsFromGoogle.user.displayName,
+        photoURL: resultsFromGoogle.user.photoURL,
+      };
+
+      const res = await axios.post("/api/auth/google", googleData, {
+        headers: { "Content-Type": "application/json" },
+      });
+      if (res.statusText === "OK") {
+        dispatch(signInSuccess(res));
+        navigate("/home");
+      }
       console.log(resultsFromGoogle);
     } catch (error) {
-      console.log(error);
+      dispatch(signInFailure(error.response.data.message));
     }
   };
   return (
