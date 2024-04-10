@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
-  error: null,
+  errorMessage: null,
   loading: false,
 };
 
@@ -13,16 +13,16 @@ const userSlice = createSlice({
     //actions payload contain information
     signInStart: (state) => {
       state.loading = true;
-      state.error = null;
+      state.errorMessage = null;
     },
     signInSuccess: (state, action) => {
       state.currentUser = action.payload;
       state.loading = false;
-      state.error = null;
+      state.errorMessage = null;
     },
     signInFailure: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.errorMessage = action.payload;
     },
   },
 });

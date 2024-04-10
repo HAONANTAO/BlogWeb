@@ -8,17 +8,23 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoEyeSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
 
 const SignIn = () => {
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
+  const dispatch = useDispatch();
+  const { loading, errorMessage } = useSelector((state) => state.user);
+
+  // const [loading, setLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState();
   const [formData, setFormData] = useState({});
   //跳转
   const navigate = useNavigate();
-  useEffect(() => {
-    //clear error message
-    setErrorMessage();
-  }, []);
+
   const handleChange = (e) => {
     //keep the original one
     // removing the white space using trim()
@@ -27,7 +33,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage("need fill all information!");
+      return dispatch(signInFailure("need fill all information!"));
     }
     //no refresh
 
@@ -38,20 +44,19 @@ const SignIn = () => {
     //   body: JSON.JSON.stringify(formData),
     // });
     try {
-      setLoading(true);
+      //in redux
+      dispatch(signInStart());
       const data = await axios.post("/api/auth/signin", formData, {
         headers: { "Content-Type": "application/json" },
       });
-      console.log(data);
-      setLoading(false);
+
       if (data.statusText === "OK") {
         //changeURL to /signin
+        dispatch(signInSuccess(data));
         navigate("/home");
       }
     } catch (error) {
-      setLoading(false);
-      //specfic infor
-      setErrorMessage(error.response.data.message);
+      dispatch(signInFailure(error.response.data.message));
     }
   };
   const [passwordVisible, SetPasswordVisible] = useState("password");
@@ -145,11 +150,11 @@ const SignIn = () => {
             </Link>
             <p
               id="helper-text-explanation"
-              class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               We’ll never share your details. Read our{" "}
               <a
                 href="#"
-                class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                className="font-medium text-blue-600 hover:underline dark:text-blue-500">
                 Privacy Policy
               </a>
               .
