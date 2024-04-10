@@ -11,3 +11,5 @@ routes 是路由
 controller 是逻辑在路由中处理的提出来
 
 redux 全局状态管理
+perisit 持久化 redux 信息
+oauth 谷歌登录

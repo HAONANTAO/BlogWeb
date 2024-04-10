@@ -13,6 +13,8 @@
     "@react-three/drei": "^9.105.2",
     "@react-three/fiber": "^8.16.1",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.10.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.8.0",
     "maath": "^0.10.7",

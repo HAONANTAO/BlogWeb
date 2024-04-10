@@ -8,7 +8,7 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoEyeSharp } from "react-icons/io5";
-
+import OAuth from "../components/OAuth";
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -154,6 +154,7 @@ const SignUp = () => {
                 "SignUp"
               )}
             </Button>
+            <OAuth />
           </form>
           <div className="gap-2 mt-5 text-xs">
             <span>Have an account? </span>
@@ -162,11 +163,11 @@ const SignUp = () => {
             </Link>
             <p
               id="helper-text-explanation"
-              class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               We’ll never share your details. Read our{" "}
               <a
                 href="#"
-                class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                className="font-medium text-blue-600 hover:underline dark:text-blue-500">
                 Privacy Policy
               </a>
               .
