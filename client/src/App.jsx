@@ -10,6 +10,7 @@ import StarsCanvas from "./components/Canvas/StarsCanvas";
 //components
 import Header from "./components/Header";
 import FooterComponent from "./components/Footer";
+
 function App() {
   return (
     <>
