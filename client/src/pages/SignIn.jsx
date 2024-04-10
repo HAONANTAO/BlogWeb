@@ -3,6 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
+import StarsCanvas from "../components/Canvas/StarsCanvas";
+import { FaUserAstronaut } from "react-icons/fa";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { IoEyeSharp } from "react-icons/io5";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +30,7 @@ const SignIn = () => {
       return setErrorMessage("need fill all information!");
     }
     //no refresh
+
     //replace the original fetch method
     // const res = await fetch("/api/auth/signup", {
     //   method: "POST",
@@ -36,7 +42,7 @@ const SignIn = () => {
       const data = await axios.post("/api/auth/signin", formData, {
         headers: { "Content-Type": "application/json" },
       });
-
+      console.log(data);
       setLoading(false);
       if (data.statusText === "OK") {
         //changeURL to /signin
@@ -47,6 +53,10 @@ const SignIn = () => {
       //specfic infor
       setErrorMessage(error.response.data.message);
     }
+  };
+  const [passwordVisible, SetPasswordVisible] = useState("password");
+  const changePasswordVisibility = () => {
+    SetPasswordVisible(passwordVisible === "text" ? "password" : "text");
   };
   return (
     <>
@@ -64,8 +74,8 @@ const SignIn = () => {
           </div>
           {/* </Link> */}
           <p className="mt-5 text-sm">
-            This is a Personal blog to publish articles. You can signup with
-            your information.
+            This is a Personal blog to publish articles. You can login with your
+            information.
           </p>
           <div className="w-80 h-80">
             <EarthCanvas />
@@ -77,10 +87,14 @@ const SignIn = () => {
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
-              <Label
-                value="Your email"
-                className="text-white"
-                htmlFor="email"></Label>
+              <div className="flex gap-2">
+                <MdMarkEmailUnread />
+                <Label
+                  value="Your email"
+                  className="text-white"
+                  htmlFor="email"></Label>
+              </div>
+
               <TextInput
                 type="email"
                 placeholder="name@company.com"
@@ -89,16 +103,25 @@ const SignIn = () => {
               />
             </div>
             <div>
-              <Label
-                value="Your password"
-                htmlFor="password"
-                className="text-white"></Label>
-              <TextInput
-                type="password"
-                placeholder="xxxxxxxx"
-                id="password"
-                onChange={handleChange}
-              />
+              <div className="flex gap-2">
+                <RiLockPasswordFill />
+                <Label
+                  value="Your password"
+                  htmlFor="password"
+                  className="text-white"></Label>
+              </div>
+
+              <div className="relative ">
+                <TextInput
+                  type={passwordVisible}
+                  placeholder="xxxxxxxx"
+                  id="password"
+                  onChange={handleChange}
+                />
+                <button type="button" onClick={changePasswordVisibility}>
+                  <IoEyeSharp className="absolute right-0 w-10 text-black bottom-9" />
+                </button>
+              </div>
             </div>
             <Button
               disabled={loading}
@@ -116,22 +139,22 @@ const SignIn = () => {
             </Button>
           </form>
           <div className="gap-2 mt-5 text-xs">
-            <span>Don't have a account? </span>
+            <span>Have an account? </span>
             <Link to="/sign-up" className="text-purple-500">
               Sign Up
             </Link>
+            <p
+              id="helper-text-explanation"
+              class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              We’ll never share your details. Read our{" "}
+              <a
+                href="#"
+                class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                Privacy Policy
+              </a>
+              .
+            </p>
           </div>
-          <p
-            id="helper-text-explanation"
-            class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            We’ll never share your details. Read our{" "}
-            <a
-              href="#"
-              class="font-medium text-blue-600 hover:underline dark:text-blue-500">
-              Privacy Policy
-            </a>
-            .
-          </p>
           {errorMessage && (
             <Alert className="mt-5" color="failure">
               {errorMessage}

@@ -7,6 +7,8 @@ import StarsCanvas from "../components/Canvas/StarsCanvas";
 import { FaUserAstronaut } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { IoEyeSharp } from "react-icons/io5";
+
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -52,6 +54,10 @@ const SignUp = () => {
       setErrorMessage(error.response.data.message);
     }
   };
+  const [passwordVisible, SetPasswordVisible] = useState("password");
+  const changePasswordVisibility = () => {
+    SetPasswordVisible(passwordVisible === "text" ? "password" : "text");
+  };
   return (
     <>
       <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 text-white md:flex-row">
@@ -68,8 +74,8 @@ const SignUp = () => {
           </div>
           {/* </Link> */}
           <p className="mt-5 text-sm">
-            This is a Personal blog to publish articles. You can signup with
-            your information.
+            This is a Personal blog to publish articles. You can login with your
+            information.
           </p>
           <div className="w-80 h-80">
             <EarthCanvas />
@@ -122,12 +128,17 @@ const SignUp = () => {
                   className="text-white"></Label>
               </div>
 
-              <TextInput
-                type="password"
-                placeholder="xxxxxxxx"
-                id="password"
-                onChange={handleChange}
-              />
+              <div className="relative ">
+                <TextInput
+                  type={passwordVisible}
+                  placeholder="xxxxxxxx"
+                  id="password"
+                  onChange={handleChange}
+                />
+                <button type="button" onClick={changePasswordVisibility}>
+                  <IoEyeSharp className="absolute right-0 w-10 text-black bottom-9" />
+                </button>
+              </div>
             </div>
             <Button
               disabled={loading}
