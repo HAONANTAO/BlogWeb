@@ -50,7 +50,7 @@ export const signin = async (req, res, next) => {
     //compare password
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) {
-      next(errorHandler(404, "invalid password!"));
+      return next(errorHandler(404, "invalid password!"));
     }
     //all passed
     //JWT Token
@@ -61,13 +61,16 @@ export const signin = async (req, res, next) => {
       process.env.JWT_SECRET_KEY,
       // { expiresIn: "1d" },
     );
+    //Separate the password not showing
+    const { password: pass, ...rest } = validUser._doc;
+
     res
       .status(200)
       .cookie("access_token", token, {
         //for security reason
         httpOnly: true,
       })
-      .json(validUser);
+      .json(rest);
   } catch (error) {
     return next(error);
   }
