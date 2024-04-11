@@ -14,4 +14,4 @@ redux 全局状态管理
 perisit 持久化 redux 信息
 oauth 谷歌登录 (firebase)
 signinPop 有警告
-threejs有警告
+threejs 有警告

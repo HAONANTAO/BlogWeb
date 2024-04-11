@@ -1,12 +1,14 @@
 import React from "react";
 //UI Library
-import { Button, Navbar, TextInput } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 // router without refresh
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
-
+import { useSelector } from "react-redux";
 const Header = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
   // 当前的路径
   const path = useLocation().pathname;
   return (
@@ -45,9 +47,22 @@ const Header = () => {
         </Button>
         <Link to="/sign-in">
           {/* 渐变 */}
-          <Button gradientDuoTone="purpleToBlue" pill outline>
-            Sign In
-          </Button>
+          {/* check redux store */}
+          {currentUser ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="user"
+                  img={currentUser.data.photoURL}
+                  rounded></Avatar>
+              }></Dropdown>
+          ) : (
+            <Button gradientDuoTone="purpleToBlue" pill outline>
+              Sign In
+            </Button>
+          )}
         </Link>
         {/* Navbar.Toggle是小屏幕才显示 配合collapse显示*/}
         <Navbar.Toggle></Navbar.Toggle>
