@@ -1,5 +1,11 @@
 import React from "react";
 //UI Library
+import { MdOutlineEmail } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { FaPeopleRoof } from "react-icons/fa6";
+import { FaSignOutAlt } from "react-icons/fa";
+import { FaPeopleArrows } from "react-icons/fa";
+import { PiAirTrafficControlFill } from "react-icons/pi";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 // router without refresh
 import { Link, useLocation } from "react-router-dom";
@@ -41,29 +47,60 @@ const Header = () => {
         <AiOutlineSearch />
       </Button>
       {/* 中等md尺寸下的显示顺序 后置*/}
+
       <div className="flex gap-2 md:order-2">
         <Button className="hidden w-12 h-10 sm:inline" color="gray" pill>
           <FaMoon />
         </Button>
-        <Link to="/sign-in">
-          {/* 渐变 */}
-          {/* check redux store */}
-          {currentUser ? (
-            <Dropdown
-              arrowIcon={false}
-              inline
-              label={
-                <Avatar
-                  alt="user"
-                  img={currentUser.data.photoURL}
-                  rounded></Avatar>
-              }></Dropdown>
-          ) : (
+        {/* 渐变 */}
+        {/* check redux store */}
+
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar
+                alt="User Avatar"
+                img={currentUser.data.photoURL}
+                rounded
+              />
+              // img={`/api/image-proxy?url=${encodeURIComponent(
+              //     currentUser.data.photoURL,
+              //   )}`}
+            }>
+            <Dropdown.Header>
+              <span className="flex flex-row items-baseline block gap-1 text-sm">
+                <CgProfile />
+                {currentUser.data.username}
+              </span>
+              <span className="flex flex-row items-baseline block gap-1 text-sm">
+                <MdOutlineEmail />
+                {currentUser.data.email}
+              </span>
+            </Dropdown.Header>
+            {/* //redirect to dashboard */}
+            <Link to={"/dashboard?tab=profile"}>
+              <div className="flex flex-row items-baseline justify-center block gap-1 text-l">
+                <PiAirTrafficControlFill />
+                Profile
+              </div>{" "}
+            </Link>
+
+            <Link to={"/sign-out?tab=profile"}>
+              <div className="flex flex-row items-baseline justify-center block gap-1 text-l">
+                <FaSignOutAlt />
+                SignOut
+              </div>{" "}
+            </Link>
+          </Dropdown>
+        ) : (
+          <Link to="/sign-in">
             <Button gradientDuoTone="purpleToBlue" pill outline>
               Sign In
-            </Button>
-          )}
-        </Link>
+            </Button>{" "}
+          </Link>
+        )}
         {/* Navbar.Toggle是小屏幕才显示 配合collapse显示*/}
         <Navbar.Toggle></Navbar.Toggle>
       </div>
