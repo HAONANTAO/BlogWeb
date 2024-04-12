@@ -1,4 +1,5 @@
 import React from "react";
+import { TbStarsFilled } from "react-icons/tb";
 //UI Library
 import { MdOutlineEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -9,7 +10,7 @@ import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../redux/theme/themeSlice.js";
+import { toggleTheme, toggleBack } from "../redux/theme/themeSlice.js";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
@@ -19,7 +20,7 @@ const Header = () => {
   return (
     //  border-b-2
     // 取消边框 不好看 bg-代表和下面一个颜色
-    <Navbar className="text-white border-blue-800 bg-">
+    <Navbar className="text-gray-300 border-blue-800 bg-">
       {/* 跳转回Home主页 大于sm size的字体变大 黑夜主题字体变白色*/}
       <Link
         to="/"
@@ -48,6 +49,9 @@ const Header = () => {
       {/* 中等md尺寸下的显示顺序 后置*/}
 
       <div className="flex gap-2 md:order-2">
+        <Button color="blue" pill onClick={() => dispatch(toggleBack())}>
+          <TbStarsFilled />
+        </Button>
         <Button
           onClick={() => dispatch(toggleTheme())}
           className="hidden w-12 h-10 sm:inline"
@@ -110,19 +114,25 @@ const Header = () => {
         {/* 根据当前url的path来亮光 */}
         {/* as={"div"}是因为两个link不可以嵌套 */}
         <Navbar.Link active={path === "/"} as={"div"} className="text-white">
-          <Link to="/">Home</Link>
+          <Link to="/" className="text-gray-500 ">
+            Home
+          </Link>
         </Navbar.Link>
         <Navbar.Link
           active={path === "/about"}
           as={"div"}
           className="text-white">
-          <Link to="/about">About</Link>
+          <Link to="/about" className="text-gray-500 ">
+            About
+          </Link>
         </Navbar.Link>
         <Navbar.Link
           active={path === "/projects"}
           as={"div"}
           className="text-white">
-          <Link to="/projects">Projects</Link>
+          <Link to="/projects" className="text-gray-500 ">
+            Projects
+          </Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

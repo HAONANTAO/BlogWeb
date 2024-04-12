@@ -15,5 +15,8 @@ perisit 持久化 redux 信息
 oauth 谷歌登录 (firebase)
 signinPop 有警告
 threejs 有警告
-sign显示头像透过store的redux去检查
-然后cors用send请求到后端解决跨域
+sign 显示头像透过 store 的 redux 去检查
+然后 cors 用 send 请求到后端解决跨域
+
+toggleTheme 也是在 redux 完成
+不光可以变颜色 还可以变成星空

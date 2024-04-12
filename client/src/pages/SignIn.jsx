@@ -69,7 +69,7 @@ const SignIn = () => {
       <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 text-white md:flex-row">
         {/* md:items-center */}
         {/* left side */}
-        <div className="flex-1 mr-5 md:items-center">
+        <div className="flex-1 mr-5 text-gray-500 md:items-center">
           <div className="text-4xl font-bold dark:text-white ">
             {/* <Link to="/" className="text-4xl font-bold dark:text-white"> */}
             {/* 渐变三色 */}
@@ -90,15 +90,16 @@ const SignIn = () => {
         </div>
         {/* EarthCanvas组件放在左侧div下方 */}
         {/* right side */}
-        <div className="flex-1">
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <div className="flex-1 text-gray-500 ">
+          <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
             <div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 ">
                 <MdMarkEmailUnread />
                 <Label
                   value="Your email"
                   className="text-white"
-                  htmlFor="email"></Label>
+                  htmlFor="email"
+                  className="text-gray-500 "></Label>
               </div>
 
               <TextInput
@@ -114,7 +115,7 @@ const SignIn = () => {
                 <Label
                   value="Your password"
                   htmlFor="password"
-                  className="text-white"></Label>
+                  className="text-gray-500 "></Label>
               </div>
 
               <div className="relative ">
