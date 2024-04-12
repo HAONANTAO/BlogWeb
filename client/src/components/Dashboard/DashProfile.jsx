@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { Alert, Button, TextInput } from "flowbite-react";
 const DashProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const [preview, SetPreview] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -49,11 +50,12 @@ const DashProfile = () => {
       (error) => {
         setImageFileUploadError("Could not upload image (File must be <3MB)");
         setImageFileUploadProgress(null);
-        setImageUrl(null);
-        setImageFile(null);
+
+        setImageUrl(preview); // 直接使用preview，因为preview始终保存着最后一次成功的URL
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          SetPreview(downloadURL);
           setImageUrl(downloadURL);
         });
       },
