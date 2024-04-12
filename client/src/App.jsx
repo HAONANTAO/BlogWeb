@@ -10,7 +10,7 @@ import StarsCanvas from "./components/Canvas/StarsCanvas";
 //components
 import Header from "./components/Header";
 import FooterComponent from "./components/Footer";
-
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
   return (
     <>
@@ -19,7 +19,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+          </Route>
+
           <Route path="/projects" element={<Projects />}></Route>
           <Route path="/sign-in" element={<SignIn />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
