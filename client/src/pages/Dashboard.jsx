@@ -13,9 +13,9 @@ const Dashboard = () => {
     // console.log(tabUrl);
   }, [location.search]);
   return (
-    <div className="text-white">
+    <div className="flex flex-col min-h-screen text-white md:flex-row">
       {/* sidebar */}
-      <div className="">
+      <div className="md:w-56">
         <DashSidebar />
       </div>
       {/* profile */}
