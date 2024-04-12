@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { app } from "../../firebase.js";
+//progress bar
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import {
   getStorage,
   ref,
@@ -8,7 +11,7 @@ import {
 } from "firebase/storage";
 
 import { useSelector } from "react-redux";
-import { Button, TextInput } from "flowbite-react";
+import { Alert, Button, TextInput } from "flowbite-react";
 const DashProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -16,13 +19,13 @@ const DashProfile = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const filePickerRef = useRef();
-  console.log(imageFileUploadProgress, imageFileUploadError);
+
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (file) {
       setImageFile(file);
-      //create temp url from file object
       setImageUrl(URL.createObjectURL(file));
+      //create temp url from file object
     }
   };
   useEffect(() => {
@@ -31,6 +34,7 @@ const DashProfile = () => {
     }
   }, [imageFile]);
   const uploadImage = async () => {
+    setImageFileUploadError(null);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
     const storageRef = ref(storage, fileName);
@@ -44,6 +48,9 @@ const DashProfile = () => {
       },
       (error) => {
         setImageFileUploadError("Could not upload image (File must be <3MB)");
+        setImageFileUploadProgress(null);
+        setImageUrl(null);
+        setImageFile(null);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -65,14 +72,46 @@ const DashProfile = () => {
         />
 
         <div
-          className="self-center overflow-hidden rounded shadow-md cursor-pointer w-36 h-36"
+          className="relative self-center overflow-hidden rounded shadow-md cursor-pointer w-36 h-36"
           onClick={() => filePickerRef.current.click()}>
+          {imageFileUploadProgress && (
+            <CircularProgressbar
+              value={imageFileUploadProgress || 0}
+              text={`${imageFileUploadProgress}%`}
+              strokeWidth="5"
+              styles={{
+                root: {
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                },
+                // opacity according to progress
+                path: {
+                  stroke: `rgba(62,152,199,${imageFileUploadProgress / 100})`,
+                },
+              }}
+            />
+          )}
           <img
             src={imageUrl ? imageUrl : currentUser.data.photoURL}
             alt="Avatar"
-            className="w-full rounded-full border-2 border-[lightgray] object-cover "
+            className={`w-full h-full rounded-full border-2 border-[lightgray] object-fit
+            ${
+              imageFileUploadProgress &&
+              imageFileUploadProgress < 100 &&
+              "opacity-40"
+            }`}
           />
         </div>
+        {/* alert when error upload image */}
+        {imageFileUploadError && (
+          <div className="mt-8">
+            <Alert color="failure">{imageFileUploadError}</Alert>
+          </div>
+        )}
+
         <TextInput
           type="text"
           id="username"

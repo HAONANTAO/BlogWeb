@@ -20,3 +20,6 @@ sign 显示头像透过 store 的 redux 去检查
 
 toggleTheme 也是在 redux 完成
 不光可以变颜色 还可以变成星空
+
+变 icon 头像的时候 传到 firebase 在拿下来 storage
+react-circular-progressbar 进度条加载
