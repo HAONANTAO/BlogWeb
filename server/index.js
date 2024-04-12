@@ -45,25 +45,25 @@ app.use((err, req, res, next) => {
 //   next();
 // });
 // 图片代理路由
-// app.get("/api/image-proxy", async (req, res) => {
-//   const url = req.query.url;
-//   if (!url) {
-//     return res.status(400).send("URL parameter is required");
-//   }
-//   try {
-//     const response = await axios.get(url, {
-//       responseType: "arraybuffer", // 指定响应类型为arraybuffer以获取原始二进制数据
-//       responseEncoding: "binary", // 确保处理二进制数据
-//     });
-//     const body = response.data;
-//     const contentType = response.headers["content-type"]; // 从响应头中获取实际的Content-Type
-//     res.writeHead(200, {
-//       "Content-Type": contentType, // 动态设置Content-Type
-//       "Content-Length": body.length,
-//     });
-//     res.end(Buffer.from(body, "binary")); // 使用Buffer.from来处理二进制数据并发送响应
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Failed to fetch image");
-//   }
-// });
+app.get("/api/image-proxy", async (req, res) => {
+  const url = req.query.url;
+  if (!url) {
+    return res.status(400).send("URL parameter is required");
+  }
+  try {
+    const response = await axios.get(url, {
+      responseType: "arraybuffer", // 指定响应类型为arraybuffer以获取原始二进制数据
+      responseEncoding: "binary", // 确保处理二进制数据
+    });
+    const body = response.data;
+    const contentType = response.headers["content-type"]; // 从响应头中获取实际的Content-Type
+    res.writeHead(200, {
+      "Content-Type": contentType, // 动态设置Content-Type
+      "Content-Length": body.length,
+    });
+    res.end(Buffer.from(body, "binary")); // 使用Buffer.from来处理二进制数据并发送响应
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to fetch image");
+  }
+});

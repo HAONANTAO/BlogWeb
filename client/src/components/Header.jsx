@@ -62,12 +62,11 @@ const Header = () => {
             label={
               <Avatar
                 alt="User Avatar"
-                img={currentUser.data.photoURL}
+                img={`/api/image-proxy?url=${encodeURIComponent(
+                  currentUser.data.photoURL,
+                )}`}
                 rounded
               />
-              // img={`/api/image-proxy?url=${encodeURIComponent(
-              //     currentUser.data.photoURL,
-              //   )}`}
             }>
             <Dropdown.Header>
               <span className="flex flex-row items-baseline block gap-1 text-sm">

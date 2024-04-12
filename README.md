@@ -15,3 +15,4 @@ perisit 持久化 redux 信息
 oauth 谷歌登录 (firebase)
 signinPop 有警告
 threejs 有警告
+sign显示头像透过store的redux去检查
