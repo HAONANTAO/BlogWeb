@@ -6,10 +6,12 @@ import useRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import axios from "axios";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 // create server using express
 const app = express();
 //parse middle ware
 app.use(bodyParser.json());
+app.use(cookieParser());
 // security
 // Load environment variables from .env file
 dotenv.config();
@@ -24,7 +26,7 @@ app.listen(3000, () => {
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
 
-//middleware handle error！
+//middleware handle error！ next()
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error!";
@@ -35,7 +37,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// // 允许跨域请求（CORS）
+//  允许跨域请求（CORS）
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header(
@@ -44,6 +46,7 @@ app.use((err, req, res, next) => {
 //   );
 //   next();
 // });
+
 // 图片代理路由
 app.get("/api/image-proxy", async (req, res) => {
   const url = req.query.url;

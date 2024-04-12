@@ -1,7 +1,9 @@
 import express from "express";
-import { test, normal } from "../controllers/user.controller.js";
+import { normal, updateUser } from "../controllers/user.controller.js";
+import { veriftUser } from "../utils/verifyUser.js";
 const useRoutes = express.Router();
 
-useRoutes.get("/", test);
 useRoutes.get("/test", normal);
+// update
+useRoutes.put("/update:userId", veriftUser, updateUser);
 export default useRoutes;

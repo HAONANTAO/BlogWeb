@@ -23,3 +23,5 @@ toggleTheme 也是在 redux 完成
 
 变 icon 头像的时候 传到 firebase 在拿下来 storage
 react-circular-progressbar 进度条加载
+
+为了更新用户信息 需要从后端进行验证用户在更新 jwt cookie-parser
