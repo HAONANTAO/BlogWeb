@@ -2,19 +2,18 @@ import React from "react";
 //UI Library
 import { MdOutlineEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { FaPeopleRoof } from "react-icons/fa6";
-import { FaSignOutAlt } from "react-icons/fa";
-import { FaPeopleArrows } from "react-icons/fa";
+import { FaSignOutAlt, FaPeopleArrows, FaMoon, FaSun } from "react-icons/fa";
 import { PiAirTrafficControlFill } from "react-icons/pi";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 // router without refresh
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice.js";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
-
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
   // 当前的路径
   const path = useLocation().pathname;
   return (
@@ -49,8 +48,12 @@ const Header = () => {
       {/* 中等md尺寸下的显示顺序 后置*/}
 
       <div className="flex gap-2 md:order-2">
-        <Button className="hidden w-12 h-10 sm:inline" color="gray" pill>
-          <FaMoon />
+        <Button
+          onClick={() => dispatch(toggleTheme())}
+          className="hidden w-12 h-10 sm:inline"
+          color="gray"
+          pill>
+          {theme === "light" ? <FaMoon /> : <FaSun />}
         </Button>
         {/* 渐变 */}
         {/* check redux store */}

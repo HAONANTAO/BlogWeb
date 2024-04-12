@@ -16,3 +16,4 @@ oauth 谷歌登录 (firebase)
 signinPop 有警告
 threejs 有警告
 sign显示头像透过store的redux去检查
+然后cors用send请求到后端解决跨域
