@@ -82,7 +82,7 @@ export const google = async (req, res, next) => {
     const user = await User.findOne({ email });
     //create first then next time find
     if (user) {
-      const token = createToken(user);
+      createToken(user);
     } else {
       const generatedPassword = Math.random().toString(36).slice(-8);
       const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
@@ -96,7 +96,7 @@ export const google = async (req, res, next) => {
         photoURL,
       });
       await newUser.save();
-      const token = createToken(newUser);
+      createToken(newUser);
     }
   } catch (error) {
     next(error);

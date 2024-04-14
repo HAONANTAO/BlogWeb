@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { app } from "../../firebase.js";
+import axios from "axios";
 //progress bar
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -9,12 +10,24 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-
-import { useSelector } from "react-redux";
+import {
+  updateStart,
+  updateSuccess,
+  updateFailure,
+} from "../../redux/user/userSlice.js";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Alert, Button, TextInput } from "flowbite-react";
 const DashProfile = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [updateUserError, setUpdateUserError] = useState(null);
+  const [imageUploading, setImageUploading] = useState(false);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+
   const [formData, setFormData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
+
   const [preview, SetPreview] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
@@ -25,7 +38,7 @@ const DashProfile = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  console.log(formData);
+
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -39,7 +52,51 @@ const DashProfile = () => {
       uploadImage();
     }
   }, [imageFile]);
+  const handleSubmit = async (e) => {
+    setUpdateUserError(null);
+    setUpdateUserSuccess(null);
+    e.preventDefault();
+    //if not any update
+    if (Object.keys(formData).length === 0) {
+      setUpdateUserError("No change Made");
+      return;
+    }
+
+    if (imageUploading) {
+      return;
+    }
+    try {
+      dispatch(updateStart());
+      console.log(currentUser.data._id);
+      const data = await axios.put(
+        `/api/user/update/${currentUser.data._id}`,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+      console.log(data);
+      if (data.statusText !== "OK") {
+        //changeURL to /signin
+        console.log(data);
+        dispatch(updateFailure(data.message));
+        setUpdateUserError(data.error.message);
+      } else {
+        console.log(data);
+        setUpdateUserSuccess("User'profile update successfully!");
+        dispatch(updateSuccess(data));
+      }
+    } catch (error) {
+      console.error(
+        "Failed to update profile:",
+        error.response || error.message,
+      );
+      dispatch(updateFailure(error.message));
+      setUpdateUserError(error.message);
+    }
+  };
   const uploadImage = async () => {
+    setImageUploading(true);
     setImageFileUploadError(null);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
@@ -53,6 +110,7 @@ const DashProfile = () => {
         setImageFileUploadProgress(progress.toFixed(0));
       },
       (error) => {
+        setImageUploading(false);
         setImageFileUploadError("Could not upload image (File must be <3MB)");
         setImageFileUploadProgress(null);
 
@@ -60,10 +118,11 @@ const DashProfile = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImageUploading(false);
           SetPreview(downloadURL);
           setImageUrl(downloadURL);
           //update url
-          setFormData({ ...form, photoUrl: downloadURL });
+          setFormData({ ...formData, photoUrl: downloadURL });
         });
       },
     );
@@ -71,7 +130,7 @@ const DashProfile = () => {
   return (
     <div className="justify-center w-full max-w-lg gap-6 mx-auto text-white">
       <h1 className="my-8 text-3xl font-semibold text-center">Profile</h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="file"
           accept="image/*"
@@ -152,6 +211,16 @@ const DashProfile = () => {
         <span className="cursor-pointer">Delete Account</span>
         <span className="cursor-pointer">Sign Out</span>
       </div>
+      {updateUserSuccess && (
+        <Alert color="success" className="mt-5">
+          {updateUserSuccess}
+        </Alert>
+      )}{" "}
+      {updateUserError && (
+        <Alert color="failure" className="mt-5">
+          {updateUserError}
+        </Alert>
+      )}
     </div>
   );
 };
