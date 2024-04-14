@@ -28,7 +28,6 @@ export const updateUser = async (req, res, next) => {
     }
   }
 
-  console.log(req.body);
   //update user after check
   try {
     const updatedUser = await User.findByIdAndUpdate(

@@ -28,7 +28,6 @@ const DashProfile = () => {
   const [formData, setFormData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
 
-  const [preview, SetPreview] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -50,21 +49,21 @@ const DashProfile = () => {
   useEffect(() => {
     if (imageFile) {
       uploadImage();
+      setUpdateUserError(null);
+      setUpdateUserSuccess(null);
     }
   }, [imageFile]);
   const handleSubmit = async (e) => {
-    setUpdateUserError(null);
-    setUpdateUserSuccess(null);
     e.preventDefault();
     //if not any update
+    if (imageUploading) {
+      return;
+    }
     if (Object.keys(formData).length === 0) {
       setUpdateUserError("No change Made");
       return;
     }
 
-    if (imageUploading) {
-      return;
-    }
     try {
       dispatch(updateStart());
 
@@ -86,10 +85,6 @@ const DashProfile = () => {
         dispatch(updateSuccess(data));
       }
     } catch (error) {
-      console.error(
-        "Failed to update profile:",
-        error.response || error.message,
-      );
       dispatch(updateFailure(error.message));
       setUpdateUserError(error.message);
     }
@@ -112,13 +107,11 @@ const DashProfile = () => {
         setImageUploading(false);
         setImageFileUploadError("Could not upload image (File must be <3MB)");
         setImageFileUploadProgress(null);
-
-        setImageUrl(preview); // 直接使用preview，因为preview始终保存着最后一次成功的URL
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageUploading(false);
-          SetPreview(downloadURL);
+
           setImageUrl(downloadURL);
           //update url
           setFormData({ ...formData, photoURL: downloadURL });
