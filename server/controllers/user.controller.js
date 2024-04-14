@@ -1,4 +1,5 @@
 import { errorHandler } from "../utils/errorHandler.js";
+import User from "../models/user.model.js";
 
 export const updateUser = async (req, res, next) => {
   //check user
@@ -26,9 +27,20 @@ export const updateUser = async (req, res, next) => {
     }
     //update user after check
     try {
-      
-    } catch (error) {
-      
-    }
+      const updatedUser = await User.findByIdAndDelete(
+        req.params.userId,
+        {
+          $set: {
+            username: req.body.username,
+            email: req.body.email,
+            photoUrl: req.body.photoUrl,
+            password: req.body.password,
+          },
+        },
+        { new: true },
+      );
+      const { password, ...rest } = updatedUser._doc;
+      res.status(200).json(rest);
+    } catch (error) {}
   }
 };
