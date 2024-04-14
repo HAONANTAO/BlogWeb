@@ -97,9 +97,9 @@ const SignIn = () => {
                 <MdMarkEmailUnread />
                 <Label
                   value="Your email"
-                  className="text-white"
+                  className="text-gray-500 "
                   htmlFor="email"
-                  className="text-gray-500 "></Label>
+                  ></Label>
               </div>
 
               <TextInput
