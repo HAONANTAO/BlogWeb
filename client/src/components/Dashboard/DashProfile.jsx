@@ -67,7 +67,7 @@ const DashProfile = () => {
     }
     try {
       dispatch(updateStart());
-      console.log(currentUser.data._id);
+
       const data = await axios.put(
         `/api/user/update/${currentUser.data._id}`,
         formData,
@@ -75,14 +75,13 @@ const DashProfile = () => {
           headers: { "Content-Type": "application/json" },
         },
       );
-      console.log(data);
+
       if (data.statusText !== "OK") {
         //changeURL to /signin
-        console.log(data);
+
         dispatch(updateFailure(data.message));
         setUpdateUserError(data.error.message);
       } else {
-        console.log(data);
         setUpdateUserSuccess("User'profile update successfully!");
         dispatch(updateSuccess(data));
       }
@@ -122,7 +121,7 @@ const DashProfile = () => {
           SetPreview(downloadURL);
           setImageUrl(downloadURL);
           //update url
-          setFormData({ ...formData, photoUrl: downloadURL });
+          setFormData({ ...formData, photoURL: downloadURL });
         });
       },
     );
