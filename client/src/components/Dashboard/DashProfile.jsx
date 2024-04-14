@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Scene from "../Canvas/Scene.jsx";
+import SolarSystem from "../Canvas/SolarSystem.jsx";
 import { app } from "../../firebase.js";
 import axios from "axios";
 //progress bar
@@ -215,7 +216,7 @@ const DashProfile = () => {
         </Alert>
       )}
       <div className="flex items-center justify-center h-64">
-        <Scene />
+        <SolarSystem />
       </div>
     </div>
   );
