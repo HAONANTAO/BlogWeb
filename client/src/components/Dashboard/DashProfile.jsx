@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import { Alert, Button, TextInput } from "flowbite-react";
 const DashProfile = () => {
+  const [formData, setFormData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
   const [preview, SetPreview] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -21,6 +22,10 @@ const DashProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const filePickerRef = useRef();
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  console.log(formData);
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -57,6 +62,8 @@ const DashProfile = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           SetPreview(downloadURL);
           setImageUrl(downloadURL);
+          //update url
+          setFormData({ ...form, photoUrl: downloadURL });
         });
       },
     );
@@ -118,17 +125,20 @@ const DashProfile = () => {
           type="text"
           id="username"
           placeholder="username"
-          defaultValue={currentUser.data.username}></TextInput>
+          defaultValue={currentUser.data.username}
+          onChange={handleChange}></TextInput>
         <TextInput
           type="email"
           id="email"
           placeholder="email"
-          defaultValue={currentUser.data.email}></TextInput>
+          defaultValue={currentUser.data.email}
+          onChange={handleChange}></TextInput>
         <TextInput
           type="password"
           id="password"
           placeholder="password"
-          defaultValue="******* "></TextInput>
+          defaultValue="*******"
+          onChange={handleChange}></TextInput>
         <Button
           type="submit"
           gradientDuoTone="purpleToBlue"
