@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import Scene from "../Canvas/Scene.jsx";
 import { app } from "../../firebase.js";
 import axios from "axios";
 //progress bar
@@ -213,6 +214,9 @@ const DashProfile = () => {
           {updateUserError}
         </Alert>
       )}
+      <div className="flex items-center justify-center h-64">
+        <Scene />
+      </div>
     </div>
   );
 };

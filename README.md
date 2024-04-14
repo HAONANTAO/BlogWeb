@@ -1,3 +1,7 @@
+video:https://www.youtube.com/watch?v=Kkht2mwSL_I
+
+githun sourcecode:https://github.com/sahandghavidel/mern-blog
+
 react-router-dom 路由
 tailwindcss 装饰
 切换日夜主题（没我这个星空的好看）
