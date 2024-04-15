@@ -166,11 +166,8 @@ const DashProfile = () => {
     );
   };
   return (
-    <div className="justify-center w-full max-w-lg gap-6 mx-auto text-white">
-      <h1 className="my-8 text-3xl font-semibold text-center">
-        Profile
-       
-      </h1>
+    <div className="justify-center w-full max-w-lg gap-6 mx-auto text-gray-400">
+      <h1 className="my-8 text-3xl font-semibold text-center ">Profile</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -249,7 +246,7 @@ const DashProfile = () => {
           {loading ? "Loading..." : "Update"}
         </Button>
         {currentUser.data.isAdmin && (
-          <Link to={"create-post"}>
+          <Link to={"/create-post"}>
             <Button
               type="button"
               gradientDuoTone="purpleToPink"

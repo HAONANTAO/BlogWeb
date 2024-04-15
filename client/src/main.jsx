@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "../App.css";
 import ThemeProvider from "./components/ThemeProvider.jsx";
-
+import StarsProvider from "./components/StarsProvider.jsx";
 //redux
 import { useSelector } from "react-redux";
 import { store, persistor } from "./redux/store";
@@ -21,7 +21,9 @@ const RootComponent = () => {
           <App />
         </ThemeProvider>
       ) : (
-        <App />
+        <StarsProvider>
+          <App />
+        </StarsProvider>
       )}
     </PersistGate>
   );
