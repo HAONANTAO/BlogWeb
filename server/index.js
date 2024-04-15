@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 // users 路由
 import useRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import postRoutes from "./routes/post.route.js";
 import axios from "axios";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -25,6 +26,7 @@ app.listen(3000, () => {
 //pass this path from this routes
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/post", postRoutes);
 
 //middleware handle error！ next()
 app.use((err, req, res, next) => {
