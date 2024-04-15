@@ -1,19 +1,19 @@
+import { Button, FileInput, Select, TextInput } from "flowbite-react";
 import React, { useState } from "react";
-import { TextInput, Select, FileInput, Button } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useSelector } from "react-redux";
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+
 import {
   getDownloadURL,
   getStorage,
-  uploadBytesResumable,
   ref,
+  uploadBytesResumable,
 } from "firebase/storage";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
-import { app } from "../firebase.js";
 import { Alert } from "flowbite-react";
+import { app } from "../firebase.js";
 const CreatePost = () => {
   // 处理文字编辑器文字颜色
   // const stars = useSelector((state) => state.theme.stars);

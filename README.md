@@ -29,4 +29,4 @@ toggleTheme 也是在 redux 完成
 react-circular-progressbar 进度条加载
 
 为了更新用户信息 需要从后端进行验证用户在更新 jwt cookie-parser
-ReactQuill 文本编辑器
+ReactQuill 文本编辑器(需要解决在星空和黑暗模式的颜色问题）)
