@@ -9,3 +9,7 @@ body {
 .ql-editor {
   font-size: 1.05rem;
 }
+/* .dark,
+.stars .ql-editor {
+  color: white; /* 设置文本颜色为白色 */
+/* } */

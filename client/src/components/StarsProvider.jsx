@@ -4,7 +4,7 @@ function StarsProvider({ children }) {
   const { stars } = useSelector((state) => state.theme);
 
   return (
-    <div>
+    <div className={`${stars ? "stars" : ""}`}>
       <div
         className={`${stars ? "text-white" : "text-gray-400"}  min-h-screen`}>
         {children}

@@ -2,12 +2,19 @@ import React from "react";
 import { TextInput, Select, FileInput, Button } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useSelector } from "react-redux";
 const CreatePost = () => {
+  const stars = useSelector((state) => state.theme.stars);
+  const { theme } = useSelector((state) => state.theme);
+
   return (
     <div className="max-w-3xl min-h-screen p-3 mx-auto ">
       <h1 className="text-3xl font-semibold text-center my-7">Create a Post</h1>
       <form className="flex flex-col gap-4">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row">
+        <div
+          className={`flex flex-col justify-between gap-4 sm:flex-row ${
+            stars ? "stars" : ""
+          } ${theme === "dark" ? "dark" : "light"}`}>
           <TextInput
             type="text"
             placeholder="Title"
@@ -35,9 +42,11 @@ const CreatePost = () => {
         <ReactQuill
           theme="snow"
           placeholder="write something"
-          className="mb-12 h-72"
+          className="mb-12 text-white h-72"
         />
-        <Button type="submit" gradientDuoTone="purpleToPink">Publish</Button>
+        <Button type="submit" gradientDuoTone="purpleToPink">
+          Publish
+        </Button>
       </form>
     </div>
   );
