@@ -57,6 +57,7 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign(
       {
         id: validUser._id,
+        isAdmin: validUser.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
       // { expiresIn: "1d" },
@@ -106,6 +107,7 @@ export const google = async (req, res, next) => {
     const token = jwt.sign(
       {
         id: user1._id,
+        isAdmin: user1.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
     );
