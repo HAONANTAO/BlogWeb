@@ -13,6 +13,7 @@ const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState("");
   const { currentUser } = useSelector((state) => state.user);
+  
   const handleSignOut = async () => {
     signOutStart();
     try {
@@ -43,7 +44,7 @@ const DashSidebar = () => {
           <Sidebar.Item
             active={tab === "profile"}
             icon={HiUser}
-            label={"User"}
+            label={ currentUser.data.isAdmin === true ? "Admin" : "User"}
             labelColor="blue"
             href="/dashboard?tab=profile">
             Profile

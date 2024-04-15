@@ -24,6 +24,8 @@ function Globe() {
 
   const earthMaterial = new MeshPhongMaterial({
     map: earthTexture,
+    //  // 0xCED1FF
+    color: 0xced1ff, // Even lighter blue color for oceans
   });
   const cloudsMaterial = new MeshPhongMaterial({
     map: cloudsTexture,

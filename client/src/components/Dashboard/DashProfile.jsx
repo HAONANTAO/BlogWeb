@@ -23,7 +23,7 @@ import {
   signOutSuccess,
   signOutFailure,
 } from "../../redux/user/userSlice.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Alert, Button, Modal, TextInput } from "flowbite-react";
 const DashProfile = () => {
@@ -34,7 +34,9 @@ const DashProfile = () => {
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
-  const { currentUser, errorMessage } = useSelector((state) => state.user);
+  const { currentUser, errorMessage, loading } = useSelector(
+    (state) => state.user,
+  );
 
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
@@ -165,7 +167,10 @@ const DashProfile = () => {
   };
   return (
     <div className="justify-center w-full max-w-lg gap-6 mx-auto text-white">
-      <h1 className="my-8 text-3xl font-semibold text-center">Profile</h1>
+      <h1 className="my-8 text-3xl font-semibold text-center">
+        Profile
+       
+      </h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -239,9 +244,20 @@ const DashProfile = () => {
           gradientDuoTone="purpleToBlue"
           outline
           pill
-          className="my-4">
-          Update
+          className="my-2"
+          disabled={loading || imageUploading}>
+          {loading ? "Loading..." : "Update"}
         </Button>
+        {currentUser.data.isAdmin && (
+          <Link to={"create-post"}>
+            <Button
+              type="button"
+              gradientDuoTone="purpleToPink"
+              className="w-full">
+              Create a post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="flex justify-between mt-3 text-red-500 ">
         <span
