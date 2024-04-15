@@ -39,6 +39,19 @@ const DashProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const filePickerRef = useRef();
 
+  const handleSignOut = async () => {
+    try {
+      const data = axios.post(`/api/user/signout/${currentUser.data._id}`)
+       if (!data.status === 200) {
+        console.log("not ok")
+      } else {
+       console.log("ok")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleDeleteUser = async () => {
     setShowModal(false);
 
@@ -47,8 +60,7 @@ const DashProfile = () => {
       const data = await axios.delete(
         `/api/user/delete/${currentUser.data._id}`,
       );
-      console.log(data);
-
+    
       // data.statusText !== "OK"
       if (!data.status === 200) {
         dispatch(deleteUserFailure(data.message));
@@ -233,7 +245,9 @@ const DashProfile = () => {
           className="cursor-pointer">
           Delete Account
         </span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span onClick={handleSignOut} className="cursor-pointer">
+          Sign Out
+        </span>
       </div>
       {updateUserSuccess && (
         <Alert color="success" className="mt-5">
