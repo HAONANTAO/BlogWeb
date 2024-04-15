@@ -27,6 +27,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Alert, Button, Modal, TextInput } from "flowbite-react";
 const DashProfile = () => {
+  console.log(file);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateUserError, setUpdateUserError] = useState(null);
