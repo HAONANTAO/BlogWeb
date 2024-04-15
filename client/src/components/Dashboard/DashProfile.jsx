@@ -49,7 +49,7 @@ const DashProfile = () => {
         `/api/user/signout/${currentUser.data._id}`,
       );
 
-      if (!data.status === 200) {
+      if (data.status !== 200) {
         dispatch(signOutFailure(data.message));
       } else {
         dispatch(signOutSuccess());

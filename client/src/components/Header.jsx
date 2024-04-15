@@ -1,5 +1,12 @@
 import React from "react";
 import { TbStarsFilled } from "react-icons/tb";
+import {
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
+} from "../redux/user/userSlice.js";
+import axios from "axios";
+
 //UI Library
 import { MdOutlineEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -13,10 +20,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme, toggleBack } from "../redux/theme/themeSlice.js";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
+
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   // 当前的路径
   const path = useLocation().pathname;
+  const handleSignOut = async () => {
+    signOutStart();
+    try {
+      const data = await axios.post(
+        `/api/user/signout/${currentUser.data._id}`,
+      );
+
+      if (data.status !== 200) {
+        dispatch(signOutFailure(data.message));
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      dispatch(signOutFailure(error));
+    }
+  };
   return (
     //  border-b-2
     // 取消边框 不好看 bg-代表和下面一个颜色
@@ -93,12 +117,10 @@ const Header = () => {
               </div>{" "}
             </Link>
 
-            <Link to={"/sign-out?tab=profile"}>
-              <div className="flex flex-row items-baseline justify-center block gap-1 text-l">
-                <FaSignOutAlt />
-                SignOut
-              </div>{" "}
-            </Link>
+            <div className="flex flex-row items-baseline justify-center block gap-1 cursor-pointer text-l">
+              <FaSignOutAlt />
+              <div onClick={handleSignOut}> SignOut</div>
+            </div>
           </Dropdown>
         ) : (
           <Link to="/sign-in">
