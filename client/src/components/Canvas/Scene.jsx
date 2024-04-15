@@ -34,7 +34,7 @@ function Globe() {
   return (
     <>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[2, 64, 64]} />
+        <sphereGeometry args={[2.5, 64, 64]} />
         <primitive object={earthMaterial} />
       </mesh>
       <mesh ref={cloudsRef} position={[0, 0, 0]}>

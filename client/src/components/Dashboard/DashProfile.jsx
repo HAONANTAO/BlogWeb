@@ -19,6 +19,9 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
 } from "../../redux/user/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -40,15 +43,19 @@ const DashProfile = () => {
   const filePickerRef = useRef();
 
   const handleSignOut = async () => {
+    signOutStart();
     try {
-      const data = axios.post(`/api/user/signout/${currentUser.data._id}`)
-       if (!data.status === 200) {
-        console.log("not ok")
+      const data = await axios.post(
+        `/api/user/signout/${currentUser.data._id}`,
+      );
+
+      if (!data.status === 200) {
+        dispatch(signOutFailure(data.message));
       } else {
-       console.log("ok")
+        dispatch(signOutSuccess());
       }
     } catch (error) {
-      console.log(error);
+      dispatch(signOutFailure(error));
     }
   };
 
@@ -60,7 +67,7 @@ const DashProfile = () => {
       const data = await axios.delete(
         `/api/user/delete/${currentUser.data._id}`,
       );
-    
+
       // data.statusText !== "OK"
       if (!data.status === 200) {
         dispatch(deleteUserFailure(data.message));
@@ -68,7 +75,6 @@ const DashProfile = () => {
         dispatch(deleteUserSuccess(data));
       }
     } catch (error) {
-      console.log(error);
       dispatch(deleteUserFailure(error.message));
     }
   };
