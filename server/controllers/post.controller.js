@@ -9,14 +9,15 @@ export const create = async (req, res, next) => {
   }
   // ”通常指的是一个用于URL中的标识符，它是一个易于阅读的、URL友好的形式
   const slug = req.body.title
-    .split(" ")
-    .join("-")
-    .toLowercase()
-    .replace(/[a-zA-Z0-9]/g, "-");
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-zA-Z0-9-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
   const newPost = new Post({
     ...req.body,
     slug,
-    userId: req.user._id,
+    userId: req.user.id,
   });
   try {
     const savedPost = await newPost.save();
