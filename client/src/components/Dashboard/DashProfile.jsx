@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Scene from "../Canvas/Scene.jsx";
-
+import { FiAlertTriangle } from "react-icons/fi";
 import { app } from "../../firebase.js";
 import axios from "axios";
 //progress bar
@@ -16,19 +16,22 @@ import {
   updateStart,
   updateSuccess,
   updateFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../../redux/user/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Alert, Button, TextInput } from "flowbite-react";
+import { Alert, Button, Modal, TextInput } from "flowbite-react";
 const DashProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateUserError, setUpdateUserError] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
-
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, errorMessage } = useSelector((state) => state.user);
 
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
@@ -36,6 +39,27 @@ const DashProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const filePickerRef = useRef();
 
+  const handleDeleteUser = async () => {
+    setShowModal(false);
+
+    try {
+      dispatch(deleteUserStart());
+      const data = await axios.delete(
+        `/api/user/delete/${currentUser.data._id}`,
+      );
+      console.log(data);
+
+      // data.statusText !== "OK"
+      if (!data.status === 200) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -202,19 +226,53 @@ const DashProfile = () => {
         </Button>
       </form>
       <div className="flex justify-between mt-3 text-red-500 ">
-        <span className="cursor-pointer">Delete Account</span>
+        <span
+          onClick={() => {
+            setShowModal(true);
+          }}
+          className="cursor-pointer">
+          Delete Account
+        </span>
         <span className="cursor-pointer">Sign Out</span>
       </div>
       {updateUserSuccess && (
         <Alert color="success" className="mt-5">
           {updateUserSuccess}
         </Alert>
-      )}{" "}
+      )}
+
       {updateUserError && (
         <Alert color="failure" className="mt-5">
           {updateUserError}
         </Alert>
       )}
+      {errorMessage && (
+        <Alert color="failure" className="mt-5">
+          {errorMessage}
+        </Alert>
+      )}
+      {/* delete user */}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="medium">
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <FiAlertTriangle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure to delete this account?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeleteUser}>
+                Yes,I am sure!
+              </Button>
+              <Button onClick={() => setShowModal(false)}>No, Cancel it</Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
       <div className="flex items-center justify-center h-64 mt-4">
         <Scene />
       </div>
