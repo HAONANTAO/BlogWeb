@@ -10,7 +10,7 @@ import axios from "axios";
 //UI Library
 import { MdOutlineEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { FaSignOutAlt, FaPeopleArrows, FaMoon, FaSun } from "react-icons/fa";
+import { FaSignOutAlt,  FaMoon, FaSun } from "react-icons/fa";
 import { PiAirTrafficControlFill } from "react-icons/pi";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 // router without refresh
