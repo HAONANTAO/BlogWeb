@@ -53,11 +53,13 @@ const DashProfile = () => {
       );
 
       if (data.status !== 200) {
-        dispatch(signOutFailure(data.message));
+        console.log(data.message);
+        dispatch(signOutFailure(data));
       } else {
         dispatch(signOutSuccess());
       }
     } catch (error) {
+      console.log(error);
       dispatch(signOutFailure(error));
     }
   };

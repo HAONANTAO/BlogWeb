@@ -2,7 +2,7 @@ import { Button, FileInput, Select, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import axios from "axios";
 import {
   getDownloadURL,
   getStorage,
@@ -11,18 +11,41 @@ import {
 } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
+import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { app } from "../firebase.js";
 const CreatePost = () => {
   // 处理文字编辑器文字颜色
   // const stars = useSelector((state) => state.theme.stars);
   // const { theme } = useSelector((state) => state.theme);
+  const navigate = useNavigate();
+  const [publishError, setPublishError] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setPublishError();
+
+    try {
+      const data = await axios.post(`/api/post/create`, formData);
+      console.log(data);
+      if (data.status !== 201) {
+        setPublishError(data.message);
+      } else {
+        setPublishError();
+
+        console.log("Attempting to navigate to", `/post/${data.data.slug}`);
+        navigate(`/post/${data.data.slug}`);
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      setPublishError(error.response.data);
+    }
+  };
   const handleUploadImage = async () => {
     try {
       if (!file) {
@@ -65,15 +88,21 @@ const CreatePost = () => {
   return (
     <div className="max-w-3xl min-h-screen p-3 mx-auto ">
       <h1 className="text-3xl font-semibold text-center my-7">Create a Post</h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className={`flex flex-col justify-between gap-4 sm:flex-row `}>
           <TextInput
             type="text"
             placeholder="Title"
             required
             id="title"
-            className="flex-1"></TextInput>
-          <Select>
+            className="flex-1"
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }></TextInput>
+          <Select
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }>
             <option value="uncategorized">Select a category</option>
             <option value="Coding">Coding</option>
             <option value="Love">Love</option>
@@ -118,10 +147,12 @@ const CreatePost = () => {
           theme="snow"
           placeholder="write something"
           className="mb-12 text-white h-72"
+          onChange={(value) => setFormData({ ...formData, content: value })}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
           Publish
         </Button>
+        {publishError && <Alert color="failure">{publishError} </Alert>}
       </form>
     </div>
   );
