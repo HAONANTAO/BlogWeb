@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Sidebar } from "flowbite-react";
 import axios from "axios";
+import { MdCollectionsBookmark } from "react-icons/md";
+
 import {
   signOutStart,
   signOutSuccess,
@@ -13,7 +15,7 @@ const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState("");
   const { currentUser } = useSelector((state) => state.user);
-  
+
   const handleSignOut = async () => {
     signOutStart();
     try {
@@ -40,16 +42,26 @@ const DashSidebar = () => {
   return (
     <Sidebar className="w-full text-white md:w-56">
       <Sidebar.Items>
-        <Sidebar.ItemGroup>
+        <Sidebar.ItemGroup className="flex flex-col gap-2">
           <Sidebar.Item
             active={tab === "profile"}
             icon={HiUser}
-            label={ currentUser.data.isAdmin === true ? "Admin" : "User"}
+            label={currentUser.data.isAdmin === true ? "Admin" : "User"}
             labelColor="blue"
             href="/dashboard?tab=profile">
             Profile
           </Sidebar.Item>
 
+          {currentUser.data.isAdmin && (
+            <Link to="/dashboard?tab=posts">
+              <Sidebar.Item
+                active={tab === "posts"}
+                icon={MdCollectionsBookmark}
+                as="div">
+                Post
+              </Sidebar.Item>
+            </Link>
+          )}
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"
