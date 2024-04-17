@@ -7,6 +7,7 @@ import Projects from "./pages/Projects";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import StarsCanvas from "./components/Canvas/StarsCanvas";
+import UpdatePost from "./pages/UpdatePost";
 //components
 import Header from "./components/Header";
 import FooterComponent from "./components/Footer";
@@ -25,7 +26,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
           <Route element={<OnlyAdminPrivateRoute />}>
-            <Route path="/create-post" element={<CreatePost />}></Route>
+            <Route path="/create-post" element={<CreatePost />}>
+             
+            </Route>
+            <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
           </Route>
 
           <Route path="/projects" element={<Projects />}></Route>
