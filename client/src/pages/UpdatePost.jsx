@@ -16,12 +16,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { app } from "../firebase.js";
 const UpdatePost = () => {
+  const [loading, setLoading] = useState(false);
+const [success, setSuccess] = useState("");
   const { postId } = useParams();
   // 处理文字编辑器文字颜色
   // const stars = useSelector((state) => state.theme.stars);
   // const { theme } = useSelector((state) => state.theme);
   const navigate = useNavigate();
   useEffect(() => {
+    setLoading(false);
     try {
       const fetchPost = async () => {
         const data = await axios.get(`/api/post/getposts?postId=${postId}`);
@@ -29,6 +32,7 @@ const UpdatePost = () => {
         if (data.status === 200) {
           //first one
           setFormData(data.data.posts[0]);
+            setSuccess("Update Successful");
         } else {
           publishError(data.statusText);
         }
@@ -47,6 +51,7 @@ const UpdatePost = () => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setPublishError();
 
@@ -175,10 +180,14 @@ const UpdatePost = () => {
           onChange={(value) => setFormData({ ...formData, content: value })}
           value={formData.content || ""}
         />
-        <Button type="submit" gradientDuoTone="purpleToPink">
+        <Button
+          type="submit"
+          gradientDuoTone="purpleToPink"
+          disabled={loading}>
           Update Post
         </Button>
         {publishError && <Alert color="failure">{publishError} </Alert>}
+         {success && <Alert color="success">{success} </Alert>}
       </form>
     </div>
   );

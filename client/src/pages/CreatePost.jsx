@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { app } from "../firebase.js";
 const CreatePost = () => {
+  
+  const [loading, setLoading] = useState(false);
   // 处理文字编辑器文字颜色
   // const stars = useSelector((state) => state.theme.stars);
   // const { theme } = useSelector((state) => state.theme);
@@ -35,6 +37,7 @@ const CreatePost = () => {
       console.log(data);
       if (data.status !== 201) {
         setPublishError(data.message);
+      
       } else {
         setPublishError();
 
@@ -149,10 +152,11 @@ const CreatePost = () => {
           className="mb-12 text-white h-72"
           onChange={(value) => setFormData({ ...formData, content: value })}
         />
-        <Button type="submit" gradientDuoTone="purpleToPink">
+        <Button type="submit" gradientDuoTone="purpleToPink" disabled={loading}>
           Publish
         </Button>
         {publishError && <Alert color="failure">{publishError} </Alert>}
+       
       </form>
     </div>
   );

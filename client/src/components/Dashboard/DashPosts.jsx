@@ -12,8 +12,11 @@ const DashPosts = () => {
   const [showMore, setShowMore] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
   const [render, setRender] = useState(false);
+  
   useEffect(() => {
     setRender(false);
+
+    false;
     const fetchPosts = async () => {
       try {
         const data = await axios.get(
@@ -25,6 +28,7 @@ const DashPosts = () => {
           if (data.data.posts.length < 9) {
             setShowMore(false);
           }
+         
         }
       } catch (error) {
         console.log(error);
@@ -45,6 +49,7 @@ const DashPosts = () => {
 
       if (data.status === 200) {
         setUserPosts((prev) => [...prev, ...data.data.posts]);
+        setSuccess(true);
         if (data.data.posts.length < 9) {
           setShowMore(false);
         }
@@ -71,8 +76,9 @@ const DashPosts = () => {
       console.log(error);
     }
   };
+
   return (
-    <div className="w-full h-full mx-3 table-auto moverflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+    <div className="w-full h-full mx-2 table-auto moverflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
         {currentUser.data.isAdmin && userPosts.length > 0 ? (
           <>
