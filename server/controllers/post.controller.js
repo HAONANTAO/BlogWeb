@@ -1,4 +1,5 @@
 import { errorHandler } from "../utils/errorHandler.js";
+import pinyin from "pinyin";
 import Post from "../models/post.model.js";
 export const create = async (req, res, next) => {
   if (!req.user.isAdmin) {
@@ -8,12 +9,8 @@ export const create = async (req, res, next) => {
     return next(errorHandler(400, "Please provide all needed information!"));
   }
   // ”通常指的是一个用于URL中的标识符，它是一个易于阅读的、URL友好的形式
-  const slug = req.body.title
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-zA-Z0-9-]/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
+  const slug = generateSlug(req.body.title);
+
   const newPost = new Post({
     ...req.body,
     slug,
@@ -85,3 +82,17 @@ export const deletePost = async (req, res, next) => {
     next(errorHandler(500, "Failed to delete the post"));
   }
 };
+//special for chinese
+function generateSlug(title) {
+  const pinyinOptions = {
+    style: pinyin.STYLE_NORMAL, // 普通风格，即不带声调
+    heteronym: false, // 不启用多音字模式
+  };
+  const titlePinyin = pinyin(title, pinyinOptions).join(" "); // 将中文转为拼音
+  return titlePinyin
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-zA-Z0-9-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}

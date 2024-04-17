@@ -24,7 +24,9 @@ const DashPosts = () => {
             setShowMore(false);
           }
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     if (currentUser.data.isAdmin) {
       fetchPosts();
@@ -37,7 +39,7 @@ const DashPosts = () => {
       const data = await axios.get(
         `/api/post/getposts?userId=${currentUser.data._id}&startIndex=${startIndex}`,
       );
-      console.log(data);
+
       if (data.status === 200) {
         setUserPosts((prev) => [...prev, ...data.data.posts]);
         if (data.data.posts.length < 9) {
@@ -57,7 +59,10 @@ const DashPosts = () => {
       );
       if (data.status === 200) {
         //filter
-        setUserPosts((prev) => prev.filter((p) => p._id !== postIdToDelete));
+        setUserPosts((prev) =>
+          prev.filter((post) => post._id !== postIdToDelete),
+        );
+
         console.log("good delete");
       }
       console.log(data);
