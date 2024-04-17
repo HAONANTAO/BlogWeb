@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
+
 import {
   getDownloadURL,
   getStorage,
@@ -37,6 +38,7 @@ const UpdatePost = () => {
       console.log(error);
     }
   }, [postId]);
+
   const [publishError, setPublishError] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
@@ -49,7 +51,10 @@ const UpdatePost = () => {
     setPublishError();
 
     try {
-      const data = await axios.post(`/api/post/create`, formData);
+      const data = await axios.put(
+        `/api/post/updatepost/${formData._id}/${formData.userId}`,
+        formData,
+      );
       console.log(data);
       if (data.status !== 201) {
         setPublishError(data.message);
