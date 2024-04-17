@@ -5,8 +5,7 @@ function StarsProvider({ children }) {
 
   return (
     <div className={`${stars ? "stars" : ""}`}>
-      <div
-        className={`${stars ? "text-white" : "text-gray-400"}  min-h-screen`}>
+      <div className={` ${stars ? "text-gray-400 " : ""}  min-h-screen`}>
         {children}
       </div>
     </div>
