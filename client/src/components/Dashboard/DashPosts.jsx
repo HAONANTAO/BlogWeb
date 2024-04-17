@@ -11,7 +11,9 @@ const DashPosts = () => {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
+  const [render, setRender] = useState(false);
   useEffect(() => {
+    setRender(false);
     const fetchPosts = async () => {
       try {
         const data = await axios.get(
@@ -31,7 +33,8 @@ const DashPosts = () => {
     if (currentUser.data.isAdmin) {
       fetchPosts();
     }
-  }, [currentUser.data._id]);
+    //为了解决删除之后不一致显示9个的问题
+  }, [currentUser.data._id, render]);
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
 
@@ -53,7 +56,6 @@ const DashPosts = () => {
   const handleDeletePost = async () => {
     setShowModal(false);
     try {
-      console.log(postIdToDelete, currentUser.data._id);
       const data = await axios.delete(
         `/api/post/deletepost/${postIdToDelete}/${currentUser.data._id}`,
       );
@@ -62,10 +64,9 @@ const DashPosts = () => {
         setUserPosts((prev) =>
           prev.filter((post) => post._id !== postIdToDelete),
         );
-
+        setRender(true);
         console.log("good delete");
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
