@@ -105,7 +105,7 @@ const UpdatePost = () => {
   };
   return (
     <div className="max-w-3xl min-h-screen p-3 mx-auto ">
-      <h1 className="text-3xl font-semibold text-center my-7">Create a Post</h1>
+      <h1 className="text-3xl font-semibold text-center my-7">Update a Post</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className={`flex flex-col justify-between gap-4 sm:flex-row `}>
           <TextInput
@@ -171,7 +171,7 @@ const UpdatePost = () => {
           value={formData.content || ""}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
-          Publish
+          Update Post
         </Button>
         {publishError && <Alert color="failure">{publishError} </Alert>}
       </form>
