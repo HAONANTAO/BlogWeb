@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Table } from "flowbite-react";
+import { Table, Modal, Button } from "flowbite-react";
 import { Link } from "react-router-dom";
-
+import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { FiAlertTriangle } from "react-icons/fi";
 const DashPosts = () => {
+  const [postIdToDelete, setPostIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
+  const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
   useEffect(() => {
@@ -29,7 +32,7 @@ const DashPosts = () => {
   }, [currentUser.data._id]);
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
-    console.log("object");
+
     try {
       const data = await axios.get(
         `/api/post/getposts?userId=${currentUser.data._id}&startIndex=${startIndex}`,
@@ -41,6 +44,23 @@ const DashPosts = () => {
           setShowMore(false);
         }
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleDeletePost = async () => {
+    setShowModal(false);
+    try {
+      console.log(postIdToDelete, currentUser.data._id);
+      const data = await axios.delete(
+        `/api/post/deletepost/${postIdToDelete}/${currentUser.data._id}`,
+      );
+      if (data.status === 200) {
+        //filter
+        setUserPosts((prev) => prev.filter((p) => p._id !== postIdToDelete));
+        console.log("good delete");
+      }
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -119,6 +139,28 @@ const DashPosts = () => {
           <p>You have no posts yet.</p>
         )}
       </div>
+
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="medium">
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <FiAlertTriangle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure to delete this post?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeletePost}>
+                Yes,I am sure!
+              </Button>
+              <Button onClick={() => setShowModal(false)}>No, Cancel it</Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
