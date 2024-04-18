@@ -95,6 +95,7 @@ export const getUsers = async (req, res, next) => {
     );
 
     const lastMonthUsers = await User.countDocuments({
+      //greate than
       createdAt: { $gte: oneMonthAgo },
     });
 

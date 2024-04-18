@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Sidebar } from "flowbite-react";
 import axios from "axios";
 import { MdCollectionsBookmark } from "react-icons/md";
-
+import { IoAccessibilitySharp } from "react-icons/io5";
 import {
   signOutStart,
   signOutSuccess,
@@ -59,6 +59,16 @@ const DashSidebar = () => {
                 icon={MdCollectionsBookmark}
                 as="div">
                 Post
+              </Sidebar.Item>
+            </Link>
+          )}
+          {currentUser.data.isAdmin && (
+            <Link to="/dashboard?tab=users">
+              <Sidebar.Item
+                active={tab === "users"}
+                icon={IoAccessibilitySharp}
+                as="div">
+                Users
               </Sidebar.Item>
             </Link>
           )}
