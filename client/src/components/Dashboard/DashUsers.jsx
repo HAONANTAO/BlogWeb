@@ -35,7 +35,6 @@ const DashUsers = () => {
     if (currentUser.data.isAdmin) {
       fetchUsers();
     }
-    //为了解决删除之后不一致显示9个的问题
   }, [currentUser.data._id, render]);
   const handleShowMore = async () => {
     const startIndex = users.length;
@@ -56,17 +55,14 @@ const DashUsers = () => {
       console.log(error);
     }
   };
+
   const handleDeleteUser = async () => {
     setShowModal(false);
     try {
-      const data = await axios.delete(
-        `/api/user/deleteuser/${userIdToDelete}/${currentUser.data._id}`,
-      );
+      const data = await axios.delete(`/api/user/delete/${userIdToDelete}`);
       if (data.status === 200) {
         //filter
-        setUserPosts((prev) =>
-          prev.filter((post) => post._id !== postIdToDelete),
-        );
+        setUsers((user) => user.filter((user) => user._id !== userIdToDelete));
         setRender(true);
         console.log("good delete");
       }
@@ -74,6 +70,7 @@ const DashUsers = () => {
       console.log(error);
     }
   };
+
   console.log(users);
   return (
     <div className="w-full h-full mx-2 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
