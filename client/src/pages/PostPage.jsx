@@ -11,13 +11,14 @@ const PostPage = () => {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const data = axios.get(`/api/post/getposts?slug=${postSlug}`);
+        const data = await axios.get(`/api/post/getposts?slug=${postSlug}`);
         if (data.statusText !== "OK") {
           setError(true);
           setLoading(false);
           return;
         }
-        setPost(data.posts[0]);
+
+        setPost(data.data.posts[0]);
         setLoading(false);
         setError(false);
       } catch (error) {
@@ -26,7 +27,7 @@ const PostPage = () => {
         console.log(error);
       }
     };
-    console.log(postSlug);
+
     fetchPost();
   }, [postSlug]);
 
@@ -38,9 +39,11 @@ const PostPage = () => {
       </div>
     );
   return (
-    <>
-      <div>PostPage</div>
-    </>
+    <main className="flex flex-col max-w-6xl min-h-screen p-3">
+      <h1 className="max-w-2xl p-3 mx-auto mt-10 font-serif text-4xl text-center lg:text-5xl">
+        {post && post.title}
+      </h1>
+    </main>
   );
 };
 
