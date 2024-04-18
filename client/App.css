@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* basic set up */
+:root {
+  font-size: 16px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 body {
   height: 100vh;
 }
@@ -13,3 +24,36 @@ body {
 .stars .ql-editor {
   color: white; /* 设置文本颜色为白色 */
 /* } */
+
+/* 修饰post里面的内容 */
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+.post-content h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+
+  text-shadow: 2px 2px 4px gray; /* 设置文本阴影效果 */
+}
+.post-content h2 {
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+  text-shadow: 1px 1px 2px silver; /* 设置文本阴影效果 */
+}
+.post-content h3 {
+  font-size: 1.3rem;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+  text-shadow: 1px 1px 4px silver; /* 设置文本阴影效果 */
+}
+.post-content a {
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+  cursor: pointer;
+}
+.post-content a:hover {
+  text-decoration: underline;
+}
