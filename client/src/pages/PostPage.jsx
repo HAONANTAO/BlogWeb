@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Spinner, Button } from "flowbite-react";
+import { FaBookOpen } from "react-icons/fa";
+import { IoIosClock } from "react-icons/io";
+import { DiDrupal } from "react-icons/di";
+import { FaComputer } from "react-icons/fa6";
+import { GiSelfLove } from "react-icons/gi";
+
+import { FaQuestion } from "react-icons/fa";
 const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
@@ -18,7 +25,7 @@ const PostPage = () => {
 
           return;
         }
-        console.log(data.data.posts[0]);
+
         setPost(data.data.posts[0]);
         setLoading(false);
         setError(false);
@@ -46,19 +53,37 @@ const PostPage = () => {
       </h1>
       {/* click to  search */}
       <Link className="mx-auto" to={`/search?category=${post.category}`}>
-        <Button color="gray" pill size="xs" className="self-center mt-5">
+        <Button
+          color="gray"
+          pill
+          size="xs"
+          className="flex items-center justify-center mt-5 ">
+          {/* differ category differ icons */}
+          {post.category === "uncategorized" && (
+            <FaQuestion className="self-center" />
+          )}
+          {post.category === "Coding" && <FaComputer className="self-center" />}
+          {post.category === "Love" && <GiSelfLove className="self-center" />}
+          {post.category === "Life" && <DiDrupal  className="self-center" />}
           {post && post.category}
         </Button>
       </Link>
       <img
         src={post && post.image}
         alt="no image upload"
-        className="mt-10 p-3 max-h-[600px] w-full object-cover mx-auto"
+        className="mt-10 p-3 max-h-[600px] w-full object-cover flex items-center "
       />
       <div className="flex justify-between w-full max-w-2xl p-3 mx-auto border-b border-slate-300 text-sx">
-        <span> {post && new Date(post.createdAt).toLocaleDateString()}</span>
-        <span className="italic"> {post && post.content.length}words</span>
+        <span className="flex flex-row items-center gap-2 ">
+          <IoIosClock />
+          {post && new Date(post.createdAt).toLocaleDateString()}
+        </span>
+        <span className="flex flex-row items-center gap-2 italic ">
+          <FaBookOpen />
+          {post && post.content.length}words
+        </span>
       </div>
+
       {/* dangerouslySetInnerHTML 需要一个对象，该对象有一个名为 __html 的属性，其值是你想要插入到元素中的HTML字符串 
       只能用css来装饰*/}
       <div
