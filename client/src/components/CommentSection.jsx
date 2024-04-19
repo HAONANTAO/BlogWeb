@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { TextInput, Textarea, Button } from "flowbite-react";
+import { TextInput, Textarea, Button, Alert } from "flowbite-react";
 import axios from "axios";
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
-
+  const [commentError, setCommentError] = useState("");
+  const [commentSuccess, setCommentSuccess] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
       alert("Comment cannot be more than 200 characters.");
       return;
     }
-    console.log(comment, postId, currentUser.data._id);
 
-    const data = await axios.post("/api/comment/create", {
-      content: comment,
-      postId,
-      userId: currentUser.data._id,
-    });
-    console.log("2");
-    console.log(data);
-    if (data.statusText !== "OK") {
+    try {
+      const data = await axios.post("/api/comment/create", {
+        content: comment,
+        postId,
+        userId: currentUser.data._id,
+      });
+
       console.log(data);
+      if (data.statusText !== "OK") {
+        console.log("error internal when create comment");
+      }
+      //success -> clear comment
+      setComment("");
+      setCommentError(null);
+      setCommentSuccess("You are comment it successfully!");
+    } catch (error) {
+      setCommentError(error.message);
+      console.log(error);
     }
-    //success -> clear comment
-    setComment("");
   };
   return (
     <div className="w-full max-w-3xl p-3 mx-auto">
@@ -72,6 +79,16 @@ const CommentSection = ({ postId }) => {
               Submit
             </Button>
           </div>
+          {commentError && (
+            <Alert color="failure" className="mt-5">
+              {commentError}
+            </Alert>
+          )}
+          {commentSuccess && (
+            <Alert color="success" className="mt-5">
+              {commentSuccess}
+            </Alert>
+          )}
         </form>
       )}
     </div>
