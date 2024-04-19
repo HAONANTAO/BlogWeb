@@ -2,24 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { TextInput, Textarea, Button, Alert } from "flowbite-react";
+import Comment from "../components/Comment";
 import axios from "axios";
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const [comment, setComment] = useState("");
+  const [commentValue, setCommentValue] = useState("");
   const [postComments, setPostComments] = useState([]);
   const [commentError, setCommentError] = useState("");
   const [commentSuccess, setCommentSuccess] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     //in case
-    if (comment.length > 200) {
+    if (commentValue.length > 200) {
       alert("Comment cannot be more than 200 characters.");
       return;
     }
 
     try {
       const data = await axios.post("/api/comment/create", {
-        content: comment,
+        content: commentValue,
         postId,
         userId: currentUser.data._id,
       });
@@ -28,9 +29,10 @@ const CommentSection = ({ postId }) => {
         console.log("error internal when create comment");
       }
       //success -> clear comment
-      setComment("");
+      setCommentValue("");
       setCommentError(null);
       setCommentSuccess("You are comment it successfully!");
+      setPostComments([data.data, ...postComments]);
     } catch (error) {
       setCommentError(error.message);
       console.log(error);
@@ -41,7 +43,7 @@ const CommentSection = ({ postId }) => {
     const getComments = async () => {
       try {
         const data = await axios.get(`/api/comment/getPostComments/${postId}`);
-        console.log(data);
+
         if (data.statusText === "OK") {
           setPostComments(data.data);
         }
@@ -85,12 +87,12 @@ const CommentSection = ({ postId }) => {
             placeholder="add comment here"
             rows="3"
             maxLength="200"
-            onChange={(e) => setComment(e.target.value)}
-            value={comment}
+            onChange={(e) => setCommentValue(e.target.value)}
+            value={commentValue}
           />
           <div className="flex items-center justify-between mt-5">
             <p className="text-xs text-gray-500">
-              {200 - comment.length}words remaining
+              {200 - commentValue.length}words remaining
             </p>
             <Button outline gradientDuoTone="purpleToBlue" type="submit">
               Submit
@@ -107,6 +109,21 @@ const CommentSection = ({ postId }) => {
             </Alert>
           )}
         </form>
+      )}
+      {postComments.length === 0 ? (
+        <p className="my-5 text-sm">No comments yet</p>
+      ) : (
+        <>
+          <div className="flex items-baseline gap-1 my-5 text-sm">
+            <p>Comments</p>
+            <div className="px-2 py-1 border border-gray-400 rounded-sm">
+              <p>{postComments.length}</p>
+            </div>
+          </div>
+          {postComments.map((comment) => (
+            <Comment key={comment._id} comment={comment}></Comment>
+          ))}
+        </>
       )}
     </div>
   );
