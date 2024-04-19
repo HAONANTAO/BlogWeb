@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { TextInput, Textarea, Button, Alert } from "flowbite-react";
@@ -6,10 +6,12 @@ import axios from "axios";
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
+  const [postComments, setPostComments] = useState([]);
   const [commentError, setCommentError] = useState("");
   const [commentSuccess, setCommentSuccess] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //in case
     if (comment.length > 200) {
       alert("Comment cannot be more than 200 characters.");
       return;
@@ -22,7 +24,6 @@ const CommentSection = ({ postId }) => {
         userId: currentUser.data._id,
       });
 
-      console.log(data);
       if (data.statusText !== "OK") {
         console.log("error internal when create comment");
       }
@@ -35,6 +36,22 @@ const CommentSection = ({ postId }) => {
       console.log(error);
     }
   };
+  console.log(postComments);
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const data = await axios.get(`/api/comment/getPostComments/${postId}`);
+        console.log(data);
+        if (data.statusText === "OK") {
+          setPostComments(data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getComments();
+  }, [postId]);
+
   return (
     <div className="w-full max-w-3xl p-3 mx-auto">
       {currentUser ? (
