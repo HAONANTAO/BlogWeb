@@ -9,6 +9,7 @@ import { FaComputer } from "react-icons/fa6";
 import { GiSelfLove } from "react-icons/gi";
 import { FaQuestion } from "react-icons/fa";
 import CallToAction from "../components/CallToAction";
+import CommentSection from "../components/CommentSection";
 const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
@@ -93,6 +94,7 @@ const PostPage = () => {
       <div className="w-full max-w-4xl mx-auto">
         <CallToAction />
       </div>
+      <CommentSection postId={post._id} />
     </main>
   );
 };
