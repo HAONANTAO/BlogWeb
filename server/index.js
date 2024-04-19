@@ -8,6 +8,7 @@ import postRoutes from "./routes/post.route.js";
 import axios from "axios";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import commentRoutes from "./routes/comment.route.js";
 // create server using express
 const app = express();
 //parse middle ware
@@ -27,6 +28,7 @@ app.listen(3000, () => {
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api/comment", commentRoutes);
 
 //middleware handle error！ next()
 app.use((err, req, res, next) => {
