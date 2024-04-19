@@ -32,4 +32,6 @@ react-circular-progressbar 进度条加载
 ReactQuill 文本编辑器(需要解决在星空和黑暗模式的颜色问题）)
 require('tailwind-scrollbar'),滑动
 pinyin 处理 slug 的中文标题
-moment包 处理时间
+moment 包 处理时间
+comment 这个部分和 commentsection 一直在用
+父级定义的函数传给子,然后子级调用

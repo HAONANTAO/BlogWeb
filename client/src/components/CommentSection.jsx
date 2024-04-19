@@ -92,6 +92,20 @@ const CommentSection = ({ postId }) => {
       console.log(error);
     }
   };
+
+  const handleEdit = async (comment, editedContent) => {
+    setPostComments((prevComments) =>
+      prevComments.map((c) =>
+        c._id === comment._id ? { ...c, content: editedContent } : c,
+      ),
+    );
+    // setPostComments(
+      // update the editedContent
+    //   postComments.map((c) =>
+    //     c.id === comment._id ? { ...c, content: editedContent } :  c ,
+    //   ),
+    // );
+  };
   return (
     <div className="w-full max-w-3xl p-3 mx-auto">
       {currentUser ? (
@@ -162,7 +176,8 @@ const CommentSection = ({ postId }) => {
             <Comment
               key={comment._id}
               comment={comment}
-              onLike={handleLike}></Comment>
+              onLike={handleLike}
+              onEdit={handleEdit}></Comment>
           ))}
         </>
       )}

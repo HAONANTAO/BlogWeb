@@ -91,9 +91,7 @@ const PostPage = () => {
         className="w-full max-w-2xl p-3 mx-auto post-content"
         dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
 
-      <div className="w-full max-w-4xl mx-auto">
-        <CallToAction />
-      </div>
+      <div className="w-full max-w-4xl mx-auto">{/* <CallToAction /> */}</div>
       <CommentSection postId={post._id} />
     </main>
   );
