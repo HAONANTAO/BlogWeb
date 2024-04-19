@@ -7,8 +7,8 @@ import { IoIosClock } from "react-icons/io";
 import { DiDrupal } from "react-icons/di";
 import { FaComputer } from "react-icons/fa6";
 import { GiSelfLove } from "react-icons/gi";
-
 import { FaQuestion } from "react-icons/fa";
+import CallToAction from "../components/CallToAction";
 const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ const PostPage = () => {
           )}
           {post.category === "Coding" && <FaComputer className="self-center" />}
           {post.category === "Love" && <GiSelfLove className="self-center" />}
-          {post.category === "Life" && <DiDrupal  className="self-center" />}
+          {post.category === "Life" && <DiDrupal className="self-center" />}
           {post && post.category}
         </Button>
       </Link>
@@ -89,6 +89,10 @@ const PostPage = () => {
       <div
         className="w-full max-w-2xl p-3 mx-auto post-content"
         dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
+
+      <div className="w-full max-w-4xl mx-auto">
+        <CallToAction />
+      </div>
     </main>
   );
 };
