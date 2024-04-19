@@ -57,12 +57,14 @@ const Comment = ({ comment, onLike }) => {
             onClick={() => onLike(comment._id)}>
             <FaThumbsUp className="self-center text-sm" />
           </button>
+          {/* like */}
           <p className="text-gray-400">
             {comment.numberOfLikes > 0 &&
-              `${comment.numberOfLikes}${
+              `${comment.numberOfLikes}    ${
                 comment.numberOfLikes === 1 ? "like" : "likes"
               }`}
           </p>
+          
         </div>
       </div>
     </div>

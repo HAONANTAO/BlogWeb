@@ -119,7 +119,7 @@ const CommentSection = ({ postId }) => {
 
       {currentUser && (
         <form
-          className="p-3 border border-teal-500 rounded-md"
+          className="p-3 border border-blue-900 rounded-md"
           onSubmit={handleSubmit}>
           <Textarea
             placeholder="add comment here"
