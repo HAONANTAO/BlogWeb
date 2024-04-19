@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-const Comment = ({ comment }) => {
+import { FaThumbsUp } from "react-icons/fa";
+const Comment = ({ comment, onLike }) => {
   const [users, setUsers] = useState({});
 
   useEffect(() => {
@@ -39,6 +40,16 @@ const Comment = ({ comment }) => {
         {/* comment content */}
         <div>
           <p className="mb-2 text-gray-500">{comment.content}</p>
+        </div>
+
+        {/*  functionality */}
+        <div>
+          <button
+            type="button"
+            className="pb-2 text-gray-500 hover:text-blue-500"
+            onClick={() => onLike(comment._id)}>
+            <FaThumbsUp className="text-sm " />
+          </button>
         </div>
       </div>
     </div>

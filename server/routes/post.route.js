@@ -15,4 +15,6 @@ postRoutes.get("/getposts", getPosts);
 
 postRoutes.delete("/deletepost/:postId/:userId", verifyUser, deletePost);
 postRoutes.put("/updatepost/:postId/:userId", verifyUser, updatePost);
+
+
 export default postRoutes;

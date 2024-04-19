@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextInput, Textarea, Button, Alert } from "flowbite-react";
 import Comment from "../components/Comment";
 import axios from "axios";
@@ -10,6 +10,8 @@ const CommentSection = ({ postId }) => {
   const [postComments, setPostComments] = useState([]);
   const [commentError, setCommentError] = useState("");
   const [commentSuccess, setCommentSuccess] = useState("");
+  const navigate = useNavigate();
+  console.log(postComments);
   const handleSubmit = async (e) => {
     e.preventDefault();
     //in case
@@ -17,14 +19,14 @@ const CommentSection = ({ postId }) => {
       alert("Comment cannot be more than 200 characters.");
       return;
     }
-
+    console.log(currentUser);
     try {
       const data = await axios.post("/api/comment/create", {
         content: commentValue,
         postId,
         userId: currentUser.data._id,
       });
-
+      console.log(data);
       if (data.statusText !== "OK") {
         console.log("error internal when create comment");
       }
@@ -38,7 +40,7 @@ const CommentSection = ({ postId }) => {
       console.log(error);
     }
   };
-  console.log(postComments);
+
   useEffect(() => {
     const getComments = async () => {
       try {
@@ -54,6 +56,42 @@ const CommentSection = ({ postId }) => {
     getComments();
   }, [postId]);
 
+  const handleLike = async (commentId) => {
+    console.log("object");
+    try {
+      if (!currentUser) {
+        navigate("/sign-in");
+        return;
+      }
+      console.log(commentId);
+      const data = await axios.put(`/api/comment/likeComment/${commentId}`);
+      console.log(data);
+
+      if (data.statusText === "OK") {
+        console.log("object4");
+        console.log(postComments);
+        //update liked method logic
+        setPostComments((prevComments) =>
+          prevComments.map((comment) =>
+            comment._id === commentId
+              ? {
+                  ...comment,
+                  likes: data.data.likes,
+                  numberOfLikes: data.data.numberOfLikes,
+                }
+              : comment,
+          ),
+        );
+      } else {
+        console.log(
+          "Failed to like comment, response status:",
+          response.statusText,
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-full max-w-3xl p-3 mx-auto">
       {currentUser ? (
@@ -121,7 +159,10 @@ const CommentSection = ({ postId }) => {
             </div>
           </div>
           {postComments.map((comment) => (
-            <Comment key={comment._id} comment={comment}></Comment>
+            <Comment
+              key={comment._id}
+              comment={comment}
+              onLike={handleLike}></Comment>
           ))}
         </>
       )}
