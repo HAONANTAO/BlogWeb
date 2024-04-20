@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { TextInput, Textarea, Button, Alert } from "flowbite-react";
+import { TextInput, Textarea, Button, Alert, Modal } from "flowbite-react";
+import { FiAlertTriangle } from "react-icons/fi";
 import Comment from "../components/Comment";
 import axios from "axios";
 const CommentSection = ({ postId }) => {
@@ -10,6 +11,8 @@ const CommentSection = ({ postId }) => {
   const [postComments, setPostComments] = useState([]);
   const [commentError, setCommentError] = useState("");
   const [commentSuccess, setCommentSuccess] = useState("");
+  const [commentToDelete, setCommentToDelete] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   console.log(postComments);
   const handleSubmit = async (e) => {
@@ -54,7 +57,7 @@ const CommentSection = ({ postId }) => {
       }
     };
     getComments();
-  }, [postId]);
+  }, [postId, postComments]);
 
   const handleLike = async (commentId) => {
     console.log("object");
@@ -100,11 +103,35 @@ const CommentSection = ({ postId }) => {
       ),
     );
     // setPostComments(
-      // update the editedContent
+    // update the editedContent
     //   postComments.map((c) =>
     //     c.id === comment._id ? { ...c, content: editedContent } :  c ,
     //   ),
     // );
+  };
+
+  const handleDelete = async (commentId) => {
+    try {
+      if (!currentUser) {
+        alert("not sign in");
+        navigate("/sign-in");
+        return;
+      }
+      const data = await axios.delete(
+        `/api/comment/deleteComment/${commentId}`,
+      );
+      if (data.status === "OK") {
+        //clear comments
+
+        setPostComments((prevComment) => {
+          prevComment.map((cmt) => cmt.filter(cmt._id !== commentId));
+        });
+      }
+      setShowModal(false);
+    } catch (error) {
+      setShowModal(false);
+      console.log(error);
+    }
   };
   return (
     <div className="w-full max-w-3xl p-3 mx-auto">
@@ -177,10 +204,38 @@ const CommentSection = ({ postId }) => {
               key={comment._id}
               comment={comment}
               onLike={handleLike}
-              onEdit={handleEdit}></Comment>
+              onEdit={handleEdit}
+              onDelete={(commentId) => {
+                setShowModal(true);
+                setCommentToDelete(commentId);
+              }}></Comment>
           ))}
         </>
       )}
+      {/* delete */}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="medium">
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <FiAlertTriangle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure to delete this post?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                color="failure"
+                onClick={() => handleDelete(commentToDelete)}>
+                Yes,I am sure!
+              </Button>
+              <Button onClick={() => setShowModal(false)}>No, Cancel it</Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
