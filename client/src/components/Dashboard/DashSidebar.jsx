@@ -42,9 +42,10 @@ const DashSidebar = () => {
   }, [location.search]);
 
   return (
-    <Sidebar className="w-full text-white md:w-56">
+    <Sidebar className="w-full text-white !bg-transparent md:w-56">
       <Sidebar.Items>
-        <Sidebar.ItemGroup className="flex flex-col gap-2">
+        <Sidebar.ItemGroup className="flex flex-col gap-2 ">
+          {/*  Profile */}
           <Sidebar.Item
             active={tab === "profile"}
             icon={HiUser}
@@ -54,6 +55,7 @@ const DashSidebar = () => {
             Profile
           </Sidebar.Item>
 
+          {/*   Post */}
           {currentUser.data.isAdmin && (
             <Link to="/dashboard?tab=posts">
               <Sidebar.Item
@@ -64,6 +66,7 @@ const DashSidebar = () => {
               </Sidebar.Item>
             </Link>
           )}
+          {/* users */}
           {currentUser.data.isAdmin && (
             <Link to="/dashboard?tab=users">
               <Sidebar.Item
@@ -86,6 +89,7 @@ const DashSidebar = () => {
               </Sidebar.Item>
             </Link>
           )}
+          {/* sign out */}
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"
