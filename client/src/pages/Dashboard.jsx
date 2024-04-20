@@ -4,6 +4,7 @@ import DashSidebar from "../components/Dashboard/DashSidebar";
 import DashProfile from "../components/Dashboard/DashProfile";
 import DashPosts from "../components/Dashboard/DashPosts";
 import DashUsers from "../components/Dashboard/DashUsers";
+import DashComments from "../components/Dashboard/DashComments";
 const Dashboard = () => {
   const location = useLocation();
   const [tab, setTab] = useState("");
@@ -15,18 +16,22 @@ const Dashboard = () => {
     // console.log(tabUrl);
   }, [location.search]);
   return (
-    <div className="flex flex-col min-h-screen text-white md:flex-row">
-      {/* sidebar */}
-      <div className="md:w-56">
-        <DashSidebar />
+    <>
+      <div className="flex flex-col min-h-screen text-white md:flex-row">
+        {/* sidebar */}
+        <div className="md:w-56">
+          <DashSidebar />
+        </div>
+        {/* profile */}
+        {tab === "profile" && <DashProfile />}
+        {/* posts */}
+        {tab === "posts" && <DashPosts />}
+        {/* users */}
+        {tab === "users" && <DashUsers />}
+        {/* comments */}
+        {tab === "comments" && <DashComments />}
       </div>
-      {/* profile */}
-      {tab === "profile" && <DashProfile />}
-      {/* posts */}
-      {tab === "posts" && <DashPosts />}
-      {/* users */}
-      {tab === "users" && <DashUsers />}
-    </div>
+    </>
   );
 };
 
