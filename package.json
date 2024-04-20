@@ -8,6 +8,7 @@
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "build": "yarn && yarn --prefix client && yarn build --prefix client"
+
   },
   "author": "",
   "license": "ISC",
