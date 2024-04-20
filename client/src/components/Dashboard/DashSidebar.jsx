@@ -5,6 +5,7 @@ import axios from "axios";
 import { MdCollectionsBookmark } from "react-icons/md";
 import { TfiComments } from "react-icons/tfi";
 import { IoAccessibilitySharp } from "react-icons/io5";
+import { BiAtom } from "react-icons/bi";
 import {
   signOutStart,
   signOutSuccess,
@@ -45,6 +46,15 @@ const DashSidebar = () => {
     <Sidebar className="w-full text-white !bg-transparent md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-2 ">
+          {/* dash */}
+          {currentUser && currentUser.data.isAdmin && (
+            <Sidebar.Item
+              active={tab === "dash" || !tab}
+              icon={BiAtom}
+              href="/dashboard?tab=dash">
+              Dashboard
+            </Sidebar.Item>
+          )}
           {/*  Profile */}
           <Sidebar.Item
             active={tab === "profile"}

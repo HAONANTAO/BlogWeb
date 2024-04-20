@@ -161,31 +161,27 @@ const DashboardComp = () => {
         <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
-            <h1 className="p-2 text-center">Recent Users</h1>
+            <h1 className="p-2 text-center">Recent Comments</h1>
             <Button outline gradientDuoTone="purpleToPink">
               {/* get all users */}
-              <Link to="/dashboard?tab=users">See All</Link>
+              <Link to="/dashboard?tab=comments">See All</Link>
             </Button>
           </div>
           {/* end of recent users */}
           <div>
             <Table>
               <Table.Head>
-                <Table.HeadCell>User Image</Table.HeadCell>
-                <Table.HeadCell>Username</Table.HeadCell>
+                <Table.HeadCell>Comment Content</Table.HeadCell>
+                <Table.HeadCell>Likes</Table.HeadCell>
               </Table.Head>
-              {users &&
-                users.map((user) => (
-                  <Table.Body key={user._id} className="divide-y">
+              {comments &&
+                comments.map((comment) => (
+                  <Table.Body key={comment._id} className="divide-y">
                     <Table.Row className="dark:border-gray-700 dark:bg-gray-800">
-                      <Table.Cell>
-                        <img
-                          src={user.photoURL}
-                          alt="user photo"
-                          className="w-10 h-10 bg-gray-500 rounded-full"
-                        />
+                      <Table.Cell className="w-96">
+                        <p className="line-clamp-2">{comment.content}</p>
                       </Table.Cell>
-                      <Table.Cell>{user.username}</Table.Cell>
+                      <Table.Cell>{comment.numberOfLikes}</Table.Cell>
                     </Table.Row>
                   </Table.Body>
                 ))}
@@ -197,31 +193,33 @@ const DashboardComp = () => {
         <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
-            <h1 className="p-2 text-center">Recent Users</h1>
+            <h1 className="p-2 text-center">Recent Posts</h1>
             <Button outline gradientDuoTone="purpleToPink">
               {/* get all users */}
-              <Link to="/dashboard?tab=users">See All</Link>
+              <Link to="/dashboard?tab=posts">See All</Link>
             </Button>
           </div>
           {/* end of recent users */}
           <div>
             <Table>
               <Table.Head>
-                <Table.HeadCell>User Image</Table.HeadCell>
-                <Table.HeadCell>Username</Table.HeadCell>
+                <Table.HeadCell>Post Image</Table.HeadCell>
+                <Table.HeadCell>Post Title</Table.HeadCell>
+                <Table.HeadCell>Category</Table.HeadCell>
               </Table.Head>
-              {users &&
-                users.map((user) => (
-                  <Table.Body key={user._id} className="divide-y">
+              {posts &&
+                posts.map((post) => (
+                  <Table.Body key={post._id} className="divide-y">
                     <Table.Row className="dark:border-gray-700 dark:bg-gray-800">
                       <Table.Cell>
                         <img
-                          src={user.photoURL}
-                          alt="user photo"
-                          className="w-10 h-10 bg-gray-500 rounded-full"
+                          src={post.image}
+                          alt="post image"
+                          className="h-10 bg-gray-500 rounded-md w-14"
                         />
                       </Table.Cell>
-                      <Table.Cell>{user.username}</Table.Cell>
+                      <Table.Cell className="w-96">{post.title}</Table.Cell>
+                      <Table.Cell className="w-5">{post.category}</Table.Cell>
                     </Table.Row>
                   </Table.Body>
                 ))}
@@ -229,6 +227,8 @@ const DashboardComp = () => {
           </div>
         </div>
       </div>
+
+      
     </div>
   );
 };
