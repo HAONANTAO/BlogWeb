@@ -28,14 +28,14 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 //  允许跨域请求（CORS）
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept",
-//   );
-//   next();
-// });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 //pass this path from this routes
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);

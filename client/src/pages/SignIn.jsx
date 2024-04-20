@@ -54,7 +54,7 @@ const SignIn = () => {
       if (data.statusText === "OK") {
         //changeURL to /signin
         dispatch(signInSuccess(data));
-        navigate("/home");
+        navigate("/");
       }
     } catch (error) {
       dispatch(signInFailure(error.response.data.message));
@@ -98,8 +98,7 @@ const SignIn = () => {
                 <Label
                   value="Your email"
                   className="text-gray-500 "
-                  htmlFor="email"
-                  ></Label>
+                  htmlFor="email"></Label>
               </div>
 
               <TextInput

@@ -51,7 +51,7 @@ const SignUp = () => {
       if (data.statusText === "OK") {
         //changeURL to /signin
         dispatch(signInSuccess(data));
-        navigate("/signin");
+        navigate("/sign-in");
       }
     } catch (error) {
       dispatch(signInFailure(error.response.data.message));
