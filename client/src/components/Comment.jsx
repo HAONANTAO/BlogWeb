@@ -28,7 +28,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
     //first display content
     setEditedContent(comment.content);
   };
-  console.log(comment);
+
   const handleSave = async () => {
     try {
       const data = await axios.put(`/api/comment/editComment/${comment._id}`, {

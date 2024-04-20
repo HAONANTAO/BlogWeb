@@ -14,7 +14,7 @@ const CommentSection = ({ postId }) => {
   const [commentToDelete, setCommentToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  console.log(postComments);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //in case
@@ -22,14 +22,14 @@ const CommentSection = ({ postId }) => {
       alert("Comment cannot be more than 200 characters.");
       return;
     }
-    console.log(currentUser);
+    
     try {
       const data = await axios.post("/api/comment/create", {
         content: commentValue,
         postId,
         userId: currentUser.data._id,
       });
-      console.log(data);
+     
       if (data.statusText !== "OK") {
         console.log("error internal when create comment");
       }
@@ -60,19 +60,18 @@ const CommentSection = ({ postId }) => {
   }, [postId, postComments]);
 
   const handleLike = async (commentId) => {
-    console.log("object");
+   
     try {
       if (!currentUser) {
         navigate("/sign-in");
         return;
       }
-      console.log(commentId);
+     
       const data = await axios.put(`/api/comment/likeComment/${commentId}`);
-      console.log(data);
+    
 
       if (data.statusText === "OK") {
-        console.log("object4");
-        console.log(postComments);
+     
         //update liked method logic
         setPostComments((prevComments) =>
           prevComments.map((comment) =>
@@ -111,6 +110,7 @@ const CommentSection = ({ postId }) => {
   };
 
   const handleDelete = async (commentId) => {
+    setShowModal(false);
     try {
       if (!currentUser) {
         alert("not sign in");
@@ -127,7 +127,6 @@ const CommentSection = ({ postId }) => {
           prevComment.map((cmt) => cmt.filter(cmt._id !== commentId));
         });
       }
-      setShowModal(false);
     } catch (error) {
       setShowModal(false);
       console.log(error);

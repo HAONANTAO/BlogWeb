@@ -36,4 +36,5 @@ moment 包 处理时间
 comment 这个部分和 commentsection 一直在用
 父级定义的函数传给子,然后子级调用
 
-自己加一个开机1s的开机动画
+自己加一个开机 1s 的开机动画
+@tailwindcss/line-clamp 换行
