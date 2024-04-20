@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import {
+  HiAnnotation,
+  HiArrowNarrowUp,
+  HiDocumentText,
+  HiOutlineUserGroup,
+} from "react-icons/hi";
+import { Link } from "react-router-dom";
+import { Button, Table } from "flowbite-react";
 const DashboardComp = () => {
   const [users, setUser] = useState([]);
   const [comments, setComments] = useState([]);
@@ -51,7 +59,178 @@ const DashboardComp = () => {
       fetchComments();
     }
   }, []);
-  return <div></div>;
+  return (
+    <div className="p-3 md:mx-auto">
+      <div className="flex flex-wrap justify-center gap-4">
+        {/* users part */}
+        <div className="flex flex-col w-full gap-4 p-3 border border-gray-700 rounded-md shadow-md users dark:bg-slate-800 md:w-72">
+          {/* users */}
+          <div className="flex justify-between">
+            <h3 className="text-gray-500 uppercase text-md">Total Users</h3>
+            <p className="text-2xl">{totalUsers}</p>
+            <HiOutlineUserGroup className="text-6xl text-white bg-indigo-800 rounded-full" />
+          </div>
+          {/* last months users */}
+          <div className="flex gap-2 text-sm">
+            <span className="flex items-center text-green-500">
+              <HiArrowNarrowUp />
+              {lastMonthUsers}
+            </span>
+            <div className="text-gray-500">Last Months </div>
+            <p></p>
+          </div>
+        </div>
+
+        {/* comments part */}
+        <div className="flex flex-col w-full gap-4 p-3 border border-gray-700 rounded-md shadow-md comments dark:bg-slate-800 md:w-72">
+          {/* users */}
+          <div className="flex justify-between">
+            <h3 className="text-gray-500 uppercase text-md">Total Comments</h3>
+            <p className="text-2xl">{totalComments}</p>
+            <HiAnnotation className="text-6xl text-white bg-purple-600 rounded-full" />
+          </div>
+          {/* last months users */}
+          <div className="flex gap-2 text-sm">
+            <span className="flex items-center text-green-500">
+              <HiArrowNarrowUp />
+              {lastMonthComments}
+            </span>
+            <div className="text-gray-500">Last Months </div>
+            <p></p>
+          </div>
+        </div>
+
+        {/* posts part */}
+        <div className="flex flex-col w-full gap-4 p-3 border border-gray-700 rounded-md shadow-md postsdark:bg-slate-800 md:w-72">
+          {/* users */}
+          <div className="flex justify-between">
+            <h3 className="text-gray-500 uppercase text-md">Total Posts</h3>
+            <p className="text-2xl">{totalPosts}</p>
+            <HiDocumentText className="text-6xl text-white bg-green-600 rounded-full bg-" />
+          </div>
+
+          {/* last months users */}
+          <div className="flex gap-2 text-sm">
+            <span className="flex items-center text-green-500">
+              <HiArrowNarrowUp />
+              {lastMonthPosts}
+            </span>
+            <div className="text-gray-500">Last Months </div>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      {/* all table cards1 */}
+      <div className="flex flex-wrap justify-center gap-4 py-3 mx-auto">
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          {/* start of recent users */}
+          <div className="flex justify-between p-3 text-sm font-semibold">
+            <h1 className="p-2 text-center">Recent Users</h1>
+            <Button outline gradientDuoTone="purpleToPink">
+              {/* get all users */}
+              <Link to="/dashboard?tab=users">See All</Link>
+            </Button>
+          </div>
+          {/* end of recent users */}
+          <div>
+            <Table>
+              <Table.Head>
+                <Table.HeadCell>User Image</Table.HeadCell>
+                <Table.HeadCell>Username</Table.HeadCell>
+              </Table.Head>
+              {users &&
+                users.map((user) => (
+                  <Table.Body key={user._id} className="divide-y">
+                    <Table.Row className="dark:border-gray-700 dark:bg-gray-800">
+                      <Table.Cell>
+                        <img
+                          src={user.photoURL}
+                          alt="user photo"
+                          className="w-10 h-10 bg-gray-500 rounded-full"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>{user.username}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
+          </div>
+        </div>
+        {/* all table cards2 */}
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          {/* start of recent users */}
+          <div className="flex justify-between p-3 text-sm font-semibold">
+            <h1 className="p-2 text-center">Recent Users</h1>
+            <Button outline gradientDuoTone="purpleToPink">
+              {/* get all users */}
+              <Link to="/dashboard?tab=users">See All</Link>
+            </Button>
+          </div>
+          {/* end of recent users */}
+          <div>
+            <Table>
+              <Table.Head>
+                <Table.HeadCell>User Image</Table.HeadCell>
+                <Table.HeadCell>Username</Table.HeadCell>
+              </Table.Head>
+              {users &&
+                users.map((user) => (
+                  <Table.Body key={user._id} className="divide-y">
+                    <Table.Row className="dark:border-gray-700 dark:bg-gray-800">
+                      <Table.Cell>
+                        <img
+                          src={user.photoURL}
+                          alt="user photo"
+                          className="w-10 h-10 bg-gray-500 rounded-full"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>{user.username}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
+          </div>
+        </div>
+
+        {/* all table cards3 */}
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          {/* start of recent users */}
+          <div className="flex justify-between p-3 text-sm font-semibold">
+            <h1 className="p-2 text-center">Recent Users</h1>
+            <Button outline gradientDuoTone="purpleToPink">
+              {/* get all users */}
+              <Link to="/dashboard?tab=users">See All</Link>
+            </Button>
+          </div>
+          {/* end of recent users */}
+          <div>
+            <Table>
+              <Table.Head>
+                <Table.HeadCell>User Image</Table.HeadCell>
+                <Table.HeadCell>Username</Table.HeadCell>
+              </Table.Head>
+              {users &&
+                users.map((user) => (
+                  <Table.Body key={user._id} className="divide-y">
+                    <Table.Row className="dark:border-gray-700 dark:bg-gray-800">
+                      <Table.Cell>
+                        <img
+                          src={user.photoURL}
+                          alt="user photo"
+                          className="w-10 h-10 bg-gray-500 rounded-full"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>{user.username}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DashboardComp;
