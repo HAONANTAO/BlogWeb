@@ -75,25 +75,27 @@ const Header = () => {
         </span>
         Blog
       </Link>
-
-      {/* 搜索bar */}
-      <form onSubmit={handleSubmit}>
+      {/* make icon clickable */}
+      <form onSubmit={handleSubmit} className="relative w-full lg:w-auto">
         <TextInput
           type="text"
           value={searchTerm}
           placeholder="searching..."
-          rightIcon={AiOutlineSearch}
-          // lg size 之上才显示
           className="hidden lg:inline"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <button
+          type="submit"
+          aria-label="Search"
+          className="absolute inset-y-0 right-0 flex items-center pr-3 text-lg text-gray-500">
+          <AiOutlineSearch />
+        </button>
       </form>
       {/* 给小屏幕使用的 pill=radius*/}
       <Button className="w-12 h-10 lg:hidden" color="gray" pill type="button">
         <AiOutlineSearch />
       </Button>
       {/* 中等md尺寸下的显示顺序 后置*/}
-
       <div className="flex gap-2 md:order-2">
         <Button color="blue" pill onClick={() => dispatch(toggleBack())}>
           <TbStarsFilled />
@@ -105,7 +107,7 @@ const Header = () => {
           pill>
           {theme === "light" ? <FaMoon /> : <FaSun />}
         </Button>
-        {/* 渐变 */}
+
         {/* check redux store */}
 
         {currentUser ? (
@@ -115,9 +117,11 @@ const Header = () => {
             label={
               <Avatar
                 alt="User Avatar"
-                img={`/api/image-proxy?url=${encodeURIComponent(
-                  currentUser.data.photoURL,
-                )}`}
+                // this is proxy code
+                // img={`/api/image-proxy?url=${encodeURIComponent(
+                //   currentUser.data.photoURL,
+                // )}`}
+                img={currentUser.data.photoURL}
                 rounded
               />
             }>
@@ -136,7 +140,7 @@ const Header = () => {
               <div className="flex flex-row items-baseline justify-center block gap-1 text-l">
                 <PiAirTrafficControlFill />
                 Profile
-              </div>{" "}
+              </div>
             </Link>
 
             <div className="flex flex-row items-baseline justify-center block gap-1 cursor-pointer text-l">
@@ -148,7 +152,7 @@ const Header = () => {
           <Link to="/sign-in">
             <Button gradientDuoTone="purpleToBlue" pill outline>
               Sign In
-            </Button>{" "}
+            </Button>
           </Link>
         )}
         {/* Navbar.Toggle是小屏幕才显示 配合collapse显示*/}
@@ -158,7 +162,7 @@ const Header = () => {
         {/* 根据当前url的path来亮光 */}
         {/* as={"div"}是因为两个link不可以嵌套 */}
         <Navbar.Link active={path === "/"} as={"div"} className="text-white">
-          <Link to="/" className="text-gray-500 ">
+          <Link to="/" className="text-xl text-gray-500">
             Home
           </Link>
         </Navbar.Link>
@@ -166,7 +170,7 @@ const Header = () => {
           active={path === "/about"}
           as={"div"}
           className="text-white">
-          <Link to="/about" className="text-gray-500 ">
+          <Link to="/about" className="text-xl text-gray-500 ">
             About
           </Link>
         </Navbar.Link>
@@ -174,7 +178,7 @@ const Header = () => {
           active={path === "/projects"}
           as={"div"}
           className="text-white">
-          <Link to="/projects" className="text-gray-500 ">
+          <Link to="/projects" className="text-xl text-gray-500 ">
             Projects
           </Link>
         </Navbar.Link>

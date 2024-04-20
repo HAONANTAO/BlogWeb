@@ -25,11 +25,12 @@ const Home = () => {
           Welcome to My Blog!
         </h1>
         <p className="text-xs text-gray-500 sm:text-sm">
-          loramAliqua sit sunt aute anim occaecat reprehenderit duis veniam
-          esse. Velit proident fugiat magna qui esse enim adipisicing et quis
-          mollit. Sint sunt id voluptate nulla labore veniam. Amet non eu eu
-          incididunt amet ipsum sit amet. Cupidatat quis aute irure nisi. Et
-          mollit ex id incididunt ex sint Lorem laborum.
+          "The only true wisdom is in knowing you know nothing. That's the
+          beauty of learning; it is an endless ocean, always ready to surprise
+          you with its depth and mysteries." <br />
+          -- Socrates
+          <br />
+          人群太吵了，我想更了解你，想听听旷野的风，安静又孤独，踏实和自由
         </p>
         <Link
           to="/search"
@@ -46,19 +47,23 @@ const Home = () => {
       {/* 9 post cards */}
       <div className="flex flex-col max-w-6xl gap-8 p-3 mx-auto py-7">
         {posts && posts.length > 0 && (
-          <div className="">
-            <h2 className="text-2xl font-semibold text-center">RecentPosts</h2>
+          <div className="flex-row">
+            <h2 className="mb-4 text-4xl font-semibold text-center">
+              RecentPosts
+            </h2>
             {/* shows 9 posts cards here */}
             <div className="flex flex-row flex-wrap gap-6">
               {posts.map((post) => (
                 <PostCard key={post._id} post={post}></PostCard>
               ))}
             </div>
-            <Link
-              to="/search"
-              className="text-lg text-center text-teal-500 hover:underline">
-              View All Posts
-            </Link>
+            <div className="flex justify-center mt-3">
+              <Link
+                to="/search"
+                className="text-lg text-teal-500 hover:underline">
+                View All Posts
+              </Link>
+            </div>
           </div>
         )}
       </div>
