@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TbStarsFilled } from "react-icons/tb";
 import {
   signOutStart,
@@ -14,10 +14,11 @@ import { FaSignOutAlt, FaMoon, FaSun } from "react-icons/fa";
 import { PiAirTrafficControlFill } from "react-icons/pi";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 // router without refresh
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme, toggleBack } from "../redux/theme/themeSlice.js";
+
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -41,6 +42,25 @@ const Header = () => {
       dispatch(signOutFailure(error));
     }
   };
+  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    // give input value
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
   return (
     //  border-b-2
     // 取消边框 不好看 bg-代表和下面一个颜色
@@ -57,17 +77,19 @@ const Header = () => {
       </Link>
 
       {/* 搜索bar */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           type="text"
+          value={searchTerm}
           placeholder="searching..."
           rightIcon={AiOutlineSearch}
           // lg size 之上才显示
-          className="hidden lg:inline "
+          className="hidden lg:inline"
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       {/* 给小屏幕使用的 pill=radius*/}
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
+      <Button className="w-12 h-10 lg:hidden" color="gray" pill type="button">
         <AiOutlineSearch />
       </Button>
       {/* 中等md尺寸下的显示顺序 后置*/}

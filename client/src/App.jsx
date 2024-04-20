@@ -8,6 +8,7 @@ import Projects from "./pages/Projects";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import StarsCanvas from "./components/Canvas/StarsCanvas";
+import Search from "./pages/Search";
 import UpdatePost from "./pages/UpdatePost";
 //components
 import Header from "./components/Header";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/projects" element={<Projects />}></Route>
           <Route path="/sign-in" element={<SignIn />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
+          <Route path="/search" element={<Search />}></Route>
           <Route path="/post/:postSlug" element={<PostPage />}></Route>
         </Routes>
         <FooterComponent />
