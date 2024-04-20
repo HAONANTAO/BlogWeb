@@ -122,12 +122,12 @@ const DashboardComp = () => {
       </div>
 
       {/* all table cards1 */}
-      <div className="flex flex-wrap justify-center gap-4 py-3 mx-auto">
-        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+      <div className="flex flex-wrap justify-center gap-4 py-3 mx-auto ">
+        <div className="flex flex-col w-full p-2 mt-4 border shadow-md border-gray-600rounded-md md:w-auto dark:bg-gray-600 ">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Users</h1>
-            <Button outline gradientDuoTone="purpleToPink">
+            <Button outline pill gradientDuoTone="purpleToPink">
               {/* get all users */}
               <Link to="/dashboard?tab=users">See All</Link>
             </Button>
@@ -158,11 +158,11 @@ const DashboardComp = () => {
           </div>
         </div>
         {/* all table cards2 */}
-        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+        <div className="flex flex-col w-full p-2 mt-4 border border-gray-600 rounded-md shadow-md md:w-auto dark:bg-gray-800">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Comments</h1>
-            <Button outline gradientDuoTone="purpleToPink">
+            <Button outline pill gradientDuoTone="purpleToPink">
               {/* get all users */}
               <Link to="/dashboard?tab=comments">See All</Link>
             </Button>
@@ -190,16 +190,16 @@ const DashboardComp = () => {
         </div>
 
         {/* all table cards3 */}
-        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
+        <div className="flex flex-col w-full p-2 mt-4 border border-gray-600 rounded-md shadow-md md:w-auto dark:bg-gray-800">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Posts</h1>
-            <Button outline gradientDuoTone="purpleToPink">
+            <Button outline pill gradientDuoTone="purpleToPink">
               {/* get all users */}
               <Link to="/dashboard?tab=posts">See All</Link>
             </Button>
           </div>
-          {/* end of recent users */}
+
           <div>
             <Table>
               <Table.Head>
@@ -215,7 +215,7 @@ const DashboardComp = () => {
                         <img
                           src={post.image}
                           alt="post image"
-                          className="h-10 bg-gray-500 rounded-md w-14"
+                          className="h-12 bg-gray-500 rounded-md w-14"
                         />
                       </Table.Cell>
                       <Table.Cell className="w-96">{post.title}</Table.Cell>
@@ -227,8 +227,6 @@ const DashboardComp = () => {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 };
