@@ -24,7 +24,7 @@ export default function UpdatePost() {
   const { postId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
-  console.log(formData);
+
   useEffect(() => {
     try {
       const fetchPost = async () => {
@@ -88,23 +88,28 @@ export default function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const data = await axios.put(
         `/api/post/updatepost/${formData._id}/${currentUser._id}`,
         formData,
       );
-
+      console.log("111");
+      console.log(data);
       if (data.statusText !== "OK") {
+        console.log("1111");
         setPublishError(data.message);
         return;
       }
 
       if (data.statusText === "OK") {
+        console.log("11112");
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        navigate(`/post/${data.data.slug}`);
       }
     } catch (error) {
-      setPublishError("Something went wrong");
+      console.log("11110");
+      setPublishError("Something went wrong when update");
     }
   };
   return (
@@ -135,9 +140,9 @@ export default function UpdatePost() {
             }
             value={formData.category}>
             <option value="uncategorized">Select a category</option>
-            <option value="javascript">JavaScript</option>
-            <option value="reactjs">React.js</option>
-            <option value="nextjs">Next.js</option>
+            <option value="Coding">Coding</option>
+            <option value="Love">Love</option>
+            <option value="Life">Life</option>
           </Select>
         </div>
         <div className="flex items-center justify-between gap-4 p-3 border-4 border-teal-500 border-dotted">

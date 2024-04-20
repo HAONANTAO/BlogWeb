@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { app } from "../firebase.js";
 const CreatePost = () => {
-  
   const [loading, setLoading] = useState(false);
   // 处理文字编辑器文字颜色
   // const stars = useSelector((state) => state.theme.stars);
@@ -37,7 +36,6 @@ const CreatePost = () => {
       console.log(data);
       if (data.status !== 201) {
         setPublishError(data.message);
-      
       } else {
         setPublishError();
 
@@ -78,7 +76,10 @@ const CreatePost = () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              image: downloadURL,
+            }));
           });
           setUploading(false);
         },
@@ -100,11 +101,17 @@ const CreatePost = () => {
             id="title"
             className="flex-1"
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                title: e.target.value,
+              }))
             }></TextInput>
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                category: e.target.value,
+              }))
             }>
             <option value="uncategorized">Select a category</option>
             <option value="Coding">Coding</option>
@@ -156,7 +163,6 @@ const CreatePost = () => {
           Publish
         </Button>
         {publishError && <Alert color="failure">{publishError} </Alert>}
-       
       </form>
     </div>
   );
