@@ -76,11 +76,11 @@ const DashComments = () => {
   };
 
   return (
-    <div className="w-full h-full p-3 mx-2 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500 ">
+    <div className="w-full h-full p-3 mx-2 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-thumb-slate-300 scrollbar-track-slate-100 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
         {currentUser.data.isAdmin && comments.length > 0 ? (
           <>
-            <Table hoverable className="!bg-transparent shadow-md">
+            <Table hoverable className="shadow-md ">
               <Table.Head>
                 <Table.HeadCell>Date Updated</Table.HeadCell>
                 <Table.HeadCell>Comment Content</Table.HeadCell>

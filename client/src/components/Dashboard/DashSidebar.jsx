@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Sidebar } from "flowbite-react";
 import axios from "axios";
 import { MdCollectionsBookmark } from "react-icons/md";
+import { TfiComments } from "react-icons/tfi";
 import { IoAccessibilitySharp } from "react-icons/io5";
 import {
   signOutStart,
@@ -39,6 +40,7 @@ const DashSidebar = () => {
     const tabUrl = urlParams.get("tab");
     setTab(tabUrl);
   }, [location.search]);
+
   return (
     <Sidebar className="w-full text-white md:w-56">
       <Sidebar.Items>
@@ -69,6 +71,18 @@ const DashSidebar = () => {
                 icon={IoAccessibilitySharp}
                 as="div">
                 Users
+              </Sidebar.Item>
+            </Link>
+          )}
+
+          {/* comments */}
+          {currentUser.data.isAdmin && (
+            <Link to="/dashboard?tab=comments">
+              <Sidebar.Item
+                active={tab === "comments"}
+                icon={TfiComments}
+                as="div">
+                Comments
               </Sidebar.Item>
             </Link>
           )}

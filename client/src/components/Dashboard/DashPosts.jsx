@@ -77,7 +77,7 @@ const DashPosts = () => {
   };
 
   return (
-    <div className="w-full h-full mx-2 table-auto moverflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+    <div className="w-full h-full p-3 mx-2 table-auto moverflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
         {currentUser.data.isAdmin && userPosts.length > 0 ? (
           <>
@@ -96,7 +96,7 @@ const DashPosts = () => {
                 {userPosts.map((post) => (
                   <Table.Row
                     key={post.createdAt}
-                    className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    className="dark:border-gray-700 dark:bg-gray-800">
                     <Table.Cell>
                       {new Date(post.updatedAt).toLocaleDateString()}
                     </Table.Cell>
@@ -111,7 +111,7 @@ const DashPosts = () => {
                     </Table.Cell>
                     <Table.Cell>
                       <Link
-                        className="font-medium text-gray-900 dark:text-white"
+                        className="font-medium dark:text-white"
                         to={`/post/${post.slug}`}>
                         {post.title}
                       </Link>

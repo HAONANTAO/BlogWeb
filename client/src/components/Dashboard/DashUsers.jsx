@@ -77,7 +77,7 @@ const DashUsers = () => {
       <div>
         {currentUser.data.isAdmin && users.length > 0 ? (
           <>
-            <Table hoverable className="!bg-blue-200 shadow-md ">
+            <Table hoverable className="shadow-md ">
               <Table.Head>
                 <Table.HeadCell>Create Updated</Table.HeadCell>
                 <Table.HeadCell>User Image</Table.HeadCell>
@@ -90,7 +90,7 @@ const DashUsers = () => {
                 {users.map((user) => (
                   <Table.Row
                     key={user.createdAt}
-                    className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    className="dark:border-gray-700 dark:bg-gray-800">
                     <Table.Cell>
                       {new Date(user.createdAt).toLocaleDateString()}
                     </Table.Cell>
