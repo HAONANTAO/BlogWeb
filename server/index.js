@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// users 路由
+// users routes
 import useRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
@@ -9,6 +9,10 @@ import axios from "axios";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import commentRoutes from "./routes/comment.route.js";
+import path from "path";
+
+//for build in render and deployment
+const __dirname = path.resolve();
 // create server using express
 const app = express();
 //parse middle ware
@@ -29,6 +33,13 @@ app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
+
+//static
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 //middleware handle error！ next()
 app.use((err, req, res, next) => {
