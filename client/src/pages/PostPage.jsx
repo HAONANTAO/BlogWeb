@@ -55,7 +55,7 @@ const PostPage = () => {
       console.log(error.message);
     }
   }, []);
-  
+
   //loading spinner
   if (loading)
     return (
@@ -112,7 +112,7 @@ const PostPage = () => {
 
       <div className="flex flex-col items-center justify-center mb-5">
         <h1 className="mt-5 text-xl">Recent articles</h1>
-        <div className="">
+        <div className="flex flex-wrap justify-center gap-5 mt-5">
           {recentPost &&
             recentPost.map((post) => (
               <PostCard key={post._id} post={post}></PostCard>
