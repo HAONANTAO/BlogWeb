@@ -23,7 +23,7 @@ const SignIn = () => {
   const [formData, setFormData] = useState({});
   //跳转
   const navigate = useNavigate();
-
+  console.log("content", formData);
   const handleChange = (e) => {
     //keep the original one
     // removing the white space using trim()
@@ -48,6 +48,7 @@ const SignIn = () => {
       const data = await axios.post("/api/auth/signin", formData, {
         headers: { "Content-Type": "application/json" },
       });
+      console.log(data);
 
       if (data.statusText === "OK") {
         //changeURL to /signin
