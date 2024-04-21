@@ -29,9 +29,9 @@ app.listen(3000, () => {
 });
 //  允许跨域请求（CORS）
 const allowedOrigins = [
-  "https://blogweb-f5rg.onrender.com",
+  "https://www.blogweb-f5rg.onrender.com",
 
-  "https://aaronblog.top",
+  "https://www.aaronblog.top",
 ];
 
 const corsOptions = {
