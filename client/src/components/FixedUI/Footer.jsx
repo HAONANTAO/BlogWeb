@@ -1,12 +1,19 @@
-import React from "react";
-import { Footer } from "flowbite-react";
+import React, { useState } from "react";
+import { Footer, Modal } from "flowbite-react";
 // import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa";
 import { ImEvil2, ImGithub } from "react-icons/im";
 import { IoLogoWechat } from "react-icons/io5";
 //incase the same name with Footer from flowbite
+
 const FooterComponent = () => {
+  // for wechat
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
   return (
     <Footer
       container
@@ -101,13 +108,34 @@ const FooterComponent = () => {
             />
 
             <Footer.Icon
-              href="/client/src/assets/wechat.jpg"
+              href="#"
               icon={IoLogoWechat}
+              onClick={handleToggleModal}
             />
             <Footer.Icon href="https://github.com/HAONANTAO" icon={ImGithub} />
           </div>
         </div>
       </div>
+
+      <Modal show={showModal} onClose={handleToggleModal} size="md">
+        <Modal.Header>Scan my QR Code</Modal.Header>
+        <Modal.Body>
+          <div className="flex justify-center">
+            <img
+              src="/wechat.jpg"
+              alt="WeChat QR Code"
+              className="h-auto max-w-full"
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            onClick={handleToggleModal}
+            className="px-4 py-2 mx-auto text-sm font-medium text-blue-900 bg-white border border-blue-900 rounded-lg hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </Footer>
   );
 };
