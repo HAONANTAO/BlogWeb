@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  user-select: none;
+  /* user-select: none; */
   -webkit-user-drag: none;
 }
 body {
@@ -56,4 +56,25 @@ body {
 }
 .post-content a:hover {
   text-decoration: underline;
+}
+
+/* code fence */
+.post-content pre {
+  /* 通常代码块被包裹在<pre>标签中 */
+  background-color: rgb(91, 89, 87);
+
+  border: 3px solid gray; /* 左边有一个较厚的条纹，颜色可以根据你的主题调整 */
+  padding: 10px 20px; /* 内填充 */
+  border-radius: 4px; /* 轻微的圆角 */
+  overflow: auto; /* 如果代码超长，出现滚动条 */
+  font-family: "Courier New", Courier, monospace; /* 设置字体为等宽字体 */
+}
+
+.post-content code {
+  /* <code>通常用于内联代码 */
+  background-color: #f4f4f4;
+  color: #d63384; /* 你可以选择适合你主题的颜色 */
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
 }

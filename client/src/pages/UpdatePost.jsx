@@ -103,7 +103,6 @@ export default function UpdatePost() {
       }
 
       if (data.statusText === "OK") {
-        console.log("11112");
         setPublishError(null);
         navigate(`/post/${data.data.slug}`);
       }
@@ -112,6 +111,7 @@ export default function UpdatePost() {
       setPublishError("Something went wrong when update");
     }
   };
+  console.log(formData);
   return (
     <div className="max-w-3xl min-h-screen p-3 mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Update post</h1>
@@ -145,6 +145,11 @@ export default function UpdatePost() {
             <option value="Life">Life</option>
           </Select>
         </div>
+        {formData && formData.updatedAt && (
+          <p>
+            Updated Time: {new Date(formData.updatedAt).toLocaleDateString()}
+          </p>
+        )}
         <div className="flex items-center justify-between gap-4 p-3 border-4 border-teal-500 border-dotted">
           <FileInput
             type="file"

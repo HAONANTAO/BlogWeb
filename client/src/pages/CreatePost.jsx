@@ -89,6 +89,18 @@ const CreatePost = () => {
       setImageUploadProgress(null);
     }
   };
+
+  //code fence for ReactQuill
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
+      ["code-block"], // 确保这里添加了'code-block'
+    ],
+  };
   return (
     <div className="max-w-3xl min-h-screen p-3 mx-auto ">
       <h1 className="text-3xl font-semibold text-center my-7">Create a Post</h1>
@@ -155,6 +167,7 @@ const CreatePost = () => {
         )}
         <ReactQuill
           theme="snow"
+          modules={modules}
           placeholder="write something"
           className="mb-12 text-white h-72"
           onChange={(value) => setFormData({ ...formData, content: value })}
