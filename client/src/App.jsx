@@ -11,13 +11,13 @@ import StarsCanvas from "./components/Canvas/StarsCanvas";
 import Search from "./pages/Search";
 import UpdatePost from "./pages/UpdatePost";
 //components
-import Header from "./components/Header";
-import FooterComponent from "./components/Footer";
-import PrivateRoute from "./components/PrivateRoute";
-import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
+import Header from "./components/FixedUI/Header";
+import FooterComponent from "./components/FixedUI/Footer";
+import PrivateRoute from "./components/Utils/PrivateRoute";
+import OnlyAdminPrivateRoute from "./components/Utils/OnlyAdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Utils/ScrollToTop";
 //loading animation
 import LoadingScreen from "./components/Loading/LoadingScreen";
 function App() {

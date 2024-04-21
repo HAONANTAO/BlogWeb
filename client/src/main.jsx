@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "../App.css";
-import ThemeProvider from "./components/ThemeProvider.jsx";
-import StarsProvider from "./components/StarsProvider.jsx";
+import ThemeProvider from "./components/Providers/ThemeProvider.jsx";
+import StarsProvider from "./components/Providers/StarsProvider.jsx";
 //redux
 import { useSelector } from "react-redux";
 import { store, persistor } from "./redux/store";

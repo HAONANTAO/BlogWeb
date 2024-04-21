@@ -9,7 +9,7 @@ import { FaComputer } from "react-icons/fa6";
 import { GiSelfLove } from "react-icons/gi";
 import { FaQuestion } from "react-icons/fa";
 import CallToAction from "../components/CallToAction";
-import CommentSection from "../components/CommentSection";
+import CommentSection from "../components/Comments/CommentSection";
 import PostCard from "../components/PostCard";
 const PostPage = () => {
   const { postSlug } = useParams();

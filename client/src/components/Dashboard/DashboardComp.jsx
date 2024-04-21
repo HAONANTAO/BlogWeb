@@ -21,11 +21,12 @@ const DashboardComp = () => {
   const [lastMonthComments, setLastMonthComments] = useState(0);
 
   const { currentUser } = useSelector((state) => state.user);
-
+  console.log(totalUsers);
   useEffect(() => {
     // get Users all infor
     const fetchUsers = async () => {
       const data = await axios.get("/api/user/getusers?limit=5");
+      console.log(data);
       if (data.statusText === "OK") {
         setUser(data.data.users);
         setTotalUsers(data.data.totalUsers);

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput, Textarea, Button, Alert, Modal } from "flowbite-react";
 import { FiAlertTriangle } from "react-icons/fi";
-import Comment from "../components/Comment";
+import Comment from "./Comment";
 import axios from "axios";
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -22,14 +22,14 @@ const CommentSection = ({ postId }) => {
       alert("Comment cannot be more than 200 characters.");
       return;
     }
-    
+
     try {
       const data = await axios.post("/api/comment/create", {
         content: commentValue,
         postId,
         userId: currentUser.data._id,
       });
-     
+
       if (data.statusText !== "OK") {
         console.log("error internal when create comment");
       }
@@ -60,18 +60,15 @@ const CommentSection = ({ postId }) => {
   }, [postId, postComments]);
 
   const handleLike = async (commentId) => {
-   
     try {
       if (!currentUser) {
         navigate("/sign-in");
         return;
       }
-     
+
       const data = await axios.put(`/api/comment/likeComment/${commentId}`);
-    
 
       if (data.statusText === "OK") {
-     
         //update liked method logic
         setPostComments((prevComments) =>
           prevComments.map((comment) =>
