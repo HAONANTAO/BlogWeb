@@ -75,8 +75,9 @@ const DashComments = () => {
     }
   };
 
+  // overflow-x-scroll scrollbar scrollbar-thumb-slate-300 scrollbar-track-slate-100
   return (
-    <div className="w-full h-full p-3 mx-2 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-thumb-slate-300 scrollbar-track-slate-100 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+    <div className="w-full h-full p-3 mx-2 table-auto md:mx-auto dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
         {currentUser.data.isAdmin && comments.length > 0 ? (
           <>

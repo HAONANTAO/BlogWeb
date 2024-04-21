@@ -124,7 +124,7 @@ const DashboardComp = () => {
 
       {/* all table cards1 */}
       <div className="flex flex-wrap justify-center gap-4 py-3 mx-auto ">
-        <div className="flex flex-col w-full p-2 mt-4 border shadow-md border-gray-600rounded-md md:w-auto dark:bg-gray-600 ">
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-600 ">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Users</h1>
@@ -159,7 +159,7 @@ const DashboardComp = () => {
           </div>
         </div>
         {/* all table cards2 */}
-        <div className="flex flex-col w-full p-2 mt-4 border border-gray-600 rounded-md shadow-md md:w-auto dark:bg-gray-800">
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800 ">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Comments</h1>
@@ -191,7 +191,7 @@ const DashboardComp = () => {
         </div>
 
         {/* all table cards3 */}
-        <div className="flex flex-col w-full p-2 mt-4 border border-gray-600 rounded-md shadow-md md:w-auto dark:bg-gray-800">
+        <div className="flex flex-col w-full p-2 mt-4 border rounded-md shadow-md md:w-auto dark:bg-gray-800">
           {/* start of recent users */}
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="p-2 text-center">Recent Posts</h1>

@@ -71,9 +71,9 @@ const DashUsers = () => {
     }
   };
 
-  console.log(users);
+  // overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300
   return (
-    <div className="w-full h-full p-3 mx-2 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+    <div className="w-full h-full p-3 mx-2 table-auto md:mx-autodark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
         {currentUser.data.isAdmin && users.length > 0 ? (
           <>

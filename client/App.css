@@ -78,3 +78,12 @@ body {
   border-radius: 4px;
   font-family: "Courier New", Courier, monospace;
 }
+/* editing area */
+.ql-editor {
+  color: white; /* 文本颜色为白色 */
+}
+/* header area */
+.ql-toolbar {
+  background-color: rgb(103, 103, 131);
+  color: white;
+}
