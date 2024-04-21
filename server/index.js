@@ -28,19 +28,19 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 //  允许跨域请求（CORS）
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true, // 如果使用 cookies 或认证相关功能，确保开启此项
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true, // 如果使用 cookies 或认证相关功能，确保开启此项
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 // //
 // app.use((req, res, next) => {
 //   res.header(
