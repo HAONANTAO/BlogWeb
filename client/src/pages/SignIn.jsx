@@ -30,6 +30,7 @@ const SignIn = () => {
     setLoading(true);
     e.preventDefault();
     if (!formData.email || !formData.password) {
+      setLoading(false);
       return dispatch(signInFailure("need fill all information!"));
     }
     //no refresh
