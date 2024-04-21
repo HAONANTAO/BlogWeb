@@ -7,10 +7,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { app } from "../firebase.js";
 
-import {
-  signInFailure,
-  signInSuccess
-} from "../redux/user/userSlice.js";
+import { signInFailure, signInSuccess } from "../redux/user/userSlice.js";
 
 const OAuth = () => {
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import commentRoutes from "./routes/comment.route.js";
 import path from "path";
-
+import cors from "cors";
 //for build in render and deployment
 const __dirname = path.resolve();
 // create server using express
@@ -28,7 +28,25 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 //  允许跨域请求（CORS）
+const allowedOrigins = [
+  "https://blogweb-f5rg.onrender.com",
 
+  "https://aaronblog.top",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+//
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",

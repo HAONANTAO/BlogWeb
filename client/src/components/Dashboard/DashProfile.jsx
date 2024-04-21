@@ -37,7 +37,7 @@ const DashProfile = () => {
   const { currentUser, errorMessage, loading } = useSelector(
     (state) => state.user,
   );
-
+  console.log(currentUser);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
