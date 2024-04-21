@@ -1,7 +1,3 @@
-import { Button, FileInput, Select, TextInput } from "flowbite-react";
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import {
   getDownloadURL,
@@ -9,10 +5,13 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
+import React, { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "flowbite-react";
 import { app } from "../firebase.js";
 const CreatePost = () => {
   const [loading, setLoading] = useState(false);

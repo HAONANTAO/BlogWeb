@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { Table, Modal, Button } from "flowbite-react";
-import { Link } from "react-router-dom";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Button, Modal, Table } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const DashPosts = () => {
   const [postIdToDelete, setPostIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
@@ -30,7 +29,7 @@ const DashPosts = () => {
           }
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     if (currentUser.data.isAdmin) {
@@ -54,7 +53,7 @@ const DashPosts = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   const handleDeletePost = async () => {
@@ -72,7 +71,7 @@ const DashPosts = () => {
         console.log("good delete");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

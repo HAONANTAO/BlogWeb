@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Button, Select, TextInput } from "flowbite-react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Button, Select, TextInput } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
 const Search = () => {
   const [sidebarData, setSidebarData] = useState({

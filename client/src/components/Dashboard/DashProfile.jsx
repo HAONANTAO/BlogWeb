@@ -1,33 +1,32 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import Scene from "../Canvas/Scene.jsx";
 import { FiAlertTriangle } from "react-icons/fi";
 import { app } from "../../firebase.js";
-import axios from "axios";
+import Scene from "../Canvas/Scene.jsx";
 //progress bar
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-  getDownloadURL,
 } from "firebase/storage";
+import { Alert, Button, Modal, TextInput } from "flowbite-react";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  updateStart,
-  updateSuccess,
-  updateFailure,
+  deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  deleteUserFailure,
+  signOutFailure,
   signOutStart,
   signOutSuccess,
-  signOutFailure,
+  updateFailure,
+  updateStart,
+  updateSuccess,
 } from "../../redux/user/userSlice.js";
-import { useNavigate, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Alert, Button, Modal, TextInput } from "flowbite-react";
 const DashProfile = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateUserError, setUpdateUserError] = useState(null);
@@ -53,13 +52,12 @@ const DashProfile = () => {
       );
 
       if (data.status !== 200) {
-        console.log(data.message);
         dispatch(signOutFailure(data));
       } else {
         dispatch(signOutSuccess());
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       dispatch(signOutFailure(error));
     }
   };

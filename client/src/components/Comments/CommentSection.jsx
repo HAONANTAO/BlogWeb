@@ -1,10 +1,10 @@
+import axios from "axios";
+import { Alert, Button, Modal, Textarea } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { FiAlertTriangle } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { TextInput, Textarea, Button, Alert, Modal } from "flowbite-react";
-import { FiAlertTriangle } from "react-icons/fi";
 import Comment from "./Comment";
-import axios from "axios";
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [commentValue, setCommentValue] = useState("");
@@ -40,7 +40,7 @@ const CommentSection = ({ postId }) => {
       setPostComments([data.data, ...postComments]);
     } catch (error) {
       setCommentError(error.message);
-      console.log(error);
+       console.log(error.message);
     }
   };
 
@@ -53,7 +53,7 @@ const CommentSection = ({ postId }) => {
           setPostComments(data.data);
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     getComments();
@@ -88,7 +88,7 @@ const CommentSection = ({ postId }) => {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -126,7 +126,7 @@ const CommentSection = ({ postId }) => {
       }
     } catch (error) {
       setShowModal(false);
-      console.log(error);
+    console.log(error.message);
     }
   };
   return (

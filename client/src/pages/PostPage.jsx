@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Spinner, Button } from "flowbite-react";
-import { FaBookOpen } from "react-icons/fa";
-import { IoIosClock } from "react-icons/io";
+import { Button, Spinner } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { DiDrupal } from "react-icons/di";
+import { FaBookOpen, FaQuestion } from "react-icons/fa";
 import { FaComputer } from "react-icons/fa6";
 import { GiSelfLove } from "react-icons/gi";
-import { FaQuestion } from "react-icons/fa";
-import CallToAction from "../components/CallToAction";
+import { IoIosClock } from "react-icons/io";
+import { Link, useParams } from "react-router-dom";
 import CommentSection from "../components/Comments/CommentSection";
 import PostCard from "../components/PostCard";
 const PostPage = () => {

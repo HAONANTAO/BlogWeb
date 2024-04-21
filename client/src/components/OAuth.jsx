@@ -1,16 +1,15 @@
+import axios from "axios";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "flowbite-react";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { app } from "../firebase.js";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 import {
-  signInStart,
-  signInSuccess,
   signInFailure,
+  signInSuccess
 } from "../redux/user/userSlice.js";
 
 const OAuth = () => {

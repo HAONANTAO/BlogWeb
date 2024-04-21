@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import { Footer, Modal } from "flowbite-react";
+import React, { useState } from "react";
 // import { Link } from "react-router-dom";
-import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
+import { BsFacebook } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa";
 import { ImEvil2, ImGithub } from "react-icons/im";
 import { IoLogoWechat } from "react-icons/io5";

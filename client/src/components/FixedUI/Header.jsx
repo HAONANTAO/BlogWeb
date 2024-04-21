@@ -1,23 +1,23 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { TbStarsFilled } from "react-icons/tb";
 import {
+  signOutFailure,
   signOutStart,
   signOutSuccess,
-  signOutFailure,
 } from "../../redux/user/userSlice.js";
-import axios from "axios";
 
 //UI Library
-import { MdOutlineEmail } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import { FaSignOutAlt, FaMoon, FaSun } from "react-icons/fa";
-import { PiAirTrafficControlFill } from "react-icons/pi";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+import { CgProfile } from "react-icons/cg";
+import { FaMoon, FaSignOutAlt, FaSun } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+import { PiAirTrafficControlFill } from "react-icons/pi";
 // router without refresh
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme, toggleBack } from "../../redux/theme/themeSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toggleBack, toggleTheme } from "../../redux/theme/themeSlice.js";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button, Textarea } from "flowbite-react";
 import moment from "moment";
+import React, { useEffect, useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Button, Textarea } from "flowbite-react";
 const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   const [users, setUsers] = useState({});
   const [editedContent, setEditedContent] = useState(comment.content);
@@ -40,7 +40,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
       }
     } catch (error) {
       setIsEditing(false);
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (

@@ -1,23 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"; //用react-router-dom进行路由
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom"; //用react-router-dom进行路由
 //pages
-import Home from "./pages/Home";
+import StarsCanvas from "./components/Canvas/StarsCanvas";
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 import Projects from "./pages/Projects";
+import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import StarsCanvas from "./components/Canvas/StarsCanvas";
-import Search from "./pages/Search";
 import UpdatePost from "./pages/UpdatePost";
 //components
-import Header from "./components/FixedUI/Header";
 import FooterComponent from "./components/FixedUI/Footer";
-import PrivateRoute from "./components/Utils/PrivateRoute";
+import Header from "./components/FixedUI/Header";
 import OnlyAdminPrivateRoute from "./components/Utils/OnlyAdminPrivateRoute";
+import PrivateRoute from "./components/Utils/PrivateRoute";
+import ScrollToTop from "./components/Utils/ScrollToTop";
 import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
-import ScrollToTop from "./components/Utils/ScrollToTop";
 //loading animation
 import LoadingScreen from "./components/Loading/LoadingScreen";
 function App() {

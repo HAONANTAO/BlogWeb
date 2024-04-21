@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { Button, Table } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import {
   HiAnnotation,
   HiArrowNarrowUp,
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Table } from "flowbite-react";
 const DashboardComp = () => {
   const [users, setUser] = useState([]);
   const [comments, setComments] = useState([]);
@@ -21,7 +21,7 @@ const DashboardComp = () => {
   const [lastMonthComments, setLastMonthComments] = useState(0);
 
   const { currentUser } = useSelector((state) => state.user);
-  console.log(totalUsers);
+
   useEffect(() => {
     // get Users all infor
     const fetchUsers = async () => {

@@ -1,6 +1,6 @@
 // components/LoadingScreen.jsx
 import React from "react";
-import "./Loading.css"; // 确保你的样式在这个文件中
+import "./Loading.css"; 
 
 const LoadingScreen = () => {
   return (

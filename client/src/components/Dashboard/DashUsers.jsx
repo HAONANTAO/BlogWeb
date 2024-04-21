@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { Table, Modal, Button } from "flowbite-react";
-import { Link } from "react-router-dom";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { TiTick } from "react-icons/ti";
+import { Button, Modal, Table } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import { GiSkullCrossedBones } from "react-icons/gi";
+import { TiTick } from "react-icons/ti";
+import { useSelector } from "react-redux";
 const DashUsers = () => {
   const [userIdToDelete, setUserIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
@@ -29,7 +27,7 @@ const DashUsers = () => {
           }
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
     if (currentUser.data.isAdmin) {
@@ -52,7 +50,7 @@ const DashUsers = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -67,7 +65,7 @@ const DashUsers = () => {
         console.log("good delete");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

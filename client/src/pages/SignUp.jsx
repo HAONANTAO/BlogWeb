@@ -1,19 +1,18 @@
-import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import EarthCanvas from "../components/Canvas/Earth";
 import axios from "axios";
-import StarsCanvas from "../components/Canvas/StarsCanvas";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import React, { useState } from "react";
 import { FaUserAstronaut } from "react-icons/fa";
+import { IoEyeSharp } from "react-icons/io5";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { IoEyeSharp } from "react-icons/io5";
-import OAuth from "../components/OAuth";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import EarthCanvas from "../components/Canvas/Earth";
+import OAuth from "../components/OAuth";
 import {
+  signInFailure,
   signInStart,
   signInSuccess,
-  signInFailure,
 } from "../redux/user/userSlice.js";
 
 const SignUp = () => {
