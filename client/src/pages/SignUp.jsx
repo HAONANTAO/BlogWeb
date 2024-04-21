@@ -47,7 +47,7 @@ const SignUp = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (data.statusText === "OK") {
+      if (data.statusText === "OK" || data.status === 200) {
         //changeURL to /signin
         dispatch(signInSuccess(data));
         navigate("/sign-in");
