@@ -29,11 +29,14 @@ app.listen(3000, () => {
 });
 //  允许跨域请求（CORS）
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "https://yourfrontenddomain.com"); // 只允许指定域名的跨域请求
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization", // 如果你的请求中包括认证等特殊头部，需要在此处添加
   );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE"); // 明确允许的方法
+  res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
   next();
 });
 //pass this path from this routes
