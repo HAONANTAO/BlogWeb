@@ -28,12 +28,6 @@ app.listen(3000, () => {
   console.log("listening on port 3000");
 });
 //  允许跨域请求（CORS）
-const allowedOrigins = [
-  "https://www.blogweb-f5rg.onrender.com",
-
-  "https://www.aaronblog.top",
-];
-
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -42,26 +36,27 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true, // 如果使用 cookies 或认证相关功能，确保开启此项
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-//
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://www.aaronblog.top",
-    "https://www.blogweb-f5rg.onrender.com",
-  ); // 只允许指定域名的跨域请求
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization", // 如果你的请求中包括认证等特殊头部，需要在此处添加
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE"); // 明确允许的方法
-  res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-  res.header("Cross-Origin-Embedder-Policy", "require-corp");
-  next();
-});
+// //
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "https://www.aaronblog.top",
+//     "https://www.blogweb-f5rg.onrender.com",
+//   ); // 只允许指定域名的跨域请求
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization", // 如果你的请求中包括认证等特殊头部，需要在此处添加
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE"); // 明确允许的方法
+//   res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+//   res.header("Cross-Origin-Embedder-Policy", "require-corp");
+//   next();
+// });
 //pass this path from this routes
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
