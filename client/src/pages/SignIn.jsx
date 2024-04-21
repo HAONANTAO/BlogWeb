@@ -16,12 +16,9 @@ import {
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const { loading, errorMessage } = useSelector((state) => state.user);
-
-  // const [loading, setLoading] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState();
+  const { errorMessage } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
-  //跳转
   const navigate = useNavigate();
   console.log("content", formData);
   const handleChange = (e) => {
@@ -30,6 +27,7 @@ const SignIn = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     if (!formData.email || !formData.password) {
       return dispatch(signInFailure("need fill all information!"));
@@ -51,11 +49,13 @@ const SignIn = () => {
       console.log(data);
 
       if (data.statusText === "OK") {
+        setLoading(false);
         //changeURL to /signin
         dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
+      setLoading(false);
       dispatch(signInFailure(error.response.data.message));
     }
   };
