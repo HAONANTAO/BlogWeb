@@ -47,9 +47,7 @@ const DashProfile = () => {
   const handleSignOut = async () => {
     signOutStart();
     try {
-      const data = await axios.post(
-        `/api/user/signout/${currentUser._id}`,
-      );
+      const data = await axios.post(`/api/user/signout/${currentUser._id}`);
 
       if (data.status !== 200) {
         dispatch(signOutFailure(data));
@@ -67,9 +65,7 @@ const DashProfile = () => {
 
     try {
       dispatch(deleteUserStart());
-      const data = await axios.delete(
-        `/api/user/delete/${currentUser._id}`,
-      );
+      const data = await axios.delete(`/api/user/delete/${currentUser._id}`);
 
       // data.statusText !== "OK"
       if (!data.status === 200) {
@@ -121,15 +117,16 @@ const DashProfile = () => {
           headers: { "Content-Type": "application/json" },
         },
       );
+      console.log(data);
 
-      if (data.statusText !== "OK") {
+      if (data.statusText !== "OK" || data.status !== 200) {
         //changeURL to /signin
 
-        dispatch(updateFailure(data.message));
-        setUpdateUserError(data.error.message);
+        dispatch(updateFailure(data.statusText));
+        setUpdateUserError("update profile error");
       } else {
         setUpdateUserSuccess("User'profile update successfully!");
-        dispatch(updateSuccess(data));
+        dispatch(updateSuccess(data.data));
       }
     } catch (error) {
       dispatch(updateFailure(error.message));
