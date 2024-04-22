@@ -32,7 +32,7 @@ const CreatePost = () => {
 
     try {
       const data = await axios.post(`/api/post/create`, formData);
-      console.log(data);
+
       if (data.status !== 201) {
         setPublishError(data.message);
       } else {
@@ -43,7 +43,7 @@ const CreatePost = () => {
       }
     } catch (error) {
       console.log(error.response.data);
-      setPublishError(error.response.data);
+      setPublishError(error.response.data.message);
     }
   };
   const handleUploadImage = async () => {
