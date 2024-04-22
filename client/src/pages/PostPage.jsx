@@ -26,7 +26,7 @@ const PostPage = () => {
           setLoading(false);
           return;
         }
-
+        console.log(data.data.posts[0]);
         setPost(data.data.posts[0]);
         setLoading(false);
         setError(false);
