@@ -25,14 +25,12 @@ const OAuth = () => {
       const { email, displayName, photoURL } = resultsFromGoogle.user;
 
       const googleData = {
-        email,
+        email: email,
         name: displayName,
-        photoURL,
+        photoURL: photoURL,
       };
 
-      const res = await axios.post("/api/auth/google", googleData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await axios.post("/api/auth/google", googleData);
 
       if (res.status === 200) {
         // Check response status, not statusText
