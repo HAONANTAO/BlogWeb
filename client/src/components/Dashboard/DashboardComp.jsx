@@ -27,7 +27,7 @@ const DashboardComp = () => {
     const fetchUsers = async () => {
       const data = await axios.get("/api/user/getusers?limit=5");
       console.log(data);
-      if (data.statusText === "OK") {
+      if (data.statusText === "OK" || data.status === 200) {
         setUser(data.data.users);
         setTotalUsers(data.data.totalUsers);
         setLastMonthUsers(data.data.lastMonthUsers);
