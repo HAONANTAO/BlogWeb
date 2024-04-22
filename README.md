@@ -6,7 +6,7 @@ Link:https://www.aaronblog.top/
 
 <p align="center">
   <a href="https://github.com/shaojintian/Best_README_template/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="Logo.png" alt="Logo" width="1200" height="600">
   </a>
 
 
