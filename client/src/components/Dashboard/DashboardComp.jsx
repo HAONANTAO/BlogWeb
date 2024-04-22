@@ -54,7 +54,7 @@ const DashboardComp = () => {
       }
     };
 
-    if (currentUser.data.isAdmin) {
+    if (currentUser.isAdmin) {
       fetchUsers();
       fetchPosts();
       fetchComments();

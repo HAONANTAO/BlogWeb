@@ -28,10 +28,10 @@ const DashComments = () => {
         console.log(error.message);
       }
     };
-    if (currentUser.data.isAdmin) {
+    if (currentUser.isAdmin) {
       fetchComments();
     }
-  }, [currentUser.data._id, render]);
+  }, [currentUser._id, render]);
   const handleShowMore = async () => {
     const startIndex = comments.length;
 
@@ -75,7 +75,7 @@ const DashComments = () => {
   return (
     <div className="w-full h-full p-3 mx-2 table-auto md:mx-auto dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
-        {currentUser.data.isAdmin && comments.length > 0 ? (
+        {currentUser.isAdmin && comments.length > 0 ? (
           <>
             <Table hoverable className="shadow-md ">
               <Table.Head>

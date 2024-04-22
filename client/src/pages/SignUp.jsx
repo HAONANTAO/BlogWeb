@@ -49,7 +49,7 @@ const SignUp = () => {
 
       if (data.statusText === "OK" || data.status === 200) {
         //changeURL to /signin
-        dispatch(signInSuccess(data));
+        dispatch(signInSuccess(data.data));
         navigate("/sign-in");
       }
     } catch (error) {

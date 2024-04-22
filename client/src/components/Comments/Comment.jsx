@@ -103,7 +103,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
               <button
                 type="button"
                 className={` text-gray-500 hover:text-blue-500  ${
-                  currentUser && comment.likes.includes(currentUser.data._id)
+                  currentUser && comment.likes.includes(currentUser._id)
                     ? // important
                       "!text-blue-500"
                     : " "
@@ -121,8 +121,8 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
               </p>
 
               {currentUser &&
-                (currentUser.data._id === comment.userId ||
-                  currentUser.data.isAdmin) && (
+                (currentUser._id === comment.userId ||
+                  currentUser.isAdmin) && (
                   <>
                     <button
                       type="button"

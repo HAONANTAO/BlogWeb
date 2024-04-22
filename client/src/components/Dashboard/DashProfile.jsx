@@ -48,7 +48,7 @@ const DashProfile = () => {
     signOutStart();
     try {
       const data = await axios.post(
-        `/api/user/signout/${currentUser.data._id}`,
+        `/api/user/signout/${currentUser._id}`,
       );
 
       if (data.status !== 200) {
@@ -68,7 +68,7 @@ const DashProfile = () => {
     try {
       dispatch(deleteUserStart());
       const data = await axios.delete(
-        `/api/user/delete/${currentUser.data._id}`,
+        `/api/user/delete/${currentUser._id}`,
       );
 
       // data.statusText !== "OK"
@@ -115,7 +115,7 @@ const DashProfile = () => {
       dispatch(updateStart());
 
       const data = await axios.put(
-        `/api/user/update/${currentUser.data._id}`,
+        `/api/user/update/${currentUser._id}`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
@@ -202,7 +202,7 @@ const DashProfile = () => {
             />
           )}
           <img
-            src={imageUrl ? imageUrl : currentUser.data.photoURL}
+            src={imageUrl ? imageUrl : currentUser.photoURL}
             alt="Avatar"
             className={`w-full h-full rounded-full border-2 border-[lightgray] object-fit
             ${
@@ -223,13 +223,13 @@ const DashProfile = () => {
           type="text"
           id="username"
           placeholder="username"
-          defaultValue={currentUser.data.username}
+          defaultValue={currentUser.username}
           onChange={handleChange}></TextInput>
         <TextInput
           type="email"
           id="email"
           placeholder="email"
-          defaultValue={currentUser.data.email}
+          defaultValue={currentUser.email}
           onChange={handleChange}></TextInput>
         <TextInput
           type="password"
@@ -246,7 +246,7 @@ const DashProfile = () => {
           disabled={loading || imageUploading}>
           {loading ? "Loading..." : "Update"}
         </Button>
-        {currentUser.data.isAdmin && (
+        {currentUser.isAdmin && (
           <Link to={"/create-post"}>
             <Button
               type="button"

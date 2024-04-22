@@ -30,7 +30,7 @@ const Header = () => {
     signOutStart();
     try {
       const data = await axios.post(
-        `/api/user/signout/${currentUser.data._id}`,
+        `/api/user/signout/${currentUser._id}`,
       );
 
       if (data.status !== 200) {
@@ -119,20 +119,20 @@ const Header = () => {
                 alt="User Avatar"
                 // this is proxy code
                 // img={`/api/image-proxy?url=${encodeURIComponent(
-                //   currentUser.data.photoURL,
+                //   currentUser.photoURL,
                 // )}`}
-                img={currentUser.data.photoURL}
+                img={currentUser.photoURL}
                 rounded
               />
             }>
             <Dropdown.Header>
               <span className="flex flex-row items-baseline block gap-1 text-sm">
                 <CgProfile />
-                {currentUser.data.username}
+                {currentUser.username}
               </span>
               <span className="flex flex-row items-baseline block gap-1 text-sm">
                 <MdOutlineEmail />
-                {currentUser.data.email}
+                {currentUser.email}
               </span>
             </Dropdown.Header>
             {/* //redirect to dashboard */}

@@ -22,7 +22,7 @@ const DashSidebar = () => {
     signOutStart();
     try {
       const data = await axios.post(
-        `/api/user/signout/${currentUser.data._id}`,
+        `/api/user/signout/${currentUser._id}`,
       );
 
       if (data.status !== 200) {
@@ -47,7 +47,7 @@ const DashSidebar = () => {
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-2 ">
           {/* dash */}
-          {currentUser && currentUser.data.isAdmin && (
+          {currentUser && currentUser.isAdmin && (
             <Sidebar.Item
               active={tab === "dash" || !tab}
               icon={BiAtom}
@@ -59,14 +59,14 @@ const DashSidebar = () => {
           <Sidebar.Item
             active={tab === "profile"}
             icon={HiUser}
-            label={currentUser.data.isAdmin === true ? "Admin" : "User"}
+            label={currentUser.isAdmin === true ? "Admin" : "User"}
             labelColor="blue"
             href="/dashboard?tab=profile">
             Profile
           </Sidebar.Item>
 
           {/*   Post */}
-          {currentUser.data.isAdmin && (
+          {currentUser.isAdmin && (
             <Link to="/dashboard?tab=posts">
               <Sidebar.Item
                 active={tab === "posts"}
@@ -77,7 +77,7 @@ const DashSidebar = () => {
             </Link>
           )}
           {/* users */}
-          {currentUser.data.isAdmin && (
+          {currentUser.isAdmin && (
             <Link to="/dashboard?tab=users">
               <Sidebar.Item
                 active={tab === "users"}
@@ -89,7 +89,7 @@ const DashSidebar = () => {
           )}
 
           {/* comments */}
-          {currentUser.data.isAdmin && (
+          {currentUser.isAdmin && (
             <Link to="/dashboard?tab=comments">
               <Sidebar.Item
                 active={tab === "comments"}

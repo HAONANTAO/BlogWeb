@@ -19,7 +19,7 @@ const DashPosts = () => {
     const fetchPosts = async () => {
       try {
         const data = await axios.get(
-          `/api/post/getposts?userId=${currentUser.data._id}`,
+          `/api/post/getposts?userId=${currentUser._id}`,
         );
 
         if (data.status === 200) {
@@ -32,17 +32,17 @@ const DashPosts = () => {
         console.log(error.message);
       }
     };
-    if (currentUser.data.isAdmin) {
+    if (currentUser.isAdmin) {
       fetchPosts();
     }
     //为了解决删除之后不一致显示9个的问题
-  }, [currentUser.data._id, render]);
+  }, [currentUser._id, render]);
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
 
     try {
       const data = await axios.get(
-        `/api/post/getposts?userId=${currentUser.data._id}&startIndex=${startIndex}`,
+        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`,
       );
 
       if (data.status === 200) {
@@ -60,7 +60,7 @@ const DashPosts = () => {
     setShowModal(false);
     try {
       const data = await axios.delete(
-        `/api/post/deletepost/${postIdToDelete}/${currentUser.data._id}`,
+        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
       );
       if (data.status === 200) {
         //filter
@@ -78,7 +78,7 @@ const DashPosts = () => {
   return (
     <div className="w-full h-full p-3 mx-2 table-auto moverflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
-        {currentUser.data.isAdmin && userPosts.length > 0 ? (
+        {currentUser.isAdmin && userPosts.length > 0 ? (
           <>
             <Table hoverable className="shadow-md">
               <Table.Head>

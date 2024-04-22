@@ -30,10 +30,10 @@ const DashUsers = () => {
         console.log(error.message);
       }
     };
-    if (currentUser.data.isAdmin) {
+    if (currentUser.isAdmin) {
       fetchUsers();
     }
-  }, [currentUser.data._id, render]);
+  }, [currentUser._id, render]);
   const handleShowMore = async () => {
     const startIndex = users.length;
 
@@ -73,7 +73,7 @@ const DashUsers = () => {
   return (
     <div className="w-full h-full p-3 mx-2 table-auto md:mx-autodark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
-        {currentUser.data.isAdmin && users.length > 0 ? (
+        {currentUser.isAdmin && users.length > 0 ? (
           <>
             <Table hoverable className="shadow-md ">
               <Table.Head>

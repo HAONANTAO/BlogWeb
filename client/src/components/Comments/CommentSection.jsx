@@ -27,7 +27,7 @@ const CommentSection = ({ postId }) => {
       const data = await axios.post("/api/comment/create", {
         content: commentValue,
         postId,
-        userId: currentUser.data._id,
+        userId: currentUser._id,
       });
 
       if (data.statusText !== "OK") {
@@ -136,13 +136,13 @@ const CommentSection = ({ postId }) => {
           <p>Signed in as: </p>
           <img
             className="object-cover w-5 h-5 rounded-full"
-            src={currentUser.data.photoURL}
+            src={currentUser.photoURL}
             alt="currentUser avatar"
           />
           <Link
             to="/dashboard?tab=profile"
             className="text-xs text-cyan-600 hover:underline">
-            @{currentUser.data.username}
+            @{currentUser.username}
           </Link>
         </div>
       ) : (
