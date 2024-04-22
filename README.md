@@ -2,6 +2,17 @@
 
 Resonsive MERN Blog is a responsive blogging platform built on the MERN technology stack. By combining MongoDB, Express.js, React and Node.js, it provides a simple yet powerful platform for creating, editing and sharing blog posts. The project has an adaptive design that provides a consistent user experience across a wide range of devices.
 
+Link:https://www.aaronblog.top/
+
+<p align="center">
+  <a href="https://github.com/shaojintian/Best_README_template/">
+    <img src="Logo.png" alt="Logo" width="1200" height="600">
+  </a>
+
+
+</p>
+
+
 ### **User Features:**
 
 1. ***\*Authentication\****:
@@ -84,14 +95,6 @@ Resonsive MERN Blog is a responsive blogging platform built on the MERN technolo
 - 
 
 <br />
-
-<p align="center">
-  <a href="https://github.com/shaojintian/Best_README_template/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-
-</p>
 
 
 
