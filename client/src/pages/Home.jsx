@@ -11,7 +11,7 @@ const Home = () => {
       // first 9 default but 6 is good
       const data = await axios.get("/api/post/getposts?limit=6");
 
-      if (data.statusText === "OK" || data.status === 200) {
+      if ( data.status === 200) {
         setPosts(data.data.posts);
       }
     };

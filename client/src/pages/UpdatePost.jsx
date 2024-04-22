@@ -95,13 +95,11 @@ export default function UpdatePost() {
       );
 
       console.log(data);
-      if (data.statusText !== "OK" || data.status !== 200) {
+      if (data.status !== 200) {
         console.log("1111");
         setPublishError(data.message);
         return;
-      }
-
-      if (data.statusText === "OK") {
+      } else {
         setPublishError(null);
         navigate(`/post/${data.data.slug}`);
       }

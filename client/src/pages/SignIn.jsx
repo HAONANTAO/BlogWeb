@@ -49,7 +49,7 @@ const SignIn = () => {
       });
       console.log(data);
 
-      if (data.statusText === "OK" || data.status === 200) {
+      if ( data.status === 200) {
         setLoading(false);
         //changeURL to /signin
         dispatch(signInSuccess(data.data));

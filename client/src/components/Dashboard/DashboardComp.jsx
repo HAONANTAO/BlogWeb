@@ -27,7 +27,7 @@ const DashboardComp = () => {
     const fetchUsers = async () => {
       const data = await axios.get("/api/user/getusers?limit=5");
 
-      if (data.statusText === "OK" || data.status === 200) {
+      if (data.status === 200) {
         setUser(data.data.users);
         setTotalUsers(data.data.totalUsers);
         setLastMonthUsers(data.data.lastMonthUsers);
@@ -37,7 +37,7 @@ const DashboardComp = () => {
     // get Posts all infor
     const fetchPosts = async () => {
       const data = await axios.get("/api/post/getposts?limit=5");
-      if (data.statusText === "OK" || data.status === 200) {
+      if (data.status === 200) {
         setPosts(data.data.posts);
         setTotalPosts(data.data.totalPosts);
         setLastMonthPosts(data.data.lastMonthPosts);
@@ -47,7 +47,7 @@ const DashboardComp = () => {
     // get comments all infor
     const fetchComments = async () => {
       const data = await axios.get("/api/comment/getcomments?limit=5");
-      if (data.statusText === "OK" || data.status === 200) {
+      if (data.status === 200) {
         setComments(data.data.comments);
         setTotalComments(data.data.totalComments);
         setLastMonthComments(data.data.lastMonthComments);

@@ -51,8 +51,7 @@ const DashProfile = () => {
 
       if (data.status !== 200) {
         dispatch(signOutFailure(data));
-      }
-      if (data.status === 200) {
+      } else {
         dispatch(signOutSuccess());
       }
     } catch (error) {
@@ -119,7 +118,7 @@ const DashProfile = () => {
       );
       console.log(data);
 
-      if (data.statusText !== "OK" || data.status !== 200) {
+      if (data.status !== 200) {
         //changeURL to /signin
 
         dispatch(updateFailure(data.statusText));

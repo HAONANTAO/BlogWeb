@@ -13,7 +13,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
     const getUser = async () => {
       try {
         const data = await axios.get(`/api/user/${comment.userId}`);
-        if (data.statusText === "OK" || data.status === 200) {
+        if (data.status === 200) {
           setUsers(data.data);
         }
       } catch (error) {
@@ -34,7 +34,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
       const data = await axios.put(`/api/comment/editComment/${comment._id}`, {
         content: editedContent,
       });
-      if (data.statusText === "OK" || data.status === 200) {
+      if (data.status === 200) {
         setIsEditing(false);
         onEdit(comment, editedContent);
       }
@@ -121,8 +121,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
               </p>
 
               {currentUser &&
-                (currentUser._id === comment.userId ||
-                  currentUser.isAdmin) && (
+                (currentUser._id === comment.userId || currentUser.isAdmin) && (
                   <>
                     <button
                       type="button"

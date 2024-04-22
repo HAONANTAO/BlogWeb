@@ -21,12 +21,12 @@ const PostPage = () => {
       try {
         setLoading(true);
         const data = await axios.get(`/api/post/getposts?slug=${postSlug}`);
-        if (data.statusText !== "OK" || data.status !== 200) {
+        if ( data.status !== 200) {
           setError(true);
           setLoading(false);
           return;
         }
-        if (data.statusText === "OK" || data.status === 200) {
+        if ( data.status === 200) {
           console.log(data.data.posts[0]);
           setPost(data.data.posts[0]);
           setLoading(false);
@@ -45,7 +45,7 @@ const PostPage = () => {
     try {
       const fetchRecentPosts = async () => {
         const data = await axios.get("/api/post/getposts?limit=3");
-        if (data.statusText === "OK" || data.status === 200) {
+        if ( data.status === 200) {
           serRecentPost(data.data.posts);
         }
       };
@@ -111,7 +111,7 @@ const PostPage = () => {
         dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
 
       <div className="w-full max-w-4xl mx-auto">{/* <CallToAction /> */}</div>
-      <CommentSection postId={post._id} />
+      {post && post._id && <CommentSection postId={post._id} />}
 
       <div className="flex flex-col items-center justify-center mb-5">
         <h1 className="mt-5 text-xl">Recent articles</h1>

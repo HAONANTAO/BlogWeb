@@ -36,11 +36,11 @@ const Search = () => {
 
       const data = await axios.get(`/api/post/getposts?${searchQuery}`);
       setLoading(false);
-      if (data.statusText !== "OK" || data.status !== 200) {
+      if (data.status !== 200) {
         return;
       }
       // okk
-      if (data.statusText === "OK" || data.status === 200) {
+      if (data.status === 200) {
         setPosts(data.data.posts);
         if (data.data.posts.length >= 9) {
           setShowMore(true);
@@ -83,7 +83,7 @@ const Search = () => {
     console.log(searchQuery);
     const data = await axios.get(`/api/post/getposts?${searchQuery}`);
 
-    if (data.statusText === "OK" || data.status !== 200) {
+    if (data.status !== 200) {
       setPosts([...posts, ...data.data.posts]);
       if (data.data.posts.length >= 9) {
         setShowMore(true);
