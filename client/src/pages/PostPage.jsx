@@ -25,7 +25,8 @@ const PostPage = () => {
           setError(true);
           setLoading(false);
           return;
-        } else {
+        }
+        if (data.statusText === "OK" || data.status === 200) {
           console.log(data.data.posts[0]);
           setPost(data.data.posts[0]);
           setLoading(false);
