@@ -11,37 +11,42 @@ import { signInFailure, signInSuccess } from "../redux/user/userSlice.js";
 
 const OAuth = () => {
   const navigate = useNavigate();
-  //redux
   const dispatch = useDispatch();
-  //oauth firebase
+
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+
   const handleGoogleClick = async () => {
     provider.setCustomParameters({
       prompt: "select_account",
     });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
-      //take personal google information
-      let googleData = {
-        email: resultsFromGoogle.user.email,
-        name: resultsFromGoogle.user.displayName,
-        photoURL: resultsFromGoogle.user.photoURL,
+      const { email, displayName, photoURL } = resultsFromGoogle.user;
+
+      const googleData = {
+        email,
+        name: displayName,
+        photoURL,
       };
-      // console.log(resultsFromGoogle);
+
       const res = await axios.post("/api/auth/google", googleData, {
         headers: { "Content-Type": "application/json" },
       });
-      // console.log(res);
-      if (res.statusText === "OK") {
-        dispatch(signInSuccess(res));
+
+      if (res.status === 200) {
+        // Check response status, not statusText
+        dispatch(signInSuccess(res.data)); // Assuming res.data contains user data
         navigate("/");
+      } else {
+        dispatch(signInFailure("Login failed")); // Provide a generic message
       }
     } catch (error) {
-      console.log(error);
-      dispatch(signInFailure(error.response.data.message));
+      console.error("Error during Google login:", error);
+      dispatch(signInFailure("An error occurred during login"));
     }
   };
+
   return (
     <Button
       type="button"
