@@ -30,7 +30,7 @@ const CommentSection = ({ postId }) => {
         userId: currentUser._id,
       });
 
-      if (data.statusText !== "OK") {
+      if (data.statusText !== "OK" || data.status !== 200) {
         console.log("error internal when create comment");
       }
       //success -> clear comment

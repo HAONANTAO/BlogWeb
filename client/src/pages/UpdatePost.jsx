@@ -30,7 +30,7 @@ export default function UpdatePost() {
       const fetchPost = async () => {
         const data = await axios.get(`/api/post/getposts?postId=${postId}`);
 
-        if (data.statusText === "OK") {
+        if (data.statusText === "OK" || data.status === 200) {
           setPublishError(null);
           setFormData(data.data.posts[0]);
         }
@@ -94,9 +94,9 @@ export default function UpdatePost() {
         `/api/post/updatepost/${formData._id}/${currentUser._id}`,
         formData,
       );
-      console.log("111");
+
       console.log(data);
-      if (data.statusText !== "OK") {
+      if (data.statusText !== "OK" || data.status !== 200) {
         console.log("1111");
         setPublishError(data.message);
         return;

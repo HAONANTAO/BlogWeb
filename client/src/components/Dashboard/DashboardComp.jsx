@@ -21,16 +21,12 @@ const DashboardComp = () => {
   const [lastMonthComments, setLastMonthComments] = useState(0);
 
   const { currentUser } = useSelector((state) => state.user);
-
+  console.log(totalUsers, totalComments, totalPosts);
   useEffect(() => {
     // get Users all infor
     const fetchUsers = async () => {
       const data = await axios.get("/api/user/getusers?limit=5");
-      console.log(
-        data.data.users,
-        data.data.totalUsers,
-        data.data.lastMonthUsers,
-      );
+
       if (data.statusText === "OK" || data.status === 200) {
         setUser(data.data.users);
         setTotalUsers(data.data.totalUsers);
@@ -41,7 +37,7 @@ const DashboardComp = () => {
     // get Posts all infor
     const fetchPosts = async () => {
       const data = await axios.get("/api/post/getposts?limit=5");
-      if (data.statusText === "OK") {
+      if (data.statusText === "OK" || data.status === 200) {
         setPosts(data.data.posts);
         setTotalPosts(data.data.totalPosts);
         setLastMonthPosts(data.data.lastMonthPosts);
@@ -51,7 +47,7 @@ const DashboardComp = () => {
     // get comments all infor
     const fetchComments = async () => {
       const data = await axios.get("/api/comment/getcomments?limit=5");
-      if (data.statusText === "OK") {
+      if (data.statusText === "OK" || data.status === 200) {
         setComments(data.data.comments);
         setTotalComments(data.data.totalComments);
         setLastMonthComments(data.data.lastMonthComments);

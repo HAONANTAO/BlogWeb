@@ -25,11 +25,12 @@ const PostPage = () => {
           setError(true);
           setLoading(false);
           return;
+        } else {
+          console.log(data.data.posts[0]);
+          setPost(data.data.posts[0]);
+          setLoading(false);
+          setError(false);
         }
-        console.log(data.data.posts[0]);
-        setPost(data.data.posts[0]);
-        setLoading(false);
-        setError(false);
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -43,7 +44,7 @@ const PostPage = () => {
     try {
       const fetchRecentPosts = async () => {
         const data = await axios.get("/api/post/getposts?limit=3");
-        if (data.statusText === "OK") {
+        if (data.statusText === "OK" || data.status === 200) {
           serRecentPost(data.data.posts);
         }
       };
