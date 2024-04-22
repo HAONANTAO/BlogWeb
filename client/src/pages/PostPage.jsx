@@ -68,22 +68,26 @@ const PostPage = () => {
         {post && post.title}
       </h1>
       {/* click to  search */}
-      <Link className="mx-auto" to={`/search?category=${post.category}`}>
-        <Button
-          color="gray"
-          pill
-          size="xs"
-          className="flex items-center justify-center mt-5 ">
-          {/* differ category differ icons */}
-          {post.category === "uncategorized" && (
-            <FaQuestion className="self-center" />
-          )}
-          {post.category === "Coding" && <FaComputer className="self-center" />}
-          {post.category === "Love" && <GiSelfLove className="self-center" />}
-          {post.category === "Life" && <DiDrupal className="self-center" />}
-          {post && post.category}
-        </Button>
-      </Link>
+      {post && (
+        <Link className="mx-auto" to={`/search?category=${post.category}`}>
+          <Button
+            color="gray"
+            pill
+            size="xs"
+            className="flex items-center justify-center mt-5 ">
+            {/* differ category differ icons */}
+            {post.category === "uncategorized" && (
+              <FaQuestion className="self-center" />
+            )}
+            {post.category === "Coding" && (
+              <FaComputer className="self-center" />
+            )}
+            {post.category === "Love" && <GiSelfLove className="self-center" />}
+            {post.category === "Life" && <DiDrupal className="self-center" />}
+            {post.category}
+          </Button>
+        </Link>
+      )}
       <img
         src={post && post.image}
         alt="no image upload"

@@ -33,8 +33,7 @@ export default function UpdatePost() {
         if (data.statusText === "OK" || data.status === 200) {
           setPublishError(null);
           setFormData(data.data.posts[0]);
-        }
-        if (data.statusText !== "OK") {
+        } else {
           console.log(data.message);
           setPublishError("fetch data failed");
           return;

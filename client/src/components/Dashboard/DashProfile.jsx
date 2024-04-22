@@ -68,8 +68,7 @@ const DashProfile = () => {
       dispatch(deleteUserStart());
       const data = await axios.delete(`/api/user/delete/${currentUser._id}`);
 
-      // data.statusText !== "OK"
-      if (!data.status === 200) {
+      if (data.status !== 200) {
         dispatch(deleteUserFailure(data.message));
       } else {
         dispatch(deleteUserSuccess(data));
