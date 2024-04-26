@@ -49,14 +49,17 @@ const SignIn = () => {
       });
       console.log(data);
 
-      if ( data.status === 200) {
+      if (data.status === 200) {
         setLoading(false);
         //changeURL to /signin
         dispatch(signInSuccess(data.data));
         navigate("/");
+      } else {
+        dispatch(signInFailure("data status wrong"));
       }
     } catch (error) {
       setLoading(false);
+      console.log(error.response);
       dispatch(signInFailure(error.response.data.message));
     }
   };

@@ -24,7 +24,7 @@ const DashPosts = () => {
 
         if (data.status === 200) {
           setUserPosts(data.data.posts);
-          if (data.data.posts.length < 9) {
+          if (data.data.posts.length <= 9) {
             setShowMore(false);
           }
         }
@@ -47,8 +47,8 @@ const DashPosts = () => {
 
       if (data.status === 200) {
         setUserPosts((prev) => [...prev, ...data.data.posts]);
-        setSuccess(true);
-        if (data.data.posts.length < 9) {
+        // setSuccess(true);
+        if (data.data.posts.length <= 9) {
           setShowMore(false);
         }
       }

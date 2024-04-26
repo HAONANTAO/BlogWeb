@@ -10,6 +10,8 @@ const DashComments = () => {
   const [showMore, setShowMore] = useState(true);
   const [comments, setComments] = useState([]);
   const [render, setRender] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [postId, setPostId] = useState("");
 
   useEffect(() => {
     setRender(false);
@@ -20,8 +22,12 @@ const DashComments = () => {
 
         if (data.status === 200) {
           setComments(data.data.comments);
-          if (data.data.comments.length < 9) {
+          setUserId(comments.userId);
+          setPostId(comments.postId);
+          if (data.data.comments.length <= 9) {
             setShowMore(false);
+          } else {
+            setShowMore(true);
           }
         }
       } catch (error) {
@@ -31,7 +37,8 @@ const DashComments = () => {
     if (currentUser.isAdmin) {
       fetchComments();
     }
-  }, [currentUser._id, render]);
+  }, [currentUser._id]);
+
   const handleShowMore = async () => {
     const startIndex = comments.length;
 
@@ -45,6 +52,8 @@ const DashComments = () => {
         setSuccess(true);
         if (data.data.comments.length < 9) {
           setShowMore(false);
+        } else {
+          setShowMore(true);
         }
       }
     } catch (error) {
@@ -72,6 +81,7 @@ const DashComments = () => {
   };
 
   // overflow-x-scroll scrollbar scrollbar-thumb-slate-300 scrollbar-track-slate-100
+
   return (
     <div className="w-full h-full p-3 mx-2 table-auto md:mx-auto dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div>
