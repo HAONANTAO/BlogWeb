@@ -59,7 +59,7 @@ const DashboardComp = () => {
       fetchPosts();
       fetchComments();
     }
-  }, []);
+  }, [currentUser]);
   return (
     <div className="p-3 md:mx-auto">
       <div className="flex flex-wrap justify-center gap-4">

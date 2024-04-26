@@ -10,8 +10,6 @@ const DashComments = () => {
   const [showMore, setShowMore] = useState(true);
   const [comments, setComments] = useState([]);
   const [render, setRender] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [postId, setPostId] = useState("");
 
   useEffect(() => {
     setRender(false);
@@ -21,14 +19,28 @@ const DashComments = () => {
         const data = await axios.get(`/api/comment/getcomments`);
 
         if (data.status === 200) {
-          setComments(data.data.comments);
-          setUserId(comments.userId);
-          setPostId(comments.postId);
-          if (data.data.comments.length <= 9) {
-            setShowMore(false);
-          } else {
-            setShowMore(true);
-          }
+          const commentsWithExtraInfo = await Promise.all(
+            data.data.comments.map(async (comment) => {
+              // 获取 postTitle
+              const titleResponse = await axios.get(
+                `/api/post/getposts?postId=${comment.postId}`,
+              );
+
+              // 获取 username
+              const userResponse = await axios.get(
+                `/api/user/${comment.userId}`,
+              );
+
+              return {
+                ...comment,
+                postTitle: titleResponse.data.posts[0].title,
+                username: userResponse.data.username,
+              };
+            }),
+          );
+
+          setComments(commentsWithExtraInfo);
+          setShowMore(data.data.comments.length > 9);
         }
       } catch (error) {
         console.log(error.message);
@@ -37,7 +49,7 @@ const DashComments = () => {
     if (currentUser.isAdmin) {
       fetchComments();
     }
-  }, [currentUser._id]);
+  }, [currentUser._id, render]);
 
   const handleShowMore = async () => {
     const startIndex = comments.length;
@@ -92,8 +104,8 @@ const DashComments = () => {
                 <Table.HeadCell>Date Updated</Table.HeadCell>
                 <Table.HeadCell>Comment Content</Table.HeadCell>
                 <Table.HeadCell>Number of likes</Table.HeadCell>
-                <Table.HeadCell>PostId</Table.HeadCell>
-                <Table.HeadCell>UserId</Table.HeadCell>
+                <Table.HeadCell>PostTitle</Table.HeadCell>
+                <Table.HeadCell>Username</Table.HeadCell>
                 <Table.HeadCell>Delete</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
@@ -106,8 +118,8 @@ const DashComments = () => {
                     </Table.Cell>
                     <Table.Cell>{comment.content}</Table.Cell>
                     <Table.Cell>{comment.numberOfLikes}</Table.Cell>
-                    <Table.Cell>{comment.postId}</Table.Cell>
-                    <Table.Cell>{comment.userId}</Table.Cell>
+                    <Table.Cell>{comment.postTitle}</Table.Cell>
+                    <Table.Cell>{comment.username}</Table.Cell>
                     <Table.Cell>
                       <span
                         onClick={() => {
