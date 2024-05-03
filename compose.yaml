@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  web:
+    # 依赖于
+    depends_on:
+      - api
+
+    build: ./client
+    #  dockerfile在哦哪里
+    ports:
+      - 5173:5173
+    # 环境变量
+    environment:
+      VITE_FIREBASE_API_KEY: AIzaSyCwbGYnI2STlGj811rJWAD_2Tj4tNuYFFc
+      VITE_AUTH_DOMAIN: mern-blog-41d55.firebaseapp.com
+      VITE_PROJECT_ID: mern-blog-41d55
+      VITE_BUCKET: mern-blog-41d55.appspot.com
+      VITE_SEND_ID: 837394525739
+      VITE_APP_ID: 1:837394525739:web:d2c51859ce4ed6f1bf046e
+    #  docker compose 监视
+    # command: ["sh", "-c", "wait-for-it.sh api:3000 -- npm run dev"]
+    develop:
+      # we specify the files to watch for changes
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+
+        - path: ./client
+          target: /app
+          # action: sync: 当 ./frontend 文件夹内的文件发生变化时，执行 sync 操作，可能是将这些文件同步到容器内的 /app 路径下。
+          action: sync
+
+  api:
+    depends_on:
+      - db
+    build: ./server
+
+    ports:
+      - 3000:3000
+
+    environment:
+      DATABASE_URL: mongodb+srv://AaronTAO:AaronTAO@mernblog.vsnoumt.mongodb.net/?retryWrites=true&w=majority&appName=MernBlog
+      JWT_SECRET_KEY: AaronTAO
+
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./server/package.json
+          action: rebuild
+        - path: ./server
+          target: /app
+          action: sync
+
+  db:
+    image: mongo:latest
+
+    ports:
+      - 27017:27017
+
+    volumes:
+      - database:/data/db
+
+volumes:
+  database:

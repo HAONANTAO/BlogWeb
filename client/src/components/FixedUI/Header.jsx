@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { TbStarsFilled } from "react-icons/tb";
+import { useEffect, useState } from "react";
+import { BsStars } from "react-icons/bs";
 import {
   signOutFailure,
   signOutStart,
@@ -29,9 +29,7 @@ const Header = () => {
   const handleSignOut = async () => {
     signOutStart();
     try {
-      const data = await axios.post(
-        `/api/user/signout/${currentUser._id}`,
-      );
+      const data = await axios.post(`/api/user/signout/${currentUser._id}`);
 
       if (data.status !== 200) {
         dispatch(signOutFailure(data.message));
@@ -98,7 +96,7 @@ const Header = () => {
       {/* 中等md尺寸下的显示顺序 后置*/}
       <div className="flex gap-2 md:order-2">
         <Button color="blue" pill onClick={() => dispatch(toggleBack())}>
-          <TbStarsFilled />
+          <BsStars />
         </Button>
         <Button
           onClick={() => dispatch(toggleTheme())}
