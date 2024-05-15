@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import PostCard from "../components/PostCard";
@@ -25,9 +25,9 @@ const Home = () => {
           Welcome to My Blog!
         </h1>
         <p className="text-xs text-gray-500 sm:text-sm">
-          "The only true wisdom is in knowing you know nothing. That's the
+          The only true wisdom is in knowing you know nothing. That&apos;s the
           beauty of learning; it is an endless ocean, always ready to surprise
-          you with its depth and mysteries." <br />
+          you with its depth and mysteries. <br />
           -- Socrates
           <br />
           人群太吵了，我想更了解你，想听听旷野的风，安静又孤独，踏实和自由

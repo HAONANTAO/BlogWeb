@@ -19,7 +19,9 @@ services:
       VITE_SEND_ID: 837394525739
       VITE_APP_ID: 1:837394525739:web:d2c51859ce4ed6f1bf046e
     #  docker compose 监视
-    # command: ["sh", "-c", "wait-for-it.sh api:3000 -- npm run dev"]
+    # command: ["sh", "-c", "/app/wait-for-it.sh api:3000 -- yarn run dev"]
+    
+
     develop:
       # we specify the files to watch for changes
       watch:
@@ -32,8 +34,8 @@ services:
           action: sync
 
   api:
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     build: ./server
 
     ports:
@@ -53,14 +55,14 @@ services:
           target: /app
           action: sync
 
-  db:
-    image: mongo:latest
+  # db:
+  #   image: mongo:latest
 
-    ports:
-      - 27017:27017
+  #   ports:
+  #     - 27017:27017
 
-    volumes:
-      - database:/data/db
+  #   volumes:
+  #     - database:/data/db
 
-volumes:
-  database:
+# volumes:
+#   database:
