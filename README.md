@@ -371,9 +371,15 @@ HAONANTAO
 
 - video[](#https://www.youtube.com/watch?v=Kkht2mwSL_I)
 
-- githun sourcecode[](#https://github.com/sahandghavidel/mern-blog)
+- github sourcecode[](#https://github.com/sahandghavidel/mern-blog)
 
   
+### Using Docker to run the App
+open the Docker Desktop
+Run 
+
+docker-compose up --build
+
 
 <!-- links -->
 
