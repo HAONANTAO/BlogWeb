@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
-    "build": "yarn && cd client && yarn && yarn build"
+    "build": "yarn && cd client && yarn && yarn build && cp -r client/dist/* server/public/"
   },
   "author": "AaronTAO",
   "license": "ISC",

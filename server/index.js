@@ -18,6 +18,8 @@ const app = express();
 //parse middle ware
 app.use(bodyParser.json());
 app.use(cookieParser());
+// 静态文件服务
+app.use(express.static(path.join(__dirname, 'server/public')));
 // security
 // Load environment variables from .env file
 dotenv.config();
