@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/CallToAction";
 import PostCard from "../components/PostCard";
@@ -11,7 +11,7 @@ const Home = () => {
       // first 9 default but 6 is good
       const data = await axios.get("/api/post/getposts?limit=6");
 
-      if ( data.status === 200) {
+      if (data.status === 200) {
         setPosts(data.data.posts);
       }
     };
@@ -20,22 +20,22 @@ const Home = () => {
   return (
     <div>
       {/* introduction part */}
-      <div className="flex flex-col max-w-6xl gap-6 px-3 mx-auto p-28">
-        <h1 className="self-center text-3xl font-bold lg:text-6xl">
-          Welcome to My Blog!
+      <div className="flex flex-col gap-6 px-3 py-20 mx-auto max-w-6xl text-center">
+        <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl">
+          Discover Ideas, Stories & Insights
         </h1>
-        <p className="text-xs text-gray-500 sm:text-sm">
-          The only true wisdom is in knowing you know nothing. That&apos;s the
-          beauty of learning; it is an endless ocean, always ready to surprise
-          you with its depth and mysteries. <br />
-          -- Socrates
-          <br />
-          人群太吵了，我想更了解你，想听听旷野的风，安静又孤独，踏实和自由
+        <p className="mx-auto max-w-3xl text-sm text-gray-600 sm:text-base">
+          Welcome to my blog—a place where thoughts take shape, ideas flow, and
+          stories unfold. Dive into the latest articles and join the
+          conversation.
         </p>
+        <blockquote className="text-sm italic text-gray-500 sm:text-base">
+          The only true wisdom is in knowing you know nothing. – Socrates
+        </blockquote>
         <Link
           to="/search"
-          className="text-xs font-bold text-teal-500 sm:text-sm hover:underline">
-          View All Post
+          className="text-sm font-semibold text-teal-600 hover:underline">
+          Browse All Posts →
         </Link>
       </div>
 
@@ -45,7 +45,7 @@ const Home = () => {
       </div>
 
       {/* 9 post cards */}
-      <div className="flex flex-col max-w-6xl gap-8 p-3 mx-auto py-7">
+      <div className="flex flex-col gap-8 p-3 py-7 mx-auto max-w-6xl">
         {posts && posts.length > 0 && (
           <div className="flex-row">
             <h2 className="mb-4 text-4xl font-semibold text-center">
