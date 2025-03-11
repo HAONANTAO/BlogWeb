@@ -1,3 +1,9 @@
+/*
+ * @Date: 2024-05-15 13:48:48
+ * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
+ * @LastEditTime: 2025-03-11 21:36:39
+ * @FilePath: /BlogWeb/server/index.js
+ */
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -19,8 +25,7 @@ const app = express();
 
 // 设置 COOP 和 COEP 头
 app.use((req, res, next) => {
-  // 设置 COOP 和 COEP 安全头
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups"); // 修改为允许跨域弹出窗口操作
   res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
   next();
 });
