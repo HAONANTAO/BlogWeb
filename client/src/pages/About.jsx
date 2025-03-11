@@ -1,42 +1,64 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 
 const About = () => {
   return (
-    <>
-      <div className="flex items-center justify-center min-h-screen ">
-        <div className="max-w-2xl p-3 mx-auto text-center">
-          <div className="">
-            <h1 className="text-3xl font-semibold text-center my-7">
-              {" "}
-              About My's Blog
-              <br />
-              关于宇宙的浪漫
-            </h1>
-            <div className="flex flex-col gap-6 text-gray-500 text-md">
-              Welcome to my blog, where curiosity meets insight! Dive into a
-              world of intriguing discussions, detailed guides, and personal
-              reflections. Whether you're seeking inspiration, knowledge, or a
-              community of like-minded enthusiasts, you've found the right
-              place. Join me on this journey of exploration and discovery. Let's
-              learn and grow together."
-              <br />
-              <p>
-                我与你身体里的原子
-                <p> 在几亿光年之外，在宇宙的伊始，出自同一母体，</p>
-                <p>黑暗中我们抬头走来 星辰从远方而来 赴一面之约 生生不息，</p>
-                这就是宇宙的浪漫
-              </p>
-              <p>
-                <p>其实分别也没那么可怕 </p>65万个小时之后 当我们氧化成风
-                就能变成同一杯啤酒上
-                <p>两朵相邻的泡沫 就能变成同一盏路灯下 两粒依偎的尘埃</p>
-                宇宙中的原子不会泯灭， <p>而我们，终究会在一起</p>
-              </p>
-            </div>
-          </div>
+    <div className="flex justify-center items-center px-6 min-h-screen">
+      <div className="p-6 max-w-3xl text-center rounded-lg border border-gray-500 backdrop-blur-md">
+        {/* Title */}
+        <h1 className="my-6 text-4xl font-bold text-white">About Me</h1>
+        <p className="text-lg text-white">
+          Welcome to my blog! Here, I share my journey, interests, and
+          experiences.
+        </p>
+
+        {/* Education */}
+        <div className="mt-8 text-left">
+          <h2 className="text-2xl font-bold text-white">🎓 Education</h2>
+          <p className="mt-2 text-white">
+            I moved to Melbourne during high school and studied at{" "}
+            <span className="font-medium">Noble Park</span> for three years.
+            Later, I completed my{" "}
+            <span className="font-medium">Bachelor of Computer Science</span> at{" "}
+            <span className="font-medium">Monash University</span>, followed by
+            a <span className="font-medium">Master of IT</span> at{" "}
+            <span className="font-medium">The University of Melbourne</span>.
+          </p>
+        </div>
+
+        {/* Career */}
+        <div className="mt-8 text-left">
+          <h2 className="text-2xl font-bold text-white">💼 Career & Goals</h2>
+          <p className="mt-2 text-white">
+            Currently, I am actively seeking a front-end or full-stack
+            development role. My focus is on modern web technologies, including{" "}
+            <span className="font-medium">React, Node.js, and MongoDB</span>. I
+            am eager to work in a dynamic team, build impactful projects, and
+            continuously grow as a developer.
+          </p>
+        </div>
+
+        {/* Interests */}
+        <div className="mt-8 text-left">
+          <h2 className="text-2xl font-bold text-white">🎭 Interests</h2>
+          <p className="mt-2 text-white">
+            Beyond coding, I am passionate about **fitness** and believe a
+            strong mind starts with a strong body. I also enjoy **Texas
+            Hold&apos;em Poker**, as it challenges both strategy and psychology.
+            In my free time, I love reading, writing, and exploring new
+            technologies.
+          </p>
+        </div>
+
+        {/* Conclusion */}
+        <div className="mt-8">
+          <p className="text-sm font-semibold">
+            Life is an adventure. I embrace every challenge and look forward to
+            what&apos;s ahead!
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
