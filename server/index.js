@@ -24,8 +24,9 @@ dotenv.config();
 const DATABASE_URL = process.env.DATABASE_URL;
 mongoose.connect(DATABASE_URL).then(console.log("Mongodb database connected!"));
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 //  允许跨域请求（CORS）
 // const corsOptions = {
