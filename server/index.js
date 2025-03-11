@@ -18,8 +18,6 @@ const app = express();
 //parse middle ware
 app.use(bodyParser.json());
 app.use(cookieParser());
-// 静态文件服务
-app.use(express.static(path.join(__dirname, 'server/public')));
 // security
 // Load environment variables from .env file
 dotenv.config();
@@ -67,17 +65,11 @@ app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
 //static
-app.use(express.static(path.join(__dirname, "client", "dist")));
+app.use(express.static(path.join(__dirname, "server", "public")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "server", "public", "index.html"));
 });
-
-// app.use(express.static(path.join(__dirname, "/client/dist")));
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-// });
 
 //middleware handle error！ next()
 app.use((err, req, res, next) => {
