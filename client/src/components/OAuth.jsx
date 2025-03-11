@@ -1,6 +1,13 @@
+/*
+ * @Date: 2024-04-21 22:33:31
+ * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
+ * @LastEditTime: 2025-03-11 21:38:36
+ * @FilePath: /BlogWeb/client/src/components/OAuth.jsx
+ */
 import axios from "axios";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "flowbite-react";
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -57,7 +64,7 @@ const OAuth = () => {
       gradientDuoTone="pinkToOrange"
       outline
       onClick={handleGoogleClick}>
-      <FaGoogle className="w-6 h-6 mr-2" />
+      <FaGoogle className="mr-2 w-6 h-6" />
       Continue with Google
     </Button>
   );
