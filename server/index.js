@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-05-15 13:48:48
  * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 21:52:28
+ * @LastEditTime: 2025-03-11 22:42:51
  * @FilePath: /BlogWeb/server/index.js
  */
 import express from "express";
@@ -25,8 +25,8 @@ const app = express();
 
 // 设置 COOP 和 COEP 头
 app.use((req, res, next) => {
-  res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
   next();
 });
 
@@ -51,13 +51,13 @@ app.listen(PORT, "0.0.0.0", () => {
 });
 
 //  允许跨域请求（CORS）
-const corsOptions = {
-  origin: "https://blog-web-puce-psi.vercel.app/", // 允许的前端域名
-  credentials: true, // 如果使用了 cookies，确保开启此项
-};
-
-app.use(cors(corsOptions));
-
+app.use(
+  cors({
+    origin: "https://blog-web-eight-zeta.vercel.app", // 允许的前端 URL
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 // 路由设置
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
