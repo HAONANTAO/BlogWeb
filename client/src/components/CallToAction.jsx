@@ -2,9 +2,9 @@ import { Button } from "flowbite-react";
 
 export default function CallToAction() {
   return (
-    <div className="flex flex-col items-center justify-center p-4 m-4 text-center border rounded-md sm:flex-row ">
-      <div className="flex flex-col justify-center flex-1">
-        <h2 className="text-2xl ">Want to Know much more about me?</h2>
+    <div className="flex flex-col justify-center items-center p-4 m-4 text-center rounded-md border sm:flex-row">
+      <div className="flex flex-col flex-1 justify-center">
+        <h2 className="text-2xl">Want to Know much more about me?</h2>
         <p className="my-2 text-gray-500">
           Go to my Personal Portfolio Website
         </p>
@@ -13,7 +13,7 @@ export default function CallToAction() {
             href="https://www.aarontao.com"
             target="_blank"
             rel="noopener noreferrer">
-            Aaron's Portfolio
+            Aaron&apos;s Portfolio
           </a>
         </Button>
       </div>
