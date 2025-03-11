@@ -37,9 +37,13 @@ mongoose
 // CORS - 允许来自前端的请求
 app.use(
   cors({
-    origin: "https://blog-web-eight-zeta.vercel.app", // 允许的前端 URL
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: [
+      // 允许访问的域名白名单
+      "https://blog-web-eight-zeta.vercel.app", // 你的生产环境前端地址
+      "http://localhost:3000/", // 开发环境地址（如 http://localhost:5173）
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"], // 允许的 HTTP 方法
+    credentials: true, // 允许发送 Cookie 和认证头信息
   }),
 );
 
@@ -50,8 +54,10 @@ app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
 // 静态文件服务
-app.use(express.static(path.join(__dirname, "client", "dist")));
-
+// 仅在生产环境启用静态文件服务（非Vercel环境）
+if (process.env.NODE_ENV !== "production") {
+  app.use(express.static(path.join(__dirname, "client", "dist")));
+}
 // Catch-all route to serve index.html for any non-API requests (SPA)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
