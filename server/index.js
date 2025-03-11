@@ -1,13 +1,6 @@
-/*
- * @Date: 2024-05-15 13:48:48
- * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 22:42:51
- * @FilePath: /BlogWeb/server/index.js
- */
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import axios from "axios";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import useRoutes from "./routes/user.route.js";
@@ -30,27 +23,18 @@ app.use((req, res, next) => {
   next();
 });
 
-//parse middle ware
+// parse middle ware
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// 静态文件服务
-app.use(express.static(path.join(__dirname, "server/public")));
-
 // security
-// Load environment variables from .env file
 dotenv.config();
 const DATABASE_URL = process.env.DATABASE_URL;
 mongoose
   .connect(DATABASE_URL)
   .then(() => console.log("Mongodb database connected!"));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-//  允许跨域请求（CORS）
+// CORS - 允许来自前端的请求
 app.use(
   cors({
     origin: "https://blog-web-eight-zeta.vercel.app", // 允许的前端 URL
@@ -58,20 +42,22 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
 // 路由设置
 app.use("/api/user", useRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-//静态文件
+// 静态文件服务
 app.use(express.static(path.join(__dirname, "client", "dist")));
 
+// Catch-all route to serve index.html for any non-API requests (SPA)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
-// middleware handle error！ next()
+// middleware handle error
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error!";
@@ -80,4 +66,10 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
 });

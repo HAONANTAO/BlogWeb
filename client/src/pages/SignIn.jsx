@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { IoEyeSharp } from "react-icons/io5";
 import { MdMarkEmailUnread } from "react-icons/md";
@@ -20,7 +21,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
-  console.log("content", formData);
+  // console.log("content", formData);
   const handleChange = (e) => {
     //keep the original one
     // removing the white space using trim()
@@ -69,15 +70,15 @@ const SignIn = () => {
   };
   return (
     <>
-      <div className="flex flex-col max-w-3xl min-h-screen p-3 mx-auto mt-20 text-white md:flex-row">
+      <div className="flex flex-col p-3 mx-auto mt-20 max-w-3xl min-h-screen text-white md:flex-row">
         {/* md:items-center */}
         {/* left side */}
         <div className="flex-1 mr-5 text-gray-500 md:items-center">
-          <div className="text-4xl font-bold dark:text-white ">
+          <div className="text-4xl font-bold dark:text-white">
             {/* <Link to="/" className="text-4xl font-bold dark:text-white"> */}
             {/* 渐变三色 */}
-            <span className="px-2 py-1 text-white rounded-lg bg-gradient-to-r from-teal-500 to-lime-500">
-              Aaron's
+            <span className="px-2 py-1 text-white bg-gradient-to-r from-teal-500 to-lime-500 rounded-lg">
+              Aaron&apos;s
             </span>
             Blog
           </div>
@@ -93,14 +94,14 @@ const SignIn = () => {
         </div>
         {/* EarthCanvas组件放在左侧div下方 */}
         {/* right side */}
-        <div className="flex-1 text-gray-500 ">
-          <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
+        <div className="flex-1 text-gray-500">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
-              <div className="flex gap-2 ">
+              <div className="flex gap-2">
                 <MdMarkEmailUnread />
                 <Label
                   value="Your email"
-                  className="text-gray-500 "
+                  className="text-gray-500"
                   htmlFor="email"></Label>
               </div>
 
@@ -117,10 +118,10 @@ const SignIn = () => {
                 <Label
                   value="Your password"
                   htmlFor="password"
-                  className="text-gray-500 "></Label>
+                  className="text-gray-500"></Label>
               </div>
 
-              <div className="relative ">
+              <div className="relative">
                 <TextInput
                   type={passwordVisible}
                   placeholder="xxxxxxxx"
@@ -128,7 +129,7 @@ const SignIn = () => {
                   onChange={handleChange}
                 />
                 <button type="button" onClick={changePasswordVisibility}>
-                  <IoEyeSharp className="absolute right-0 w-10 text-black bottom-9" />
+                  <IoEyeSharp className="absolute right-0 bottom-9 w-10 text-black" />
                 </button>
               </div>
             </div>
