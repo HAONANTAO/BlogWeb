@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-05-15 13:48:48
  * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 21:47:56
+ * @LastEditTime: 2025-03-11 21:52:28
  * @FilePath: /BlogWeb/server/index.js
  */
 import express from "express";
@@ -51,7 +51,12 @@ app.listen(PORT, "0.0.0.0", () => {
 });
 
 //  允许跨域请求（CORS）
-app.use(cors());
+const corsOptions = {
+  origin: "https://blog-web-puce-psi.vercel.app/", // 允许的前端域名
+  credentials: true, // 如果使用了 cookies，确保开启此项
+};
+
+app.use(cors(corsOptions));
 
 // 路由设置
 app.use("/api/user", useRoutes);

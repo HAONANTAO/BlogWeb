@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-21 22:33:31
  * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 21:38:36
+ * @LastEditTime: 2025-03-11 22:08:06
  * @FilePath: /BlogWeb/client/src/components/OAuth.jsx
  */
 import axios from "axios";
@@ -37,19 +37,19 @@ const OAuth = () => {
       const { email, displayName, photoURL } = resultsFromGoogle.user;
 
       const googleData = {
-        email: email,
+        email,
         name: displayName,
-        photoURL: photoURL,
+        photoURL,
       };
 
+      console.log("Google data:", googleData); // 输出日志以确认数据
       const res = await axios.post("/api/auth/google", googleData);
 
       if (res.status === 200) {
-        // Check response status, not statusText
-        dispatch(signInSuccess(res.data)); // Assuming res.data contains user data
+        dispatch(signInSuccess(res.data));
         navigate("/");
       } else {
-        dispatch(signInFailure("Login failed")); // Provide a generic message
+        dispatch(signInFailure("Login failed"));
       }
     } catch (error) {
       console.error("Error during Google login:", error);
